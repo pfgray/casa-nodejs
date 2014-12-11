@@ -3,10 +3,10 @@
 // Development specific configuration
 // ==================================
 module.exports = {
-  // MongoDB connection options
-  mongo: {
-    uri: 'mongodb://localhost/casanodejs-dev'
-  },
-
-  seedDB: true
+  // CouchDB connection options
+  couch: {
+    host: 'http://localhost',
+    port: 6984,
+    db_name: 'casa'
+  }
 };
