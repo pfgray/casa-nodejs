@@ -5,6 +5,9 @@ angular.module('casaNodejsApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    },{
+      'title': 'Apps',
+      'link': '/apps'
     }];
 
     $scope.isCollapsed = true;
