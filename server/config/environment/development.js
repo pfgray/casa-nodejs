@@ -5,8 +5,8 @@
 module.exports = {
   // CouchDB connection options
   couch: {
-    host: 'http://localhost',
-    port: 6984,
+    host: 'http://nexus',
+    port: 5984,
     db_name: 'casa'
   }
 };

@@ -2,7 +2,7 @@
    "_id":"_design/casa",
    "language":"javascript",
    "views":{
-      "users":{
+      "applications":{
          "map":"function(doc){\n  if(doc.type != null && doc.type == 'application'){\n    emit(doc.title, doc)\n  }\n}"
       }
    }

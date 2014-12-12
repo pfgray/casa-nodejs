@@ -3,10 +3,10 @@
 var jf = require('jsonfile');
 var util = require('util');
 var cradle = require('cradle');
+var couch = require('../config/environment').couch;
 
 module.exports = {
   init: function(config){
-    var couch = config.couch;
     console.log('initing database...', couch);
     jf.readFile('server/config/casa-design.json', function(err, designFile) {
       if(err){
@@ -44,8 +44,13 @@ module.exports = {
         });
       }
     });
-    // Setup the db
-    /*
-        */
+  },
+  getDatabase:function(){
+    var c =  new(cradle.Connection)(couch.host, couch.port, {
+        cache: true,
+        raw: false,
+        forceSave: true
+    });
+    return c.database(couch.db_name);
   }
 }
