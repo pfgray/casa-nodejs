@@ -4,5 +4,11 @@ block content
   .container
     .row
       .col-lg-12
-        ul.list-group
-          li.list-group-item(ng-repeat="peer in peers") {{peer.name}}
+        ul.peer-list
+          li.peer-list-item.peer(ng-repeat="peer in peers")
+              div.name {{peer.name}}
+              div.info
+                  div.payload-location {{peer.payload_url}}
+                  div.payload-last-updated Last updated: {{peer.last_updated | fromNow}}
+              div.options
+                  button.btn.btn-info Update Now
