@@ -4,4 +4,6 @@ block content
   .container
     .row
       .col-lg-12
-        h1.App List:
+        span APPS
+        ul.list-group
+          li.list-group-item(ng-repeat="app in apps") {{app.title}}
