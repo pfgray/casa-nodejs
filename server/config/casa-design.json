@@ -3,7 +3,10 @@
    "language":"javascript",
    "views":{
       "applications":{
-         "map":"function(doc){\n  if(doc.type != null && doc.type == 'application'){\n    emit(doc.title, doc)\n  }\n}"
+         "map":"function(doc){\n  if(doc.type != null && doc.type == 'application'){\n    emit(doc.name, doc)\n  }\n}"
+      },
+      "peers":{
+         "map":"function(doc){\n  if(doc.type != null && doc.type == 'peer'){\n    emit(doc.name, doc)\n  }\n}"
       }
    }
 }

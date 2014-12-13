@@ -8,6 +8,9 @@ angular.module('casaNodejsApp')
     },{
       'title': 'Apps',
       'link': '/apps'
+    },{
+      'title': 'Peers',
+      'link': '/peers'
     }];
 
     $scope.isCollapsed = true;
