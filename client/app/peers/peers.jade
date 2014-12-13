@@ -11,4 +11,7 @@ block content
                   div.payload-location {{peer.payload_url}}
                   div.payload-last-updated Last updated: {{peer.last_updated | fromNow}}
               div.options
-                  button.btn.btn-info Update Now
+                  button.btn.btn-info(ng-click="updatePeer(peer)")
+                      span(ng-if="!peer.updating") Update Now
+                      span(ng-if="peer.updating")
+                          i.fa.fa-circle-o-notch.fa-spin
