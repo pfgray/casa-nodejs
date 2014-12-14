@@ -3,7 +3,7 @@ extends ../layout.jade
 block content
   .container
     .row
-      .col-lg-12
+      .col-lg-8.col-lg-offset-2
         ul.peer-list
           li.peer-list-item.peer(ng-repeat="peer in peers")
               div.name {{peer.name}}
@@ -15,3 +15,21 @@ block content
                       span(ng-if="!peer.updating") Update Now
                       span(ng-if="peer.updating")
                           i.fa.fa-circle-o-notch.fa-spin
+    .row
+      .col-lg-8.col-lg-offset-2
+        form.form-horizontal#newPeer(role="form")
+          h4 Add a new Peer:
+          div.form-group
+            label.col-sm-2.control-label(for="title") Name
+            div.col-sm-10
+              input.form-control(placeholder="Title", name="name", ng-model="newPeer.name", focus-on="focusTitle")
+          div.form-group
+            label.col-sm-2.control-label(for="payload_url") Payload Url
+            div.col-sm-10
+              input.form-control(placeholder="Payload Url", name="payload_url", ng-model="newPeer.payload_url")
+          div.form-group
+            div.col-sm-offset-2.col-sm-10
+              button.btn.btn-default(ng-click="createPeer(newPeer)")
+                  span(ng-if="!creatingPeer") Add
+                  span(ng-if="creatingPeer")
+                    i.fa.fa-circle-o-notch.fa-spin
