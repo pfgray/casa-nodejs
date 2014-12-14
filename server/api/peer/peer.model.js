@@ -26,5 +26,17 @@ module.exports = {
         db.save(peer._id, peer._rev, peer, function (err, res) {
             callback(err, res);
         });
+    },
+    createPeer:function(peer, callback){
+        var db = casa_model.getDatabase();
+        db.save(peer, function (err, res) {
+            callback(err, res);
+        });
+    },
+    deletePeer:function(id, rev, callback){
+        var db = casa_model.getDatabase();
+        db.remove(id, rev, function (err, res) {
+            callback(err, res);
+        });
     }
 }

@@ -18,3 +18,59 @@ exports.index = function(req, res) {
         }
     });
 };
+
+exports.create = function(req, res) {
+    var errors = [];
+    var invalid = false;
+    if(!req.body.name || req.body.name.trim() === ''){
+        invalid = true;
+        errors.push({
+            field:'name',
+            error:'Cannot be blank'
+        });
+    }
+    if(!req.body.payload_url || req.body.payload_url.trim() === ''){
+        invalid = true;
+        errors.push({
+            field:'payload_url',
+            error:'Cannot be blank'
+        });
+    }
+
+    if(invalid){
+        res.json(errors, 400);
+        return;
+    }
+    var peer = {
+        name:req.body.name,
+        payload_url:req.body.payload_url,
+        type:'peer',
+        last_updated:null
+    };
+    model.createPeer(peer, function(err, newPeer){
+        if(err){
+            console.log('error creating peer: ', err);
+            res.json({
+                status:'error',
+                message:err
+            });
+        } else {
+            peer._id  = newPeer.id;
+            peer._rev = newPeer.rev;
+            res.json(peer);
+        }
+    });
+};
+
+exports.delete = function(req, res) {
+    model.getPeer(req.params.peer, function(err, peer){
+        model.deletePeer(req.params.peer, peer._rev, function(err, result){
+            if(err){
+                console.log('error deleting peer', err);
+                res.json(err, 500);
+            } else {
+                res.json(result);
+            }
+        });
+    });
+};

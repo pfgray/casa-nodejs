@@ -6,7 +6,11 @@ block content
       .col-lg-8.col-lg-offset-2
         ul.peer-list
           li.peer-list-item.peer(ng-repeat="peer in peers")
-              div.name {{peer.name}}
+              div
+                  span.name {{peer.name}}
+                  span.delete(role="button", label="delete", ng-click="deletePeer(peer)")
+                      i.fa.fa-trash(ng-if="!peer.deleting")
+                      i.fa.fa-circle-o-notch.fa-spin(ng-if="peer.deleting")
               div.info
                   div.payload-location {{peer.payload_url}}
                   div.payload-last-updated Last updated: {{peer.last_updated | fromNow}}
@@ -19,11 +23,11 @@ block content
       .col-lg-8.col-lg-offset-2
         form.form-horizontal#newPeer(role="form")
           h4 Add a new Peer:
-          div.form-group
+          div.form-group(ng-class="{'has-error':errors.name}")
             label.col-sm-2.control-label(for="title") Name
             div.col-sm-10
               input.form-control(placeholder="Title", name="name", ng-model="newPeer.name", focus-on="focusTitle")
-          div.form-group
+          div.form-group(ng-class="{'has-error':errors.payload_url}")
             label.col-sm-2.control-label(for="payload_url") Payload Url
             div.col-sm-10
               input.form-control(placeholder="Payload Url", name="payload_url", ng-model="newPeer.payload_url")

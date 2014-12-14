@@ -7,9 +7,6 @@ var casa_config = require('../../config/casa.js');
 
 // Get list of things
 exports.createUpdateOperation = function(req, res) {
-    console.log('***creating update operation!');
-    console.log('***', req.params.peer);
-    console.log('***', req.body);
 
     //get the peer they're talking about
     model.getPeer(req.params.peer, function(err, peer){
@@ -21,7 +18,7 @@ exports.createUpdateOperation = function(req, res) {
             } else {
                 res.json(result);
             }
-        })
+        });
     });
 };
 

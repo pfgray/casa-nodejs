@@ -3,6 +3,10 @@
 angular.module('casaNodejsApp')
 .filter('fromNow', function () {
     return function(input){
-        return moment(input).fromNow();
+        if(input === null){
+            return 'never';
+        } else {
+            return moment(input).fromNow();
+        }
     }
 });
