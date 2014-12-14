@@ -7,5 +7,10 @@ angular.module('casaNodejsApp')
         url: '/peers',
         templateUrl: 'app/peers/peers.html',
         controller: 'PeersCtrl'
+      })
+      .state('createPeer', {
+        url: '/peers/new',
+        templateUrl: 'app/peers/newPeer.html'
       });
+
   });

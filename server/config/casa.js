@@ -10,7 +10,8 @@ module.exports = {
     "c80df319-d5da-4f59-8ca3-c89b234c5055": "categories",
     "c6e33506-b170-475b-83e9-4ecd6b6dd42a": "tags",
     "a7e923e5-8da3-46d9-a3e8-aeda4ac8e6d5": "explicit",
-    "b7856963-4078-4698-8e95-8feceafe78da": "description"
+    "b7856963-4078-4698-8e95-8feceafe78da": "description",
+    "d25b3012-1832-4843-9ecf-3002d3434155": "icon"
   }
 
 }

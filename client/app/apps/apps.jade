@@ -3,7 +3,18 @@ extends ../layout.jade
 block content
   .container
     .row
-      .col-lg-12
-        span APPS
+      .col-lg-10.col-lg-offset-1(ng-if="apps.length > 0")
         ul.list-group
-          li.list-group-item(ng-repeat="app in apps") {{app.original.title}}
+          li.list-group-item.app(ng-repeat="app in apps")
+            div.icon(ng-if="!app.original.icon", style="{{'background-color:' + app.color + ';'}}")
+              span {{app.original.title.substring(0, 1)}}
+            img.icon(ng-if="app.original.icon" ng-src="{{app.original.icon}}")
+            span {{app.original.title}}
+      .col-md-6.col-md-6.col-lg-offset-3.col-md-offset-3(ng-if="apps.length < 1")
+        div.jumbotron.empty-apps
+          i.fa.fa-cubes
+          h3 There aren't any apps here.
+          div Apps can be gathered by adding
+            a(href="/peers")  peers.
+          div
+            button.btn.btn-default(ui-sref="createPeer") Add Peer
