@@ -7,6 +7,9 @@
       },
       "peers":{
          "map":"function(doc){\n  if(doc.type != null && doc.type == 'peer'){\n    emit(doc._id, doc)\n  }\n}"
+      },
+      "users": {
+           "map": "function(doc){\n  if(doc.type != null && doc.type === 'user'){\n    emit(doc._id, doc)\n  }\n}"
       }
    }
 }
