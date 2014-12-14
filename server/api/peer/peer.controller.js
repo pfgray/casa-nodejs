@@ -12,7 +12,7 @@ exports.index = function(req, res) {
             res.json({
                 status:'error',
                 message:err
-            });
+            }, 500);
         } else {
             res.json(apps);
         }
