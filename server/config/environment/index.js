@@ -32,16 +32,9 @@ var all = {
   // List of user roles
   userRoles: ['guest', 'user', 'admin'],
 
-  // MongoDB connection options
-  mongo: {
-    options: {
-      db: {
-        safe: true
-      }
-    }
-  }
-
 };
+
+console.log(all)
 
 // Export the config object based on the NODE_ENV
 // ==============================================

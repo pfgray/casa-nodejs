@@ -10,4 +10,4 @@ RUN grunt build
 
 EXPOSE 9000
 
-CMD ["node", "server/app.js"]
+CMD ["/bin/bash", "/app/docker/run.sh"]

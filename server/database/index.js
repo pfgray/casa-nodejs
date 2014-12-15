@@ -12,7 +12,6 @@ module.exports = {
       if(err){
         console.log('could not read view json file, ', err);
       } else {
-        console.log('with design: ' + util.inspect(designFile));
         var c =  new(cradle.Connection)(couch.host, couch.port, {
             cache: true,
             raw: false,

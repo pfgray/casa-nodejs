@@ -4,20 +4,23 @@
 // =================================
 module.exports = {
   // Server IP
+  /*
   ip:       process.env.OPENSHIFT_NODEJS_IP ||
             process.env.IP ||
             undefined,
+            */
 
   // Server port
-  port:     process.env.OPENSHIFT_NODEJS_PORT ||
+  port:     //process.env.OPENSHIFT_NODEJS_PORT ||
             process.env.PORT ||
-            8080,
+            9000,
 
-  // MongoDB connection options
-  mongo: {
-    uri:    process.env.MONGOLAB_URI ||
-            process.env.MONGOHQ_URL ||
-            process.env.OPENSHIFT_MONGODB_DB_URL+process.env.OPENSHIFT_APP_NAME ||
-            'mongodb://localhost/casanodejs'
+
+  // CouchDB connection options
+  couch: {
+    host: process.env.COUCH_HOST,
+    port: process.env.COUCH_PORT,
+    db_name: process.env.COUCH_DB_NAME
   }
+
 };
