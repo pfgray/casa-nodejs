@@ -8,8 +8,8 @@ var authorized = require('../../components/authorize');
 var router = express.Router();
 
 router.get('/', controller.index);
-router.post('/', authorized('admin'), controller.create);
-router.delete('/:peer', authorized('admin'), controller.delete);
-router.post('/:peer/updates', authorized('admin'), operations.createUpdateOperation);
+router.post('/', /*authorized('admin'),*/ controller.create);
+router.delete('/:peer', /*authorized('admin'),*/ controller.delete);
+router.post('/:peer/updates', /*authorized('admin'),*/ operations.createUpdateOperation);
 
 module.exports = router;

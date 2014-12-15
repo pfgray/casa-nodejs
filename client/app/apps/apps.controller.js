@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('casaNodejsApp')
-.controller('AppsCtrl', function ($scope, $http, colorService) {
+.controller('AppsCtrl', function ($scope, $http, appsService) {
     $scope.apps = [];
 
-    $http.get('/api/apps').success(function(apps) {
+    $scope.loadingApps = true;
+    appsService.getApps(true)
+    .then(function(apps){
+        $scope.loadingApps = false;
         $scope.apps = apps;
-        for(var i=0; i<apps.length; i++){
-            apps[i].color = colorService.getColorForHash(JSON.stringify(apps[i].identity));
-        }
     });
 
 });

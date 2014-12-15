@@ -2,10 +2,13 @@ extends ../layout.jade
 
 block content
   .container
-    .row
+    .row(ng-if="loadingApps")
+      .col-md-6.col-md-6.col-lg-offset-3.col-md-offset-3.main-load-icon
+          i.fa.fa-circle-o-notch.fa-spin
+    .row(ng-if="!loadingApps")
       .col-lg-10.col-lg-offset-1(ng-if="apps.length > 0")
         ul.list-group
-          li.list-group-item.app(ng-repeat="app in apps")
+          li.list-group-item.app(ng-repeat="app in apps", ui-sref="singleApp({originatorId:app.identity.originator_id, appId:app.identity.id})", role="link")
             div.icon(ng-if="!app.original.icon", style="{{'background-color:' + app.color + ';'}}")
               span {{app.original.title.substring(0, 1)}}
             img.icon(ng-if="app.original.icon" ng-src="{{app.original.icon}}")
