@@ -5,16 +5,30 @@ var model = require('./application.model');
 
 // Get list of things
 exports.index = function(req, res) {
-  console.log('yeilding to model');
-  model.getApplications(function(err, apps){
-    if(err){
-      console.log('error getting apps: ', err);
-      res.json({
-        status:'error',
-        message:err
-      }, 500);
-    } else {
-      res.json(apps);
-    }
-  });
+    model.getApplications(function(err, apps){
+        if(err){
+            console.log('error getting apps: ', err);
+            res.json({
+                status:'error',
+                message:err
+            }, 500);
+        } else {
+            res.json(apps);
+        }
+    });
+};
+
+exports.getApp = function(req, res) {
+    console.log('getting app: ', req.params);
+    model.getApplication(req.params.originatorId, req.params.appId, function(err, app){
+        if(err){
+            console.log('error getting app: ', err);
+            res.json({
+                status:'error',
+                message:err
+            }, 500);
+        } else {
+            res.json(app);
+        }
+    });
 };

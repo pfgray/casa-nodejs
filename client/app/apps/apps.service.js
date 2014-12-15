@@ -30,16 +30,25 @@ angular.module('casaNodejsApp')
 
     AppService.getApp = function(originatorId, appId, refresh){
         var deferred = $q.defer();
-        if(appsCache != null){
+        if(!refresh && appsCache !== null){
             for(var i=0; i<appsCache.length; i++){
                 if(appsCache[i].identity.originator_id === originatorId
                     && appsCache[i].identity.id === appId){
                     $timeout(function(){
                         deferred.resolve(appsCache[i]);
-                    })
+                    });
                     return deferred.promise;
                 }
             }
+        } else {
+            $http.get('/api/apps/' + originatorId + '/' + appId)
+            .success(function(app) {
+                app.color = colorService.getColorForHash(JSON.stringify(app.identity));
+                deferred.resolve(app);
+            })
+            .error(function(error){
+                deferred.reject(error);
+            });
         }
         return deferred.promise;
     }
