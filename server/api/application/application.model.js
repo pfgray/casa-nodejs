@@ -6,9 +6,9 @@ var casa_model = require('../../database');
 module.exports = {
     getApplications:function(callback){
         var db = casa_model.getDatabase();
-        db.view('casa/applications', null, function (err, res) {
+        db.view('casa/applications', {group: true}, function (err, res) {
             callback(err, _.transform(res, function(result, entity){
-                return result.push(entity.value);
+                return result.push(entity.key[1]);
             }));
         });
     },

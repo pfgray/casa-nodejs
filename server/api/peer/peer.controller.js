@@ -53,7 +53,7 @@ exports.create = function(req, res) {
             res.json({
                 status:'error',
                 message:err
-            });
+            }, 500);
         } else {
             peer._id  = newPeer.id;
             peer._rev = newPeer.rev;
