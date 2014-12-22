@@ -9,8 +9,11 @@ block content
   .container
     .row
       .col-lg-12
-        h1.page-header Features:
-        ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in awesomeThings')
-          li
-            a(href='#', tooltip='{{thing.info}}')
-              | {{thing.name}}
+        h3.page-header CASA Modules:
+        .row(ng-repeat='row in issueRows')
+          .col-lg-4.col-md-4(ng-repeat='module in row', ng-class="{'col-lg-offset-2 col-md-offset-2' : row.length === 2 && $index === 0}")
+            ul.list-group.module-list
+              li.list-group-item.disabled {{module.name}}
+              li.list-group-item(ng-repeat='feature in module.features', ng-class="{'success' : feature.completed}")
+                i.fa.fa-check(ng-if='feature.completed')
+                span {{feature.name}}

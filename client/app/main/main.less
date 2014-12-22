@@ -28,3 +28,21 @@
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
 }
+
+ul.module-list{
+    li{
+        &.success{
+            color:#3c763d;
+        }
+        span{
+            margin-left:0.5em;
+            &:only-child{
+                margin-left:1.5em;
+            }
+        }
+    }
+    li:first-child{
+        font-weight:700;
+        background:#eee
+    }
+}
