@@ -1,6 +1,6 @@
 #casa-nodejs
 
-[![Docker image](http://dockeri.co/image/pfgray/casa)](https://registry.hub.docker.com/u/pfgray/casa/)
+[![Docker image](http://dockeri.co/image/pfgray/casa)](https://registry.hub.docker.com/u/pfgray/casa/)  
 [![Travis build](https://travis-ci.org/pfgray/casa-nodejs.svg?branch=master)](https://travis-ci.org/pfgray/casa-nodejs)
 
 This is a casa app server that can be used to peer & share apps with other casa peers.
