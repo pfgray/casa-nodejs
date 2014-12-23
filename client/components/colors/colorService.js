@@ -29,7 +29,6 @@ angular.module('casaNodejsApp').service('colorService', function () {
 
     colorService.getColorForHash = function(input){
         var number = Math.abs(hash(input));
-        console.log('got hash: ', number);
         return colors[Math.floor(number % colors.length)];
     }
 

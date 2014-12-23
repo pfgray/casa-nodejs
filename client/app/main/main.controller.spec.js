@@ -12,8 +12,8 @@ describe('Controller: MainCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/things')
-      .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
+    $httpBackend.expectGET('/api/issues')
+      .respond({"casa_modules":[{"name":"Payload","features":[{"name":"TRANSITPAYLOAD","completed":false},{"name":"LOCALPAYLOAD","completed":false}]},{"name":"Publisher","features":[{"name":"SENDOUT","completed":false}]},{"name":"Local","features":[{"name":"SENDLOCAL","completed":false}]},{"name":"Receiver","features":[{"name":"RECEIVEIN","completed":true},{"name":"ADJINTRANSLATE","completed":true},{"name":"ADJINSQUASH","completed":false},{"name":"ADJINFILTER","completed":false}]},{"name":"Relay","features":[{"name":"ADJOUTTRANSFORM","completed":false},{"name":"ADJOUTFILTER","completed":false},{"name":"ADJOUTTRANSLATE","completed":false}]}]});
 
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', {
@@ -21,8 +21,15 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of things to the scope', function () {
+  it('should request a list of issues', function () {
     $httpBackend.flush();
-    expect(scope.awesomeThings.length).toBe(4);
   });
+
+  it('should split the issues up into 1 row of three and 1 row of two', function () {
+    $httpBackend.flush();
+    expect(scope.issueRows.length).toBe(2);
+    expect(scope.issueRows[0].length).toBe(3);
+    expect(scope.issueRows[1].length).toBe(2);
+  });
+
 });
