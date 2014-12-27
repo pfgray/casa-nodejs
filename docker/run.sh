@@ -1,6 +1,7 @@
 
-[ -z "$COUCH_HOST" ] && COUCH_HOST=nexus
-[ -z "$COUCH_PORT" ] && COUCH_PORT=5984
-[ -z "$COUCH_DB_NAME" ] && COUCH_DB_NAME=casa
+[ -z "$NODE_ENV" ] && export NODE_ENV=production
+[ -z "$COUCH_HOST" ] && export COUCH_HOST=`/sbin/ip route|awk '/default/ { print $3 }'`
+[ -z "$COUCH_PORT" ] && export COUCH_PORT=5984
+[ -z "$COUCH_DB_NAME" ] && export COUCH_DB_NAME=casa
 
-node /app/server/app.js
+node /app/dist/server/app.js

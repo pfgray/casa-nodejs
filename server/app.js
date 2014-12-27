@@ -6,6 +6,7 @@
 
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+console.log('Running casa in: ' + process.env.NODE_ENV);
 
 var express = require('express');
 var config = require('./config/environment');
