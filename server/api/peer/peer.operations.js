@@ -24,15 +24,16 @@ exports.createUpdateOperation = function(req, res) {
 
 var adjInTranslate = function(apps){
     _.forEach(apps, function(app) {
-        var translatedOriginal = {};
         //move the attributes we know about directly into the 'original' attribute, with their human-readable name
-        for(var key in app.original.use){
-            //check if we have a human readable string for this uuid key
-            if(casa_config.uuid_human[key]){
-                translatedOriginal[casa_config.uuid_human[key]] = app.original.use[key];
+        _.each(['use', 'require'], function(type){
+            for(var key in app.original[type]){
+                //check if we have a human readable string for this uuid key
+                if(casa_config.uuid_human[key]){
+                    app.original[type][casa_config.uuid_human[key]] = app.original[type][key];
+                    delete app.original[type][key];
+                }
             }
-        }
-        app.original = translatedOriginal;
+        });
     });
     //TODO: add the 'journal' stuff
     return apps;
