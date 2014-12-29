@@ -24,7 +24,7 @@ angular.module('casaNodejsApp')
             peer.last_updated = resultPeer.last_updated;
             peer.updating = false;
         });
-    }
+    };
 
     $scope.createPeer = function(peer){
         $scope.errors = {};
@@ -42,7 +42,7 @@ angular.module('casaNodejsApp')
                 $scope.errors[error.field] = error.error;
             });
         });
-    }
+    };
 
     $scope.deletePeer = function(peer){
         if(window.confirm("Are you sure you want to delete " + peer.name + "?")){
@@ -54,6 +54,6 @@ angular.module('casaNodejsApp')
                 $scope.peers.splice(index, 1);
             });
         }
-    }
+    };
 
 });

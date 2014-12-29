@@ -13,7 +13,7 @@ describe('Controller: MainCtrl', function () {
   beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
     $httpBackend = _$httpBackend_;
     $httpBackend.expectGET('/api/issues')
-      .respond({"casa_modules":[{"name":"Payload","features":[{"name":"TRANSITPAYLOAD","completed":false},{"name":"LOCALPAYLOAD","completed":false}]},{"name":"Publisher","features":[{"name":"SENDOUT","completed":false}]},{"name":"Local","features":[{"name":"SENDLOCAL","completed":false}]},{"name":"Receiver","features":[{"name":"RECEIVEIN","completed":true},{"name":"ADJINTRANSLATE","completed":true},{"name":"ADJINSQUASH","completed":false},{"name":"ADJINFILTER","completed":false}]},{"name":"Relay","features":[{"name":"ADJOUTTRANSFORM","completed":false},{"name":"ADJOUTFILTER","completed":false},{"name":"ADJOUTTRANSLATE","completed":false}]}]});
+      .respond({"casa_modules":[{"name":"Payload","features":[{"name":"TRANSITPAYLOAD","completed":false},{"name":"LOCALPAYLOAD","completed":false}]},{"name":"Publisher","features":[{"name":"SENDOUT","completed":false}]},{"name":"Local","features":[{"name":"SENDLOCAL","completed":false}]},{"name":"Receiver","features":[{"name":"RECEIVEIN","completed":true},{"name":"ADJINTRANSLATE","completed":true},{"name":"ADJINSQUASH","completed":true},{"name":"ADJINFILTER","completed":false}]},{"name":"Relay","features":[{"name":"ADJOUTTRANSFORM","completed":false},{"name":"ADJOUTFILTER","completed":false},{"name":"ADJOUTTRANSLATE","completed":false}]}]});
 
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', {

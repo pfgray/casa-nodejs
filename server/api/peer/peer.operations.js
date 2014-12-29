@@ -33,15 +33,26 @@ var adjInTranslate = function(apps){
             }
         }
     }
-    _.forEach(apps, function(app) {
-        //move the attributes we know about directly into the 'original' attribute, with their human-readable name
+    _.each(apps, function(app) {
         _.each(['use', 'require'], function(type){
             translateObject(app.original[type]);
-            if(app.journal){
-                _.each(app.journal, function(journal_entry){
-                    translateObject(journal_entry[type]);
-                });
-            }
+            _.each(app.journal, function(journal_entry){
+                translateObject(journal_entry[type]);
+            });
+        });
+    });
+    return apps;
+}
+
+var adjInSquash = function(apps){
+    _.each(apps, function(app) {
+        app.attributes = app.original;
+        _.each(['use', 'require'], function(type){
+            _.each(app.journal, function(journal_entry){
+                for(var key in journal_entry[type]){
+                    app.attributes[key] = journal_entry[type][key];
+                }
+            });
         });
     });
     return apps;
@@ -51,6 +62,7 @@ exports.updatePeer = function(peer, callback){
     request(peer.payload_url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var apps = adjInTranslate(JSON.parse(body));
+            apps = adjInSquash(apps);
             //let's add the apps to the peer object!
             peer.apps = apps;
             peer.last_updated = new Date();

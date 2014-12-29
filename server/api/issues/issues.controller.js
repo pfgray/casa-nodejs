@@ -45,7 +45,7 @@ exports.index = function(req, res) {
                 completed:true
             },{
                 name:"ADJINSQUASH",
-                completed:false
+                completed:true
             },{
                 name:"ADJINFILTER",
                 completed:false
