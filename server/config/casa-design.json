@@ -5,9 +5,9 @@
       "applications": {
            "map": "function(doc){\n  if(doc.type != null && doc.type == 'peer'){\n    for(var i=0; i<doc.apps.length; i++){\n      emit([doc.apps[i].identity, doc.apps[i]], null);\n    }\n  }\n}",
            "reduce": "function(keys, values) {\n    return null;\n}"
-       },
-      "peers":{
-         "map":"function(doc){\n  if(doc.type != null && doc.type == 'peer'){\n    emit(doc._id, doc)\n  }\n}"
+      },
+      "peers": {
+           "map": "function(doc){\n  if(doc.type != null && doc.type == 'peer'){\n    var appCount;\n    if(doc.apps){\n      appCount = doc.apps.length;\n    } else {\n      appCount = 0;\n    }\n    emit(doc._id, {\n        \"_id\": doc._id,\n        \"_rev\": doc._rev,\n        \"name\": doc.name,\n        \"payload_url\": doc.payload_url,\n        \"type\": doc.type,\n        \"last_updated\": doc.last_updated,\n        \"app_count\": appCount\n    })\n  }\n}"
       },
       "users": {
            "map": "function(doc){\n  if(doc.type != null && doc.type === 'user'){\n    emit(doc.username, doc)\n  }\n}"

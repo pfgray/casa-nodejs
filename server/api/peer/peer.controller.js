@@ -55,8 +55,10 @@ exports.create = function(req, res) {
                 message:err
             }, 500);
         } else {
+            //TODO: get the peer by id from the db
             peer._id  = newPeer.id;
             peer._rev = newPeer.rev;
+            peer.app_count = 0;
             res.json(peer);
         }
     });
