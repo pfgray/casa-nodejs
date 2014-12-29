@@ -23,19 +23,27 @@ exports.createUpdateOperation = function(req, res) {
 };
 
 var adjInTranslate = function(apps){
+    console.log('translating...');
+    function translateObject(object){
+        for(var key in object){
+            if(casa_config.uuid_human[key]){
+                //check if we have a human readable string for this uuid key
+                object[casa_config.uuid_human[key]] = object[key];
+                delete object[key];
+            }
+        }
+    }
     _.forEach(apps, function(app) {
         //move the attributes we know about directly into the 'original' attribute, with their human-readable name
         _.each(['use', 'require'], function(type){
-            for(var key in app.original[type]){
-                //check if we have a human readable string for this uuid key
-                if(casa_config.uuid_human[key]){
-                    app.original[type][casa_config.uuid_human[key]] = app.original[type][key];
-                    delete app.original[type][key];
-                }
+            translateObject(app.original[type]);
+            if(app.journal){
+                _.each(app.journal, function(journal_entry){
+                    translateObject(journal_entry[type]);
+                });
             }
         });
     });
-    //TODO: add the 'journal' stuff
     return apps;
 }
 
