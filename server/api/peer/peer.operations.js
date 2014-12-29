@@ -58,11 +58,30 @@ var adjInSquash = function(apps){
     return apps;
 }
 
+var adjInFilter = function(newApps){
+    _.each(apps, function(app) {
+        for(var key in app.attributes.require){
+            //does a config value exist for this key?
+            var translation_understood = false;
+            for(var config_key in casa_config.uuid_human){
+                if(key === casa_config.uuid_human[config_key]){
+                    translation_understood = true;
+                }
+            }
+        }
+
+        //TODO: how to validate per the attribute specification?
+        //TODO: how are attributes timestamps kept/stored?
+    });
+    return apps;
+}
+
 exports.updatePeer = function(peer, callback){
     request(peer.payload_url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var apps = adjInTranslate(JSON.parse(body));
             apps = adjInSquash(apps);
+            apps = adjInFilter(apps);
             //let's add the apps to the peer object!
             peer.apps = apps;
             peer.last_updated = new Date();

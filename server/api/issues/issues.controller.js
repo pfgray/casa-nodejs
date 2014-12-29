@@ -48,7 +48,7 @@ exports.index = function(req, res) {
                 completed:true
             },{
                 name:"ADJINFILTER",
-                completed:false
+                completed:true
             }]
         },{
             name:"Relay",
