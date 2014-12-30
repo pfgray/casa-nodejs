@@ -58,22 +58,36 @@ var adjInSquash = function(apps){
     return apps;
 }
 
-var adjInFilter = function(newApps){
+var adjInFilter = function(apps){
+    var filteredApps = [];
     _.each(apps, function(app) {
-        for(var key in app.attributes.require){
-            //does a config value exist for this key?
-            var translation_understood = false;
-            for(var config_key in casa_config.uuid_human){
-                if(key === casa_config.uuid_human[config_key]){
-                    translation_understood = true;
+        var appIsGood = true;
+        if(app.attributes.require){
+            console.log("app does have required requirements, checking now...");
+            for(var key in app.attributes.require){
+                console.log("checking that the app has:", key, "...");
+                //does a config value exist for this key?
+                var translation_understood = false;
+                for(var config_key in casa_config.uuid_human){
+                    if(key === casa_config.uuid_human[config_key]){
+                        translation_understood = true;
+                    }
+                }
+                if(!translation_understood){
+                    appIsGood = false;
                 }
             }
+        } else {
+            console.log("app doesn't have any required requirements");
         }
 
+        if(appIsGood){
+            filteredApps.push(app);
+        }
         //TODO: how to validate per the attribute specification?
         //TODO: how are attributes timestamps kept/stored?
     });
-    return apps;
+    return filteredApps;
 }
 
 exports.updatePeer = function(peer, callback){
