@@ -32,7 +32,13 @@ exports.index = function(req, res) {
         },{
             name:"Local",
             features:[{
-                name:"SENDLOCAL",
+                name:"SENDLOCAL_ALL",
+                completed:true
+            },{
+                name:"SENDLOCAL_ONE",
+                completed:true
+            },{
+                name:"SENDLOCAL_QUERY",
                 completed:false
             }]
         },{

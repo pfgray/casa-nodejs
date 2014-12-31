@@ -14,7 +14,7 @@ module.exports = {
     },
     getApplication:function(originatorId, appId, callback){
         var db = casa_model.getDatabase();
-        db.view('casa/applications', {key:{originator_id: originatorId, id: appId}}, function (err, res) {
+        db.view('casa/apps_by_id', {key:{originator_id: originatorId, id: appId}}, function (err, res) {
             //TODO: is there a better way to find a single entity?
             callback(err, _.transform(res, function(result, entity){
                 return result.push(entity.value);
