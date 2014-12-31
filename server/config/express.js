@@ -41,12 +41,16 @@ module.exports = function(app) {
     app.use(express.static(path.join(config.root, 'client')));
     app.set('appPath', 'client');
     app.use(morgan('dev'));
-    //app.disable('etag');
+    app.disable('etag');
     app.use(errorHandler()); // Error handler - has to be last
   }
 
   //Setup passport:
-  app.use(session({ secret: 'keyboard cat' }));
+  app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+  }));
   app.use(passport.initialize());
   app.use(passport.session());
 };
