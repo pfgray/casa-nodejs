@@ -54,13 +54,13 @@ exports.index = function(req, res) {
             name:"Relay",
             features:[{
                 name:"ADJOUTTRANSFORM",
-                completed:false
+                completed:true
             },{
                 name:"ADJOUTFILTER",
-                completed:false
+                completed:true
             },{
                 name:"ADJOUTTRANSLATE",
-                completed:false
+                completed:true
             }]
         }]
     });
