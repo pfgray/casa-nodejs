@@ -2,7 +2,13 @@ extends ../../layout.jade
 
 block content
   .container
-    .row.big-app
+    .row.big-app.large
+      .col-lg-8.col-md-8.col-lg-offset-2.col-md-offset-2
+        div.icon(ng-if="!app.attributes.use.icon", style="{{'background-color:' + app.color + ';'}}")
+          span {{app.attributes.use.title.substring(0, 1)}}
+        img.icon(ng-if="app.attributes.use.icon" ng-src="{{app.attributes.use.icon}}")
+        span.title {{app.attributes.use.title}}
+    .row.big-app.small
       .col-lg-2.col-lg-offset-2.col-md-2.col-md-offset-2
         div.icon(ng-if="!app.attributes.use.icon", style="{{'background-color:' + app.color + ';'}}")
           span {{app.attributes.use.title.substring(0, 1)}}
