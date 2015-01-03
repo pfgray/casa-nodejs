@@ -5,7 +5,8 @@ block content
     .row
       .col-md-2.col-lg-2.col-lg-offset-9.col-md-offset-9.group-button-row
         .dropdown
-          button.btn.btn-default.dropdown-toggle(ng-repeat="option in groupOptions", ng-if="option.selected") {{option.label}}
+          button.btn.btn-default.dropdown-toggle(ng-repeat="option in groupOptions", ng-if="option.selected")
+            span.drodown-button-label {{option.label}}
             span.caret
           ul.dropdown-menu
             li(ng-repeat="option in groupOptions", ng-if="!option.selected")
