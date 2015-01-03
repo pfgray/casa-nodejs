@@ -5,6 +5,17 @@ angular.module('casaNodejsApp')
     $scope.apps = [];
     $scope.loadingApps = true;
 
+    $scope.groupOptions = [{
+        label:"By Peer",
+        uisref:"apps({group:'peer'})",
+        selected:$stateParams.group === 'peer'
+    },{
+        label:"All Apps",
+        uisref:"apps({group:null})",
+        selected:$stateParams.group !== 'peer'
+    }];
+    console.log('got:', $scope.groupOptions)
+
     if($stateParams.group === 'peer'){
         $scope.group = "peer";
         peersService.getPeers(true)

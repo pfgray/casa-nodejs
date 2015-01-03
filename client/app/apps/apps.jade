@@ -4,9 +4,12 @@ block content
   .container
     .row
       .col-md-2.col-lg-2.col-lg-offset-9.col-md-offset-9.group-button-row
-        //TODO: possibly change this to a dropdown?
-        button.btn.btn-default(ng-if="group !== 'peer'" type="button", ui-sref="apps({group:'peer'})") By Peer
-        button.btn.btn-default(ng-if="group === 'peer'" type="button", ui-sref="apps({group:null})") All Apps
+        .dropdown
+          button.btn.btn-default.dropdown-toggle(ng-repeat="option in groupOptions", ng-if="option.selected") {{option.label}}
+            span.caret
+          ul.dropdown-menu
+            li(ng-repeat="option in groupOptions", ng-if="!option.selected")
+              a(ui-sref="{{option.uisref}}") {{option.label}}
     .row(ng-if="loadingApps")
       .col-md-6.col-md-6.col-lg-offset-3.col-md-offset-3.main-load-icon
           i.fa.fa-circle-o-notch.fa-spin
