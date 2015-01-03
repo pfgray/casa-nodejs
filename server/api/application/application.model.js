@@ -7,7 +7,6 @@ module.exports = {
     getApplications:function(callback){
         var db = casa_model.getDatabase();
         db.view('casa/applications', {group: true, reduce: true}, function (err, res) {
-            console.log('got results: ', res);
             callback(err, _.transform(res, function(result, entity){
                 return result.push(entity.value);
             }));
@@ -20,7 +19,6 @@ module.exports = {
             group:true,
             reduce:true
         }, function (err, res) {
-            console.log('got results: ', res);
             callback(err, _.transform(res, function(result, entity){
                 return result.push(entity.value);
             })[0]);

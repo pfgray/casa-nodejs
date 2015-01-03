@@ -4,7 +4,7 @@ angular.module('casaNodejsApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('apps', {
-        url: '/apps',
+        url: '/apps?group',
         templateUrl: 'app/apps/apps.html',
         controller: 'AppsCtrl'
       })

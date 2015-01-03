@@ -2,18 +2,37 @@ extends ../layout.jade
 
 block content
   .container
+    .row
+      .col-md-2.col-lg-2.col-lg-offset-9.col-md-offset-9.group-button-row
+        //TODO: possibly change this to a dropdown?
+        button.btn.btn-default(ng-if="group !== 'peer'" type="button", ui-sref="apps({group:'peer'})") By Peer
+        button.btn.btn-default(ng-if="group === 'peer'" type="button", ui-sref="apps({group:null})") All Apps
     .row(ng-if="loadingApps")
       .col-md-6.col-md-6.col-lg-offset-3.col-md-offset-3.main-load-icon
           i.fa.fa-circle-o-notch.fa-spin
     .row(ng-if="!loadingApps")
-      .col-lg-10.col-lg-offset-1(ng-if="apps.length > 0")
+
+      // Apps in single list
+      .col-lg-10.col-lg-offset-1(ng-if="!noApps && group !== 'peer'")
         ul.list-group
           li.list-group-item.app(ng-repeat="app in apps", ui-sref="singleApp({originatorId:app.identity.originator_id, appId:app.identity.id})", role="link")
             div.icon(ng-if="!app.original.use.icon", style="{{'background-color:' + app.color + ';'}}")
               span {{app.original.use.title.substring(0, 1)}}
             img.icon(ng-if="app.original.use.icon" ng-src="{{app.original.use.icon}}")
             span {{app.original.use.title}}
-      .col-md-6.col-md-6.col-lg-offset-3.col-md-offset-3(ng-if="apps.length < 1")
+
+      // Apps grouped by peer
+      .col-lg-10.col-lg-offset-1(ng-if="!noApps && group === 'peer'")
+        ul.list-group.list-with-header(ng-repeat="peer in peers")
+          li.list-group-item.disabled {{peer.name}}
+          li.list-group-item.app(ng-repeat="app in peer.apps", ui-sref="singleApp({originatorId:app.identity.originator_id, appId:app.identity.id})", role="link")
+            div.icon(ng-if="!app.original.use.icon", style="{{'background-color:' + app.color + ';'}}")
+              span {{app.original.use.title.substring(0, 1)}}
+            img.icon(ng-if="app.original.use.icon" ng-src="{{app.original.use.icon}}")
+            span {{app.original.use.title}}
+
+      // No Apps jumbotron
+      .col-md-6.col-md-6.col-lg-offset-3.col-md-offset-3(ng-if="noApps")
         div.jumbotron.empty-apps
           i.fa.fa-cubes
           h3 There aren't any apps here.

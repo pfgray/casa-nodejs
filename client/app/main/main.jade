@@ -12,7 +12,7 @@ block content
         h3.page-header CASA Modules:
         .row(ng-repeat='row in issueRows')
           .col-lg-4.col-md-4(ng-repeat='module in row', ng-class="{'col-lg-offset-2 col-md-offset-2' : row.length === 2 && $index === 0}")
-            ul.list-group.module-list
+            ul.list-group.module-list.list-with-header
               li.list-group-item.disabled {{module.name}}
               li.list-group-item(ng-repeat='feature in module.features', ng-class="{'success' : feature.completed}")
                 i.fa.fa-check(ng-if='feature.completed')

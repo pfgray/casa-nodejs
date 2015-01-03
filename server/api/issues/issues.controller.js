@@ -15,33 +15,6 @@ var _ = require('lodash');
 exports.index = function(req, res) {
     res.json({
         casa_modules:[{
-            name:"Payload",
-            features:[{
-                name:"TRANSITPAYLOAD",
-                completed:false
-            },{
-                name:"LOCALPAYLOAD",
-                completed:false
-            }]
-        },{
-            name:"Publisher",
-            features:[{
-                name:"SENDOUT",
-                completed:false
-            }]
-        },{
-            name:"Local",
-            features:[{
-                name:"SENDLOCAL_ALL",
-                completed:true
-            },{
-                name:"SENDLOCAL_ONE",
-                completed:true
-            },{
-                name:"SENDLOCAL_QUERY",
-                completed:false
-            }]
-        },{
             name:"Receiver",
             features:[{
                 name:"RECEIVEIN",
@@ -66,6 +39,33 @@ exports.index = function(req, res) {
                 completed:true
             },{
                 name:"ADJOUTTRANSLATE",
+                completed:true
+            }]
+        },{
+            name:"Local",
+            features:[{
+                name:"SENDLOCAL_ALL",
+                completed:true
+            },{
+                name:"SENDLOCAL_ONE",
+                completed:true
+            },{
+                name:"SENDLOCAL_QUERY",
+                completed:false
+            }]
+        },{
+            name:"Payload",
+            features:[{
+                name:"TRANSITPAYLOAD",
+                completed:true
+            },{
+                name:"LOCALPAYLOAD",
+                completed:true
+            }]
+        },{
+            name:"Publisher",
+            features:[{
+                name:"SENDOUT",
                 completed:true
             }]
         }]
