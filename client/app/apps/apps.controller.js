@@ -4,6 +4,7 @@ angular.module('casaNodejsApp')
 .controller('AppsCtrl', function ($scope, $http, $stateParams, appsService, peersService) {
     $scope.apps = [];
     $scope.loadingApps = true;
+    $scope.columnCount = 3;
 
     $scope.groupOptions = [{
         label:"By Peer",
@@ -14,7 +15,6 @@ angular.module('casaNodejsApp')
         uisref:"apps({group:null})",
         selected:$stateParams.group !== 'peer'
     }];
-    console.log('got:', $scope.groupOptions)
 
     if($stateParams.group === 'peer'){
         $scope.group = "peer";
@@ -34,10 +34,15 @@ angular.module('casaNodejsApp')
         .then(function(apps){
             if(apps.length < 1){
                 $scope.noApps = true;
+            } else {
+                $scope.apps = apps;
             }
             $scope.loadingApps = false;
-            $scope.apps = apps;
         });
     }
+
+    $scope.range = function(num) {
+        return new Array(num);
+    };
 
 });
