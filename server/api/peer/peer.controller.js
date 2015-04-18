@@ -5,7 +5,6 @@ var model = require('./peer.model');
 
 // Get list of things
 exports.index = function(req, res) {
-    console.log('yeilding to model');
     model.getPeers(function(err, apps){
         if(err){
             console.log('error getting apps: ', err);

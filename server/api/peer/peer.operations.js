@@ -35,6 +35,7 @@ var adjInTranslate = function(apps){
     }
     _.each(apps, function(app) {
         _.each(['use', 'require'], function(type){
+            console.log('translating... ', JSON.stringify(app));
             translateObject(app.original[type]);
             _.each(app.journal, function(journal_entry){
                 translateObject(journal_entry[type]);
@@ -91,8 +92,9 @@ var adjInFilter = function(apps){
 }
 
 exports.updatePeer = function(peer, callback){
+    console.log('updating peer...', peer._id);
     request(peer.payload_url, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
+        if (!error && response.statusCode === 200) {
             var apps = adjInTranslate(JSON.parse(body));
             apps = adjInSquash(apps);
             apps = adjInFilter(apps);
@@ -105,6 +107,8 @@ exports.updatePeer = function(peer, callback){
                 }
                 callback(err, peer);
             });
+        } else {
+            callback(error);
         }
     });
 }
