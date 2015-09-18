@@ -8,7 +8,7 @@ var couch = require('../config/environment').couch;
 module.exports = {
   init: function(config){
     console.log('initing database...', couch);
-    jf.readFile('server/config/casa-design.json', function(err, designFile) {
+    jf.readFile('server/config/casa-design.js', function(err, designFile) {
       if(err){
         console.log('could not read view json file, ', err);
       } else {

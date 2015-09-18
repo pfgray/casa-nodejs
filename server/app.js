@@ -20,7 +20,7 @@ require('./routes')(app);
 require('./database').init(config);
 
 //Setup authentication scheme:
-require('./config/passport.js').init(config);
+require('./config/passport.js').init(app, config);
 
 // Start server
 server.listen(config.port, config.ip, function () {
