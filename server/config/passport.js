@@ -13,6 +13,7 @@ module.exports.init = function(app, config){
     app.use(passport.initialize());
     app.use(passport.session());
     var url = config.protocol + '://' + config.domain + ':' + config.port;
+    console.log('got url, first: ', url);
     passport.use(new GoogleStrategy({
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,

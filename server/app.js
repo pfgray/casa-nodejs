@@ -19,9 +19,6 @@ require('./routes')(app);
 //Setup db:
 require('./database').init(config);
 
-//Setup authentication scheme:
-require('./config/passport.js').init(app, config);
-
 // Start server
 server.listen(config.port, config.ip, function () {
   console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
