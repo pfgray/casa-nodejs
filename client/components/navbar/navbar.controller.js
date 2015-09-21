@@ -1,17 +1,28 @@
 'use strict';
 
 angular.module('casaNodejsApp')
-  .controller('NavbarCtrl', function ($scope, $location) {
+  .controller('NavbarCtrl', function ($rootScope, $scope, $location) {
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
-    },{
-      'title': 'Apps',
-      'link': '/apps'
-    },{
-      'title': 'Peers',
-      'link': '/peers'
     }];
+
+    if($rootScope.user){
+      $scope.menu.push({
+        'title': 'Apps',
+        'link': '/apps'
+      },{
+        'title': 'Peers',
+        'link': '/peers'
+      });
+    } else {
+      $scope.menu.push({
+        title: 'Login',
+        onClick: function(){
+          window.location.href = '/auth/google';
+        }
+      });
+    }
 
     $scope.isCollapsed = true;
 
