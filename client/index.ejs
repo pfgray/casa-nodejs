@@ -10,6 +10,9 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <script type="text/javascript">
+      window.user = <%- JSON.stringify(user) || 'undefined' %>;
+    </script>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->

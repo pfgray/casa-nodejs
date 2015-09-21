@@ -8,7 +8,9 @@
     "compression": "~1.0.1",
     "connect-mongo": "^0.4.1",
     "cookie-parser": "~1.0.1",
+    "cors": "^2.5.3",
     "cradle": "^0.6.9",
+    "ejs": "^2.3.4",
     "errorhandler": "~1.0.0",
     "express": "~4.10.6",
     "express-session": "^1.0.4",
@@ -21,8 +23,7 @@
     "passport-google-oauth": "^0.1.5",
     "passport-local": "^1.0.0",
     "request": "^2.51.0",
-    "serve-favicon": "~2.0.1",
-    "cors": "^2.5.3"
+    "serve-favicon": "~2.0.1"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
