@@ -3,6 +3,9 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     util = require('gulp-util'),
     jade = require('gulp-jade');
+
+var clean = require('gulp-clean');
+var wiredep = require('wiredep').stream;
     /*
     usemin = require('gulp-usemin'),
     uglify = require('gulp-uglify'),
@@ -15,15 +18,22 @@ var path = require('path');
 
 var client = './client';
 
-gulp.task('default', function() {
+gulp.task('default', [
+  'clean',
+  'styles',
+  'templates'
+], function() {
   // place code for your default task here
-
-  gulp.run('styles', 'templates');
 
   //build styles,
   //build templates,
 
   //start the server,
+
+    // 'wiredep',
+    // 'express:dev',
+    // 'wait',
+    // 'watch'
 });
 
 gulp.task('styles', function(){
@@ -43,6 +53,20 @@ gulp.task('templates', function(){
   return gulp.src(client + '/**/*.jade')
     .pipe(jade())
     .pipe(gulp.dest('.tmp/'));
+});
+
+gulp.task('clean', function () {
+	return gulp.src('./tmp', {read: false})
+		.pipe(clean());
+});
+
+gulp.task('bower', function () {
+  return gulp.src(client + '/index.html')
+    .pipe(wiredep({
+      ignorePath: client + '/',
+      exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/', /bootstrap.css/, /font-awesome.css/ ]
+    }))
+    .pipe(gulp.dest('./dest'));
 });
 
 /*
