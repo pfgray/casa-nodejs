@@ -16,7 +16,8 @@ module.exports = {
     },
     findOrCreate:function(identifier, user, callback){
         var db = model.getDatabase();
-        db.view('casa/users', {key:identifier}, function (err, res) {
+        console.log('Finding a user for identifier: ', identifier);
+        db.view('casa/usersByGoogleId', {key:identifier.googleId}, function (err, res) {
             if(err){
                 callback(err);
                 return;
