@@ -1,32 +1,41 @@
+var session = require('express-session');
 var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-var users = require('../api/user/user.model.js');
+var userModel = require('../api/user/user.model.js');
 
-module.exports.init = function(config){
-    passport.use(new LocalStrategy(
-        function(username, password, done) {
-            users.getUser(username, function(err, user){
-                if (err) { return done(err); }
-                else {
-                    if(password !== user.password){
-                        console.log('password was wrong, rejecting');
-                        return done(null, false, {message: 'incorrect password!'});
-                    }
-                }
-                console.log('password was correct');
-                return done(null, user);
+module.exports.init = function(app, config){
+    app.use(session({
+        secret: 'keyboard cat',
+        resave: false,
+        saveUninitialized: true
+    }));
+    app.use(passport.initialize());
+    app.use(passport.session());
+    var url = config.protocol + '://' + config.domain + ':' + config.port;
+    console.log('got url, first: ', url);
+    passport.use(new GoogleStrategy({
+            clientID: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            callbackURL: url + "/auth/google/callback"
+        }, function(accessToken, refreshToken, profile, done) {
+            console.log('got: ', accessToken, refreshToken, profile);
+            var googleUser = profile._json;
+            googleUser.googleId = profile.id;
+            googleUser.displayName = profile.displayName;
+            googleUser.googleAccessToken = accessToken;
+            googleUser.googleRefreshToken = refreshToken;
+            userModel.findOrCreate({
+                googleId: profile.id
+            }, googleUser, function(err, user) {
+                return done(err, user);
             });
-        }
-    ));
-
+        })
+    );
     passport.serializeUser(function(user, done) {
-        done(null, user.username);
+        done(null, user);
     });
-
-    passport.deserializeUser(function(username, done) {
-        users.getUser(username, function(err, user){
-            done(err, user);
-        });
+    passport.deserializeUser(function(user, done) {
+        done(null, user);
     });
-}
+};

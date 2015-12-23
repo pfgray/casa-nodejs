@@ -19,3 +19,13 @@ exports.login = function(req, res) {
         }
     });
 };
+
+exports.currentUser = function(req, res){
+    if(!req.user){
+        res.status(403).json({
+          error:"not authenticated"
+        });
+    } else {
+        res.status(200).json(req.user);
+    }
+}
