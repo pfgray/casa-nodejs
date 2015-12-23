@@ -15,6 +15,7 @@ angular.module('casaNodejsApp')
         'title': 'Peers',
         'link': '/peers'
       });
+      $scope.user = $rootScope.user;
     } else {
       $scope.menu.push({
         title: 'Login',
