@@ -32,3 +32,19 @@
     color: @main-color !important;
     cursor:default;
 }
+
+body {
+  overflow-y: overlay;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    position: absolute;
+    right:0;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: @main-color;
+    border-radius: 2px;
+  }
+}
