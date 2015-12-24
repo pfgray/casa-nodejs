@@ -5,7 +5,14 @@ var model = require('./peer.model');
 
 // Get list of things
 exports.index = function(req, res) {
-    model.getPeers(function(err, apps){
+    if(!req.user){
+      res.json({
+        error:"Missing Authentication"
+      }, 403);
+      return;
+    }
+    console.log("Getting peers with user: ", req.user._id);
+    model.getPeersByUser(req.user._id, function(err, apps){
         if(err){
             console.log('error getting apps: ', err);
             res.json({
@@ -19,24 +26,28 @@ exports.index = function(req, res) {
 };
 
 exports.create = function(req, res) {
+    if(!req.user){
+      res.json({
+        error:"Missing Authentication"
+      }, 403);
+      return;
+    }
     var errors = [];
-    var invalid = false;
+    console.log("Creating peer with user: ", req.user._id);
     if(!req.body.name || req.body.name.trim() === ''){
-        invalid = true;
         errors.push({
             field:'name',
             error:'Cannot be blank'
         });
     }
     if(!req.body.payload_url || req.body.payload_url.trim() === ''){
-        invalid = true;
         errors.push({
             field:'payload_url',
             error:'Cannot be blank'
         });
     }
 
-    if(invalid){
+    if(errors.length > 0){
         res.json(errors, 400);
         return;
     }
@@ -44,6 +55,7 @@ exports.create = function(req, res) {
         name:req.body.name,
         payload_url:req.body.payload_url,
         type:'peer',
+        userId: req.user._id,
         last_updated:null
     };
     model.createPeer(peer, function(err, newPeer){

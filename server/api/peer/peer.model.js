@@ -12,6 +12,14 @@ module.exports = {
             }));
         });
     },
+    getPeersByUser:function(userId, callback){
+        var db = casa_model.getDatabase();
+        db.view('casa/peersByUser', {key:userId}, function (err, res) {
+            callback(err, _.transform(res, function(result, entity){
+                return result.push(entity.value);
+            }));
+        });
+    },
     getPeer:function(id, callback){
         var db = casa_model.getDatabase();
         db.view('casa/peers', {key:id}, function (err, res) {

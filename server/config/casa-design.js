@@ -46,6 +46,21 @@ module.exports = {
             }
           }
       },
+      peersByUser: {
+          map: function(doc){
+            if(doc.type != null && doc.type == 'peer'){
+              var appCount = doc.apps ? doc.apps.length : 0;
+              emit(doc.userId, {
+                "_id": doc._id,
+                "name": doc.name,
+                "payload_url": doc.payload_url,
+                "type": doc.type,
+                "last_updated": doc.last_updated,
+                "app_count": appCount
+              });
+            }
+          }
+      },
       users: {
           map: function(doc){
             if(doc.type != null && doc.type === 'user'){
