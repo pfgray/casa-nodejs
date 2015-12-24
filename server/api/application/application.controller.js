@@ -5,7 +5,13 @@ var model = require('./application.model');
 
 // Get list of things
 exports.index = function(req, res) {
-    model.getApplications(function(err, apps){
+    if(!req.user){
+      res.json({
+        error: "Missing Authentication"
+      }, 403);
+      return;
+    }
+    model.getApplicationsForUser(req.user._id, function(err, apps){
         if(err){
             console.log('error getting apps: ', err);
             res.json({

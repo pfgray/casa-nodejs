@@ -24,6 +24,15 @@ module.exports = {
             return values[latest_index];
           }
       },
+      applicationsByUser: {
+          map: function(doc){
+            if(doc.type != null && doc.type == 'peer'){
+              for(var i=0; i<doc.apps.length; i++){
+                emit(doc.userId, doc.apps[i]);
+              }
+            }
+          }
+      },
       peers: {
           map: function(doc){
             if(doc.type != null && doc.type == 'peer'){
