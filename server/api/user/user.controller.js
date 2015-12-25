@@ -28,4 +28,9 @@ exports.currentUser = function(req, res){
     } else {
         res.status(200).json(req.user);
     }
-}
+};
+
+exports.logout = function(req, res){
+  req.logout();
+  res.redirect('/');
+};

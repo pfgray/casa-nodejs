@@ -7,6 +7,7 @@ var passport = require('passport');
 var router = express.Router();
 
 router.post('/login', passport.authenticate('local'), controller.login);
+router.get('/logout', controller.logout);
 router.get('/me', controller.currentUser);
 
 module.exports = router;

@@ -14,6 +14,11 @@ angular.module('casaNodejsApp')
       },{
         'title': 'Peers',
         'link': '/peers'
+      },{
+        'title': 'Logout',
+        onClick: function(){
+          window.location.href = '/api/logout';
+        }
       });
       $scope.user = $rootScope.user;
     } else {
