@@ -25,7 +25,7 @@ module.exports = {
         console.log('database: ' + config.couch.db_name + ' already exists');
         updateDesign(couch_design);
       } else {
-        console.log('database does not exists.');
+        console.log('database does not exist.');
         db.create(function(err){
           // do something if there's an error
           if(!err){

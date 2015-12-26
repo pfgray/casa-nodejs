@@ -28,9 +28,20 @@ module.exports = {
           map: function(doc){
             if(doc.type != null && doc.type == 'peer'){
               for(var i=0; i<doc.apps.length; i++){
-                emit(doc.userId, doc.apps[i]);
+                emit([doc.userId, doc.apps[i].identity], doc.apps[i]);
               }
             }
+          },
+          reduce: function (keys, values) {
+            var latest = 0;
+            var latest_index = 0;
+            for(var i=0; i<values.length; i++){
+              if((new Date(values[i].attributes.timestamp)).getTime() > latest){
+                latest = (new Date(values[i].attributes.timestamp)).getTime();
+                latest_index = i;
+              }
+            }
+            return values[latest_index];
           }
       },
       peers: {

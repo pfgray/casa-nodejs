@@ -14,8 +14,17 @@ module.exports = {
     },
     getApplicationsForUser:function(userId, callback){
         var db = casa_model.getDatabase();
-        db.view('casa/applicationsByUser', {key: userId}, function (err, res) {
-            console.log("got apps for user: ", userId, res);
+        var opts = {
+          startkey: [userId],
+          endkey: [userId, {
+            originator_id: {},
+            id: {}
+          }],
+          group: true,
+          reduce: true
+        };
+        console.log('Using opts: ', opts);
+        db.view('casa/applicationsByUser', opts, function (err, res) {
             callback(err, _.transform(res, function(result, entity){
                 return result.push(entity.value);
             }));
