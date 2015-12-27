@@ -25,6 +25,7 @@
     "passport": "^0.2.1",
     "passport-google-oauth": "^0.1.5",
     "passport-local": "^1.0.0",
+    "q": "^1.4.1",
     "request": "^2.51.0",
     "serve-favicon": "~2.0.1"
   },

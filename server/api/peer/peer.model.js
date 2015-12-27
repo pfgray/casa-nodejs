@@ -1,7 +1,6 @@
-'use strict';
-
 var _ = require('lodash');
 var casa_model = require('../../database');
+
 
 module.exports = {
     getPeers:function(callback){

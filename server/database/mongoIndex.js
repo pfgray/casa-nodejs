@@ -1,4 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
+var Q = require('q');
 
 module.exports = {
   init: function(config){
@@ -8,17 +9,16 @@ module.exports = {
     var port = 27017
     this.url = 'mongodb://' + host + ':' + port + '/' + db_name;
   },
-  getDatabase:function(cb){
+  getDatabase:function(){
     var db_name = 'casa';
     var host = 'localhost';
     var port = 27017
     var url = 'mongodb://' + host + ':' + port + '/' + db_name;
-    MongoClient.connect(url, function(err, db) {
-      if(err){
-        console.log("error conneccting to mongo db (" + this.url + ")");
-        cb(err);
-      }
-      cb(null, db);
-    });
+
+    return Q.nfcall(MongoClient.connect, url)
+      .catch(function(err){
+        console.log("error connecting to mongo db using: (" + this.url + ")");
+        throw err;
+      });
   }
 };

@@ -8,7 +8,8 @@ var collection = 'users';
 
 module.exports = {
     getUser:function(username, callback){
-        model.getDatabase(function(err, db){
+        model.getDatabase()
+        .then(function(db){
           //users
           db.collection(collection).findOne({
             username:username
@@ -20,7 +21,8 @@ module.exports = {
     },
     findOrCreate:function(identifier, user, callback){
         console.log('Finding a user for identifier: ', identifier);
-        model.getDatabase(function(err, db){
+        model.getDatabase()
+        .then(function(db){
           //users
           db.collection(collection).findOne({
             googleId:identifier.googleId
