@@ -1,48 +1,42 @@
 'use strict';
 
 var _ = require('lodash');
-var model = require('../../database');
+var model = require('../../database/mongoIndex');
 var keyGenerator = require('../key/key.generator.js');
+
+var collection = 'users';
 
 module.exports = {
     getUser:function(username, callback){
-        var db = model.getDatabase();
-        db.view('casa/users', {key:username}, function (err, res) {
-            //TODO: is there a better way to find a single entity?
-            callback(err, _.transform(res, function(result, entity){
-                return result.push(entity.value);
-            })[0]);
+        model.getDatabase(function(err, db){
+          //users
+          db.collection(collection).findOne({
+            username:username
+          }, function(err, user){
+            console.log("found user:", user);
+            callback(null, user);
+          });
         });
     },
     findOrCreate:function(identifier, user, callback){
-        var db = model.getDatabase();
         console.log('Finding a user for identifier: ', identifier);
-        db.view('casa/usersByGoogleId', {key:identifier.googleId}, function (err, res) {
-            if(err){
-                callback(err);
-                return;
-            }
-            //TODO: is there a better way to find a single entity?
-            console.log('got res: ', res);
-            if(res.length < 1){
-                var db = model.getDatabase();
-                identifier.type = "user";
-                keyGenerator.generateApiKey(function(err, apiKey){
-                    identifier.apiKey = apiKey;
-                    var newUser = _.merge(user, identifier);
-                    console.log('creating user... ', JSON.stringify(newUser));
-                    db.save(newUser, function (err, res) {
-                        callback(err, _.merge(newUser, {
-                          _id:res.id
-                        }));
-                    });
-                });
-
+        model.getDatabase(function(err, db){
+          //users
+          db.collection(collection).findOne({
+            googleId:identifier.googleId
+          }, function(err, u){
+            console.log("found user:", u);
+            if(u === null){
+              var newUser = _.merge(user, identifier);
+              console.log('creating user... ', JSON.stringify(newUser));
+              db.collection(collection).insertMany([user], function(err, res){
+                console.log('created user... ', JSON.stringify(res));
+                callback(err, res);
+              });
             } else {
-                callback(err, _.transform(res, function(result, entity){
-                    return result.push(entity.value);
-                })[0]);
+              callback(null, u);
             }
+          });
         });
     }
 };
