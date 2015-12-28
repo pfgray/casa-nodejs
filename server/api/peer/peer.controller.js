@@ -12,16 +12,16 @@ exports.index = function(req, res) {
       return;
     }
     console.log("Getting peers with user: ", req.user._id);
-    model.getPeersByUser(req.user._id, function(err, apps){
-        if(err){
-            console.log('error getting apps: ', err);
-            res.json({
-                status:'error',
-                message:err
-            }, 500);
-        } else {
-            res.json(apps);
-        }
+
+    model.getPeersByUser(req.user._id)
+    .then(function(apps){
+      res.json(apps);
+    }, function(err){
+      console.log('error getting apps: ', err);
+      res.json({
+          status:'error',
+          message:err
+      }, 500);
     });
 };
 
@@ -58,20 +58,19 @@ exports.create = function(req, res) {
         userId: req.user._id,
         last_updated:null
     };
-    model.createPeer(peer, function(err, newPeer){
-        if(err){
-            console.log('error creating peer: ', err);
-            res.json({
-                status:'error',
-                message:err
-            }, 500);
-        } else {
-            //TODO: get the peer by id from the db
-            peer._id  = newPeer.id;
-            peer._rev = newPeer.rev;
-            peer.app_count = 0;
-            res.json(peer);
-        }
+    model.createPeer(peer).then(function(newPeer){
+        //TODO: get the peer by id from the db
+        peer._id  = newPeer.id;
+        peer._rev = newPeer.rev;
+        peer.app_count = 0;
+        res.json(peer);
+    })
+    .catch(function(err){
+        console.log('error creating peer: ', err, err.stack);
+        res.status(500).json({
+            status:'error',
+            message:err
+        });
     });
 };
 
@@ -80,7 +79,7 @@ exports.delete = function(req, res) {
         model.deletePeer(req.params.peer, peer._rev, function(err, result){
             if(err){
                 console.log('error deleting peer', err);
-                res.json(err, 500);
+                res.status(500).json(err);
             } else {
                 res.json(result);
             }

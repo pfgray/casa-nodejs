@@ -1,6 +1,10 @@
 var _ = require('lodash');
 var casa_model = require('../../database');
 
+var model = require('../../database/mongoIndex');
+var collection = 'peers';
+var Q = require('q');
+
 
 module.exports = {
     getPeers:function(callback){
@@ -11,12 +15,12 @@ module.exports = {
             }));
         });
     },
-    getPeersByUser:function(userId, callback){
-        var db = casa_model.getDatabase();
-        db.view('casa/peersByUser', {key:userId}, function (err, res) {
-            callback(err, _.transform(res, function(result, entity){
-                return result.push(entity.value);
-            }));
+    getPeersByUser:function(userId){
+        return model.getDatabase()
+        .then(function(db){
+          return Q.ninvoke(db.collection(collection).find({
+            userId: userId
+          }), 'toArray');
         });
     },
     getPeer:function(id, callback){
@@ -34,11 +38,11 @@ module.exports = {
             callback(err, res);
         });
     },
-    createPeer:function(peer, callback){
-        var db = casa_model.getDatabase();
-        db.save(peer, function (err, res) {
-            callback(err, res);
-        });
+    createPeer:function(peer){
+      return model.getDatabase()
+      .then(function(db){
+        return Q.ninvoke(db.collection(collection), 'insert', peer);
+      });
     },
     deletePeer:function(id, rev, callback){
         var db = casa_model.getDatabase();
