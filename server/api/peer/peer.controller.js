@@ -5,17 +5,11 @@ var model = require('./peer.model');
 
 // Get list of things
 exports.index = function(req, res) {
-    if(!req.user){
-      res.json({
-        error:"Missing Authentication"
-      }, 403);
-      return;
-    }
     console.log("Getting peers with user: ", req.user._id);
 
     model.getPeersByUser(req.user._id)
-    .then(function(apps){
-      res.json(apps);
+    .then(function(peers){
+      res.json(peers);
     }, function(err){
       console.log('error getting apps: ', err);
       res.json({
@@ -26,12 +20,6 @@ exports.index = function(req, res) {
 };
 
 exports.create = function(req, res) {
-    if(!req.user){
-      res.json({
-        error:"Missing Authentication"
-      }, 403);
-      return;
-    }
     var errors = [];
     console.log("Creating peer with user: ", req.user._id);
     if(!req.body.name || req.body.name.trim() === ''){
@@ -54,7 +42,6 @@ exports.create = function(req, res) {
     var peer = {
         name:req.body.name,
         payload_url:req.body.payload_url,
-        type:'peer',
         userId: req.user._id,
         last_updated:null
     };
