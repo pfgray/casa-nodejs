@@ -62,14 +62,23 @@ exports.create = function(req, res) {
 };
 
 exports.delete = function(req, res) {
-    model.getPeer(req.params.peer, function(err, peer){
-        model.deletePeer(req.params.peer, peer._rev, function(err, result){
-            if(err){
-                console.log('error deleting peer', err);
-                res.status(500).json(err);
-            } else {
-                res.json(result);
-            }
-        });
-    });
+  function handleErr(err){
+    console.log('error deleting peer', err, err.stack);
+    res.status(500).json(err);
+  }
+  console.log("deleting peer with id: ", req.params.peer);
+  model.getPeer(req.params.peer).then(function(peer) {
+    console.log("got peer:", peer);
+    if(req.user._id === peer.userId){
+      model.deletePeer(peer._id)
+      .then(function(result){
+        res.json(result);
+      }, handleErr);
+    } else {
+      res.status(403).json({
+        message:"You can only delete your own peers"
+      });
+    }
+  })
+  .catch(handleErr);
 };

@@ -1,42 +1,32 @@
 var _ = require('lodash');
-var casa_model = require('../../database');
 
+var Q = require('q');
+var mongodb = require('mongodb');
 var model = require('../../database/mongoIndex');
 var collection = 'peers';
-var Q = require('q');
-
 
 module.exports = {
-    getPeers:function(callback){
-        var db = casa_model.getDatabase();
-        db.view('casa/peers', null, function (err, res) {
-            callback(err, _.transform(res, function(result, entity){
-                return result.push(entity.value);
-            }));
+    getPeer:function(peerId){
+      return model.getDatabase()
+      .then(function(db){
+        return Q.ninvoke(db.collection(collection), 'findOne', {
+          _id: new mongodb.ObjectID(peerId)
         });
+      });
     },
     getPeersByUser:function(userId){
-        return model.getDatabase()
-        .then(function(db){
-          return Q.ninvoke(db.collection(collection).find({
-            userId: userId
-          }), 'toArray');
-        });
-    },
-    getPeer:function(id, callback){
-        var db = casa_model.getDatabase();
-        db.view('casa/peers', {key:id}, function (err, res) {
-            //TODO: is there a better way to find a single entity?
-            callback(err, _.transform(res, function(result, entity){
-                return result.push(entity.value);
-            })[0]);
-        });
+      return model.getDatabase()
+      .then(function(db){
+        return Q.ninvoke(db.collection(collection).find({
+          userId: userId
+        }), 'toArray');
+      });
     },
     updatePeer:function(peer, callback){
-        var db = casa_model.getDatabase();
-        db.save(peer._id, peer._rev, peer, function (err, res) {
-            callback(err, res);
-        });
+      return model.getDatabase()
+      .then(function(db){
+        return Q.ninvoke(db.collection(collection), 'save', peer);
+      });
     },
     createPeer:function(peer){
       return model.getDatabase()
@@ -44,10 +34,12 @@ module.exports = {
         return Q.ninvoke(db.collection(collection), 'insert', peer);
       });
     },
-    deletePeer:function(id, rev, callback){
-        var db = casa_model.getDatabase();
-        db.remove(id, rev, function (err, res) {
-            callback(err, res);
+    deletePeer:function(id){
+      return model.getDatabase()
+      .then(function(db){
+        return Q.ninvoke(db.collection(collection), 'remove', {
+          _id: new mongodb.ObjectID(id)
         });
+      });
     }
 }
