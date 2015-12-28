@@ -6,40 +6,28 @@ var model = require('../../database/mongoIndex');
 var collection = 'peers';
 
 module.exports = {
-    getPeer:function(peerId){
-      return model.getDatabase()
-      .then(function(db){
-        return Q.ninvoke(db.collection(collection), 'findOne', {
-          _id: new mongodb.ObjectID(peerId)
-        });
+    getPeer:function(db, peerId){
+      return Q.ninvoke(db.collection(collection), 'findOne', {
+        _id: new mongodb.ObjectID(peerId)
       });
     },
-    getPeersByUser:function(userId){
-      return model.getDatabase()
-      .then(function(db){
-        return Q.ninvoke(db.collection(collection).find({
-          userId: userId
-        }), 'toArray');
-      });
+    getPeersByUser:function(db, userId){
+      return Q.ninvoke(db.collection(collection).find({
+        userId: userId
+      }), 'toArray');
     },
-    updatePeer:function(peer, callback){
+    updatePeer:function(db, peer){
       return model.getDatabase()
       .then(function(db){
         return Q.ninvoke(db.collection(collection), 'save', peer);
       });
     },
-    createPeer:function(peer){
-      return model.getDatabase()
-      .then(function(db){
-        return Q.ninvoke(db.collection(collection), 'insert', peer);
-      });
+    createPeer:function(db, peer){
+      return Q.ninvoke(db.collection(collection), 'insert', peer);
     },
-    deletePeer:function(id){
-      return model.getDatabase()
-      .then(function(db){
-        return Q.ninvoke(db.collection(collection), 'remove', {
-          _id: new mongodb.ObjectID(id)
-        });
+    deletePeer:function(db, id){
+      return Q.ninvoke(db.collection(collection), 'remove', {
+        _id: new mongodb.ObjectID(id)
       });
     }
 }

@@ -7,7 +7,7 @@ var model = require('./peer.model');
 exports.index = function(req, res) {
     console.log("Getting peers with user: ", req.user._id);
 
-    model.getPeersByUser(req.user._id)
+    model.getPeersByUser(req.casa.db, req.user._id)
     .then(function(peers){
       res.json(peers);
     }, function(err){
@@ -45,7 +45,8 @@ exports.create = function(req, res) {
         userId: req.user._id,
         last_updated:null
     };
-    model.createPeer(peer).then(function(newPeer){
+    model.createPeer(req.casa.db, peer)
+    .then(function(newPeer){
         //TODO: get the peer by id from the db
         peer._id  = newPeer.id;
         peer._rev = newPeer.rev;
@@ -67,10 +68,10 @@ exports.delete = function(req, res) {
     res.status(500).json(err);
   }
   console.log("deleting peer with id: ", req.params.peer);
-  model.getPeer(req.params.peer).then(function(peer) {
+  model.getPeer(req.casa.db, req.params.peer).then(function(peer) {
     console.log("got peer:", peer);
     if(req.user._id === peer.userId){
-      model.deletePeer(peer._id)
+      model.deletePeer(req.casa.db, peer._id)
       .then(function(result){
         res.json(result);
       }, handleErr);
