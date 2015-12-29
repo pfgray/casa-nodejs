@@ -17,10 +17,8 @@ module.exports = {
       }), 'toArray');
     },
     updatePeer:function(db, peer){
-      return model.getDatabase()
-      .then(function(db){
-        return Q.ninvoke(db.collection(collection), 'save', peer);
-      });
+      console.log("saving peer:", peer);
+      return Q.ninvoke(db.collection(collection), 'save', peer);
     },
     createPeer:function(db, peer){
       return Q.ninvoke(db.collection(collection), 'insert', peer);

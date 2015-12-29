@@ -1,7 +1,9 @@
 'use strict';
 
 var _ = require('lodash');
+var Q = require('q');
 var casa_model = require('../../database');
+var model = require('../../database/mongoIndex');
 
 module.exports = {
     getApplications:function(callback){
@@ -12,23 +14,16 @@ module.exports = {
             }));
         });
     },
-    getApplicationsForUser:function(userId, callback){
-        var db = casa_model.getDatabase();
-        var opts = {
-          startkey: [userId],
-          endkey: [userId, {
-            originator_id: {},
-            id: {}
-          }],
-          group: true,
-          reduce: true
-        };
-        console.log('Using opts: ', opts);
-        db.view('casa/applicationsByUser', opts, function (err, res) {
-            callback(err, _.transform(res, function(result, entity){
-                return result.push(entity.value);
-            }));
-        });
+    getApplicationsForUser:function(db, userId){
+      return Q.ninvoke(db.collection('peers').find({
+        userId: userId
+      }), 'toArray')
+      .then(function(peers){
+        console.log('got peers!: ', peers);
+        return _(peers).map(function(peer){
+          return peer.apps || [];
+        }).flatten().value();
+      });
     },
     getApplication:function(originatorId, appId, callback){
         var db = casa_model.getDatabase();

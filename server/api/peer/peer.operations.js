@@ -4,22 +4,23 @@ var _ = require('lodash');
 var request = require('request');
 var model = require('./peer.model');
 var casa_config = require('../../config/casa.js');
+var mongo = require('../../database/mongoIndex');
 
 // Get list of things
 exports.createUpdateOperation = function(req, res) {
-
-    //get the peer they're talking about
-    model.getPeer(req.params.peer, function(err, peer){
-        //now, go get all the apps from the payload_url!
-        exports.updatePeer(peer, function(err, result){
-            if(err){
-                console.log('error saving Peer: ', err);
-                res.json(result, 500);
-            } else {
-                res.json(result);
-            }
-        });
+  //get the peer they're talking about
+  model.getPeer(req.casa.db, req.params.peer).then(function(peer){
+    //now, go get all the apps from the payload_url!
+    exports.updatePeer(req.casa.db, peer, function(result){
+      db.close();
+      if(err){
+        console.log('error saving Peer: ', err);
+        res.json(result, 500);
+      } else {
+        res.json(result);
+      }
     });
+  });
 };
 
 var adjInTranslate = function(apps){
@@ -35,7 +36,7 @@ var adjInTranslate = function(apps){
     }
     _.each(apps, function(app) {
         _.each(['use', 'require'], function(type){
-            console.log('translating... ', JSON.stringify(app));
+            //console.log('translating... ', JSON.stringify(app));
             translateObject(app.original[type]);
             _.each(app.journal, function(journal_entry){
                 translateObject(journal_entry[type]);
@@ -78,8 +79,6 @@ var adjInFilter = function(apps){
                     appIsGood = false;
                 }
             }
-        } else {
-            console.log("app doesn't have any required requirements");
         }
 
         if(appIsGood){
@@ -91,21 +90,21 @@ var adjInFilter = function(apps){
     return filteredApps;
 }
 
-exports.updatePeer = function(peer, callback){
+exports.updatePeer = function(db, peer, callback){
     console.log('updating peer...', peer._id);
     request(peer.payload_url, function (error, response, body) {
         if (!error && response.statusCode === 200) {
+            console.log('got successful response...');
             var apps = adjInTranslate(JSON.parse(body));
             apps = adjInSquash(apps);
             apps = adjInFilter(apps);
             //let's add the apps to the peer object!
             peer.apps = apps;
             peer.last_updated = new Date();
-            model.updatePeer(peer, function(err, res){
-                if(res){
-                    peer._rev = res._rev;
-                }
-                callback(err, peer);
+            console.log('Now updating peer...');
+            model.updatePeer(db, peer).then(function(err, res){
+                peer._rev = res._rev;
+                return peer;
             });
         } else {
             callback(error);

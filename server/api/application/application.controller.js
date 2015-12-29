@@ -11,16 +11,14 @@ exports.index = function(req, res) {
       }, 403);
       return;
     }
-    model.getApplicationsForUser(req.user._id, function(err, apps){
-        if(err){
-            console.log('error getting apps: ', err);
-            res.json({
-                status:'error',
-                message:err
-            }, 500);
-        } else {
-            res.json(apps);
-        }
+    model.getApplicationsForUser(req.casa.db, req.user._id).then(function(apps){
+      res.json(apps);
+    }, function(err){
+      console.log('error getting apps: ', err);
+      res.status(500).json({
+          status:'error',
+          message:err
+      });
     });
 };
 
