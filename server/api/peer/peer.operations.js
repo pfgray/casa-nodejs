@@ -11,14 +11,15 @@ exports.createUpdateOperation = function(req, res) {
   //get the peer they're talking about
   model.getPeer(req.casa.db, req.params.peer).then(function(peer){
     //now, go get all the apps from the payload_url!
-    exports.updatePeer(req.casa.db, peer, function(result){
-      db.close();
+    exports.updatePeer(req.casa.db, peer, function(err, result){
+      console.log('Updated peer...');
       if(err){
         console.log('error saving Peer: ', err);
         res.json(result, 500);
       } else {
         res.json(result);
       }
+      req.casa.db.close();
     });
   });
 };
@@ -102,10 +103,10 @@ exports.updatePeer = function(db, peer, callback){
             peer.apps = apps;
             peer.last_updated = new Date();
             console.log('Now updating peer...');
-            model.updatePeer(db, peer).then(function(err, res){
+            model.updatePeer(db, peer).then(function(res){
                 peer._rev = res._rev;
-                return peer;
-            });
+                callback(null, peer);
+            }, callback);
         } else {
             callback(error);
         }
