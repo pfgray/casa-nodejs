@@ -19,7 +19,6 @@ module.exports = {
         userId: userId
       }), 'toArray')
       .then(function(peers){
-        console.log('got peers!: ', peers);
         return _(peers).map(function(peer){
           return peer.apps || [];
         }).flatten().value();

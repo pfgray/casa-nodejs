@@ -8,7 +8,6 @@ module.exports = function(req, res, next){
     req.casa.db = db;
     next();
     res.on('finish', function(){
-      console.log("now closing the connection....");
       db.close();
     });
   })

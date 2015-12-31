@@ -14,7 +14,6 @@ module.exports = {
           db.collection(collection).findOne({
             username:username
           }, function(err, user){
-            console.log("found user:", user);
             callback(null, user);
           });
         });
@@ -27,7 +26,6 @@ module.exports = {
           db.collection(collection).findOne({
             googleId:identifier.googleId
           }, function(err, u){
-            console.log("found user:", u);
             if(u === null){
               var newUser = _.merge(user, identifier);
               console.log('creating user... ', JSON.stringify(newUser));

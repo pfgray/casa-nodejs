@@ -16,9 +16,9 @@ block content
           i.fa.fa-circle-o-notch.fa-spin
     .row(ng-if="!loadingApps")
       //App grid
-      .col-lg-10.col-md-10.col-lg-offset-1.col-md-offset-1
+      .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1(ng-if="!noApps && group !== 'peer'")
         .row
-          .col-lg-4.col-md-4(ng-repeat="i in range(columnCount) track by $index" ng-if="!noApps && group !== 'peer'")
+          .col-lg-4.col-md-4(ng-repeat="i in range(columnCount) track by $index")
             .app-box(ng-repeat="app in apps", ui-sref="singleApp({originatorId:app.identity.originator_id, appId:app.identity.id})", role="link", ng-if="(($index - $parent.$index) % columnCount) === 0")
               .app-header(style="{{!app.original.use.icon ? 'background-color:' + app.color : 'background-color: #e7e7e7'}}")
                 span(ng-if="!app.original.use.icon") {{app.original.use.title.substring(0, 1)}}
@@ -28,7 +28,7 @@ block content
                 .app-subtitle {{app.original.use.description}}
 
       // Apps grouped by peer
-      .col-lg-10.col-lg-offset-1(ng-if="!noApps && group === 'peer'")
+      .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1(ng-if="!noApps && group === 'peer'")
         ul.list-group.list-with-header(ng-repeat="peer in peers")
           li.list-group-item.disabled {{peer.name}}
           li.list-group-item.app(ng-repeat="app in peer.apps", ui-sref="singleApp({originatorId:app.identity.originator_id, appId:app.identity.id})", role="link")
