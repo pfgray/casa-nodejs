@@ -25,7 +25,7 @@ block content
                 img.icon(ng-if="app.original.use.icon" ng-src="{{app.original.use.icon}}")
               .app-body
                 .app-title {{app.original.use.title}}
-                .app-subtitle {{app.original.use.description}}
+                .app-subtitle(ng-if="app.original.use.description") {{app.original.use.description}}
 
       // Apps grouped by peer
       .col-lg-10.col-lg-offset-1.col-md-10.col-md-offset-1(ng-if="!noApps && group === 'peer'")
