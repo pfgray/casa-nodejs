@@ -21,7 +21,10 @@ module.exports = {
       return Q.ninvoke(db.collection(collection), 'save', peer);
     },
     createPeer:function(db, peer){
-      return Q.ninvoke(db.collection(collection), 'insert', peer);
+      return Q.ninvoke(db.collection(collection), 'insert', peer)
+        .then(function(result){
+          return result.ops[0];
+        });
     },
     deletePeer:function(db, id){
       return Q.ninvoke(db.collection(collection), 'remove', {

@@ -20,9 +20,9 @@ angular.module('casaNodejsApp')
         peer.updating = true;
         $http.post('/api/peers/' + peer._id + '/updates', {})
         .success(function(resultPeer){
-            //peer = resultPeer; TODO: why doesn't this work??
-            peer.last_updated = resultPeer.last_updated;
+            _.merge(peer, resultPeer);
             peer.updating = false;
+            console.log('done');
         });
     };
 

@@ -14,7 +14,7 @@ block content
               div.info
                   div.payload-location {{peer.payload_url}}
                   div.payload-last-updated Last updated: {{peer.last_updated | fromNow}}
-                  div.payload-app-count Apps: {{peer.apps.length}}
+                  div.payload-app-count Apps: {{peer.apps ? peer.apps.length : 'n/a'}}
               div.options
                   button.btn.btn-info(ng-click="updatePeer(peer)")
                       span(ng-if="!peer.updating") Update Now

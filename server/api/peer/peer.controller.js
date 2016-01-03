@@ -48,8 +48,7 @@ exports.create = function(req, res) {
     model.createPeer(req.casa.db, peer)
     .then(function(newPeer){
         //TODO: get the peer by id from the db
-        peer._id  = newPeer.id;
-        peer._rev = newPeer.rev;
+        peer._id  = newPeer._id;
         peer.app_count = 0;
         res.json(peer);
     })
