@@ -3,7 +3,7 @@ extends ../layout.jade
 block content
   .container
     .row
-      .col-lg-8.col-lg-offset-2
+      .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
         ul.peer-list
           li.peer-list-item.peer(ng-repeat="peer in peers")
               div
@@ -21,7 +21,7 @@ block content
                       span(ng-if="peer.updating")
                           i.fa.fa-circle-o-notch.fa-spin
     .row
-      .col-lg-8.col-lg-offset-2
+      .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
         form.form-horizontal#newPeer(role="form")
           h4 Add a new Peer:
           div.form-group(ng-class="{'has-error':errors.name}")
