@@ -5,7 +5,9 @@ var gulp = require('gulp'),
     jade = require('gulp-jade');
 
 var clean = require('gulp-clean');
+var server = require('gulp-express');
 var wiredep = require('wiredep').stream;
+
     /*
     usemin = require('gulp-usemin'),
     uglify = require('gulp-uglify'),
@@ -67,6 +69,26 @@ gulp.task('bower', function () {
       exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/', /bootstrap.css/, /font-awesome.css/ ]
     }))
     .pipe(gulp.dest('./dest'));
+});
+
+gulp.task('serve', function(){
+  server.run(['server/app.js']);
+
+  gulp.watch(['client/**/*.jade'], function(){
+    gulp.run('templates');
+    server.notify();
+  });
+  gulp.watch(['client/**/*.js'], server.notify);
+  gulp.watch(['client/**/*.less'], function(){
+    gulp.run('styles');
+    server.notify();
+  });
+
+  gulp.watch(['server/**/*.js'], function(event){
+    server.stop();
+    server.run(['server/app.js']);
+  });
+
 });
 
 /*
