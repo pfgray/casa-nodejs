@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
-var model = require('../../database/mongoIndex');
+var model = require('../../database');
 var keyGenerator = require('../key/key.generator.js');
 
 var collection = 'users';

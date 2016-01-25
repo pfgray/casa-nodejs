@@ -6,15 +6,14 @@ var gulp = require('gulp'),
 
 var clean = require('gulp-clean');
 var server = require('gulp-express');
-var wiredep = require('wiredep').stream;
 
-    /*
-    usemin = require('gulp-usemin'),
-    uglify = require('gulp-uglify'),
-    minifyHtml = require('gulp-minify-html'),
-    minifyCss = require('gulp-minify-css'),
-    rev = require('gulp-rev');
-    */
+/*
+usemin = require('gulp-usemin'),
+uglify = require('gulp-uglify'),
+minifyHtml = require('gulp-minify-html'),
+minifyCss = require('gulp-minify-css'),
+rev = require('gulp-rev');
+*/
 
 var path = require('path');
 

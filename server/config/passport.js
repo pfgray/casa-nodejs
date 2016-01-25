@@ -15,8 +15,8 @@ module.exports.init = function(app, config){
     var url = config.protocol + '://' + config.domain + ':' + config.port;
     console.log('got url, first: ', url);
     passport.use(new GoogleStrategy({
-            clientID: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            clientID: process.env.CASA_GOOGLE_CLIENT_ID,
+            clientSecret: process.env.CASA_GOOGLE_CLIENT_SECRET,
             callbackURL: url + "/auth/google/callback"
         }, function(accessToken, refreshToken, profile, done) {
             console.log('got: ', accessToken, refreshToken, profile);

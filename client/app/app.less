@@ -1,5 +1,5 @@
-@import 'bootstrap/less/bootstrap.less';
-@import 'font-awesome/less/font-awesome.less';
+@import '../../node_modules/bootstrap/less/bootstrap.less';
+@import '../../node_modules/font-awesome/less/font-awesome.less';
 
 @icon-font-path: '/bower_components/bootstrap/fonts/';
 @fa-font-path: '/bower_components/font-awesome/fonts';
@@ -19,14 +19,12 @@
     padding: 0.2em 0;
 }
 
-// injector
-@import 'apps/apps.less';
-@import 'apps/single/singleApps.less';
-@import 'main/main.less';
-@import 'peers/peers.less';
-@import 'modal/modal.less';
-@import 'navbar/navbar.less';
-// endinjector
+@import './apps/apps.less';
+@import './apps/single/singleApps.less';
+@import './main/main.less';
+@import './peers/peers.less';
+@import './components/modal/modal.less';
+@import './components/navbar/navbar.less';
 
 .navbar-brand{
     color: @main-color !important;

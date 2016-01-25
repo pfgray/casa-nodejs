@@ -4,7 +4,7 @@ var _ = require('lodash');
 var request = require('request');
 var model = require('./peer.model');
 var casa_config = require('../../config/casa.js');
-var mongo = require('../../database/mongoIndex');
+var mongo = require('../../database');
 
 // Get list of things
 exports.createUpdateOperation = function(req, res) {

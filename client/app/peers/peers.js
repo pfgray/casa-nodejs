@@ -1,11 +1,11 @@
-'use strict';
+import peersTemplate from './peers.jade';
 
 angular.module('casaNodejsApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('peers', {
         url: '/peers?new',
-        templateUrl: 'app/peers/peers.html',
+        template: peersTemplate(),
         controller: 'PeersCtrl'
       });
 

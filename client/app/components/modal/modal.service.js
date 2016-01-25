@@ -1,4 +1,4 @@
-'use strict';
+import modalTemplate from './modal.jade';
 
 angular.module('casaNodejsApp')
   .factory('Modal', function ($rootScope, $modal) {
@@ -16,7 +16,7 @@ angular.module('casaNodejsApp')
       angular.extend(modalScope, scope);
 
       return $modal.open({
-        templateUrl: 'components/modal/modal.html',
+        template: modalTemplate(),
         windowClass: modalClass,
         scope: modalScope
       });

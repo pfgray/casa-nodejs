@@ -2,7 +2,7 @@ var _ = require('lodash');
 
 var Q = require('q');
 var mongodb = require('mongodb');
-var model = require('../../database/mongoIndex');
+var model = require('../../database');
 var collection = 'peers';
 
 module.exports = {

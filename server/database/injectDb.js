@@ -1,5 +1,5 @@
 var Q = require('q');
-var model = require('./mongoIndex');
+var model = require('./index.js');
 
 module.exports = function(req, res, next){
   model.getDatabase()

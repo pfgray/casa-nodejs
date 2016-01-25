@@ -1,11 +1,11 @@
-'use strict';
+import mainTemplate from './main.jade';
 
 angular.module('casaNodejsApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('main', {
         url: '/',
-        templateUrl: 'app/main/main.html',
+        template: mainTemplate(),
         controller: 'MainCtrl'
       });
   });

@@ -1,16 +1,17 @@
-'use strict';
+import appsTemplate from './apps.jade';
+import singleAppTemplate from './single/singleApp.jade';
 
 angular.module('casaNodejsApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('apps', {
         url: '/apps?group',
-        templateUrl: 'app/apps/apps.html',
+        template: appsTemplate(),
         controller: 'AppsCtrl'
       })
       .state('singleApp', {
         url: '/apps/:originatorId/:appId',
-        templateUrl: 'app/apps/single/singleApp.html',
+        template: singleAppTemplate(),
         controller: 'SingleAppCtrl'
       });
   });

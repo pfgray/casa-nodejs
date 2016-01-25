@@ -3,7 +3,7 @@
 var _ = require('lodash');
 var Q = require('q');
 var casa_model = require('../../database');
-var model = require('../../database/mongoIndex');
+var model = require('../../database');
 
 module.exports = {
     getApplications:function(callback){
