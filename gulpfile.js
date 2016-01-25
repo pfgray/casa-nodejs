@@ -2,21 +2,17 @@ var gulp = require('gulp'),
     less = require('gulp-less'),
     autoprefixer = require('gulp-autoprefixer'),
     util = require('gulp-util'),
-    jade = require('gulp-jade');
+    jade = require('gulp-jade'),
+    gutil = require('gulp-util');
 
 var clean = require('gulp-clean');
 var server = require('gulp-express');
 
-/*
-usemin = require('gulp-usemin'),
-uglify = require('gulp-uglify'),
-minifyHtml = require('gulp-minify-html'),
-minifyCss = require('gulp-minify-css'),
-rev = require('gulp-rev');
-*/
+var webpack = require("webpack");
+var WebpackDevServer = require("webpack-dev-server");
+var webpackConfig = require("./webpack.config.js");
 
 var path = require('path');
-
 var client = './client';
 
 gulp.task('default', [
@@ -90,16 +86,18 @@ gulp.task('serve', function(){
 
 });
 
-/*
-gulp.task('usemin', function() {
-  return gulp.src(client + '/index.html')
-    .pipe(usemin({
-      css: [ rev() ],
-      html: [ minifyHtml({ empty: true }) ],
-      js: [ uglify(), rev() ],
-      inlinejs: [ uglify() ],
-      inlinecss: [ minifyCss(), 'concat' ]
-    }))
-    .pipe(gulp.dest('build/'));
+gulp.task("webpack-dev-server", function(callback) {
+
+  var myConfig = Object.create(webpackConfig);
+
+  new WebpackDevServer(webpack(myConfig), {
+  	publicPath: myConfig.output.publicPath,
+  	stats: {
+  		colors: true
+  	},
+    contentBase:"client/"
+  }).listen(8080, "localhost", function(err) {
+  	if(err) throw new gutil.PluginError("webpack-dev-server", err);
+  	gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-dev-server/index.html");
+  });
 });
-*/
