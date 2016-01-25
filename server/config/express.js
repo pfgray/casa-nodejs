@@ -18,6 +18,7 @@ var passport = require('passport');
 var passport_config = require('./passport.js');
 var session = require('express-session');
 var cors = cors = require('cors');
+var httpProxy = require('http-proxy');
 
 module.exports = function(app) {
   var env = app.get('env');
@@ -46,9 +47,15 @@ module.exports = function(app) {
   }
 
   if ('development' === env || 'test' === env) {
-    app.use(require('connect-livereload')());
-    app.use(express.static(path.join(config.root, '.tmp')));
-    app.use(express.static(path.join(config.root, 'client')));
+    var bundle = require('./bundler.js');
+    bundle();
+    var proxy = httpProxy.createProxyServer();
+    app.all('/assets/*', function (req, res) {
+      proxy.web(req, res, {
+          target: 'http://localhost:9001'
+      });
+    });
+
     app.set('appPath', 'client');
     app.use(morgan('dev'));
     app.disable('etag');

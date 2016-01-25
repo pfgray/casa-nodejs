@@ -49,11 +49,6 @@
     "css-loader": "^0.23.1",
     "file-loader": "^0.8.5",
     "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^3.1.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-express": "^0.3.5",
-    "gulp-jade": "^1.1.0",
-    "gulp-less": "^3.0.5",
     "gulp-util": "^3.0.7",
     "jade-loader": "^0.8.0",
     "less-loader": "^2.2.2",
@@ -68,8 +63,7 @@
   },
   "scripts": {
     "start": "gulp serve",
-    "test": "grunt test",
-    "update-webdriver": "node node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager update"
+    "test": "exit 1"
   },
   "private": true
 }
