@@ -7,12 +7,13 @@ angular.module('casaNodejsApp', [
   'ui.router',
   'ui.bootstrap'
 ])
-.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
+  function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
-})
-.run(function ($rootScope) {
+}])
+.run(['$rootScope', function ($rootScope) {
     $rootScope.user = window.user;
-});
+}]);

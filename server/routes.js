@@ -33,7 +33,7 @@ module.exports = function(app) {
   });
 
   // All undefined asset or api routes should return a 404
-  app.route('/:url(api|auth|components|app|bower_components|assets)/*')
+  app.route('/:url(api|auth|components|app|bower_components)/*')
     .get(errors[404]);
 
 
@@ -43,7 +43,7 @@ module.exports = function(app) {
   app.route('/*')
     .get(function(req, res) {
       console.log('showing the index file:');
-      res.render('../../' + app.get('appPath') + '/index.ejs', {
+      res.render('index.ejs', {
         user:req.user
       });
     });

@@ -1,8 +1,7 @@
 import navbarTemplate from './navbar.jade';
 
 angular.module('casaNodejsApp')
-  .directive('casaNavbar', ['$rootScope', '$location',
-  function ($rootScope, $location) {
+  .directive('casaNavbar', function ($rootScope, $location) {
     return {
       template: navbarTemplate(),
       link:function(scope, element, attrs) {
@@ -41,4 +40,4 @@ angular.module('casaNodejsApp')
         };
       }
     };
-  }]);
+  });

@@ -6,12 +6,8 @@ var webpack = require('webpack'),
 // PATHS
 var PATHS = {
   app: __dirname + '/client/app',
-  target: __dirname + '/dist'
+  target: __dirname + '/dist/assets'
 };
-
-var babelSettings = {
-
-}
 
 module.exports = {
     resolve: {
@@ -19,8 +15,9 @@ module.exports = {
       alias: {}
     },
 
+    cache: false,
     debug: true,
-    devtool: "#inline-source-map",
+    devtool: "#source-map",
 
     entry: {
         app: [PATHS.app + '/app.js']
@@ -28,9 +25,16 @@ module.exports = {
     output: {
         path: PATHS.target,
         filename: 'main.js',
+        sourceMapFilename: "./bundle.js.map",
         publicPath: '/assets/'
     },
     module: {
+      preLoaders: [{
+        test: '\\.js$',
+        exclude: 'node_modules',
+        loader: 'jshint'
+      }],
+
       loaders: [{
         test: /\.js$/,
         loader: 'ng-annotate!babel?' + JSON.stringify({
@@ -60,7 +64,9 @@ module.exports = {
     },
 
     plugins: [
-      new webpack.NoErrorsPlugin(),
-      new webpack.optimize.UglifyJsPlugin()
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.UglifyJsPlugin(),
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.optimize.AggressiveMergingPlugin()
     ]
 };

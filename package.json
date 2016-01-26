@@ -24,7 +24,7 @@
     "express": "^4.10.8",
     "express-session": "^1.0.4",
     "font-awesome": ">=4.1.0",
-    "jade": "~1.2.0",
+    "jade": "~1.7.0",
     "jquery": "~1.11.0",
     "json3": "~3.3.1",
     "jsonfile": "^2.0.0",
@@ -50,8 +50,10 @@
     "file-loader": "^0.8.5",
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.7",
+    "gulp-webpack": "^1.5.0",
     "jade-loader": "^0.8.0",
     "less-loader": "^2.2.2",
+    "ng-annotate-loader": "^0.1.0",
     "open": "~0.0.4",
     "should": "~3.3.1",
     "style-loader": "^0.13.0",
@@ -63,6 +65,7 @@
   },
   "scripts": {
     "start": "gulp serve",
+    "build": "gulp build",
     "test": "exit 1"
   },
   "private": true

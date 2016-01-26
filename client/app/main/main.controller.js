@@ -3,7 +3,6 @@
 angular.module('casaNodejsApp')
   .controller('MainCtrl', function ($scope, $http) {
     $scope.awesomeThings = [];
-
     $http.get('/api/issues').success(function(issues) {
 
         $scope.issueRows = [];
