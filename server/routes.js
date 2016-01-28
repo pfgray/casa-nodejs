@@ -41,7 +41,7 @@ module.exports = function(app) {
 
   //todo: combine these better
   // All other routes should redirect to the index.html
-  app.route('/')
+  app.route(['/', '/dashboard', '/apps', '/peers'])
     .get(function(req, res) {
       console.log('showing the index file:');
       res.render('index.ejs', {

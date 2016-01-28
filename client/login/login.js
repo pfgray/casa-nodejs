@@ -5,11 +5,14 @@ import ReactDOM from 'react-dom';
 import './login.less';
 
 var Login = React.createClass({
+  loginWithGoogle: function(){
+    window.location.href = '/auth/google';
+  },
   render: function() {
     return (
       <div className="casa-login">
         <div className='login-container'>
-          <button className='btn'>
+          <button className='btn' onClick={this.loginWithGoogle}>
             <i className="fa fa-google"></i>
             <span>sign in with google</span>
           </button>
