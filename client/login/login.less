@@ -1,0 +1,32 @@
+@import '../app/colors.less';
+@import '../../node_modules/font-awesome/less/font-awesome.less';
+
+body {
+  margin: 0;
+}
+
+.casa-login {
+  font-family: sans-serif;
+  background-color: @color-primary;
+  height: 100vh;
+  color: #fff;
+}
+
+.login-container {
+  text-align: center;
+  padding-top: ~"calc(50vh - ((39px * 1)/2) - 10px)"
+}
+
+
+//TODO: maybe move these?
+.btn {
+  border: 2px solid white;
+  border-radius: 4px;
+  padding: 1em;
+  background-color: rgba(0,0,0,0);
+  color: white;
+
+  span:nth-child(2){
+    margin-left: 1em;
+  }
+}

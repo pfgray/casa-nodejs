@@ -39,11 +39,24 @@ module.exports = function(app) {
 
   app.set('view engine', 'ejs');
 
+  //todo: combine these better
   // All other routes should redirect to the index.html
-  app.route('/*')
+  app.route('/')
     .get(function(req, res) {
       console.log('showing the index file:');
       res.render('index.ejs', {
+        user:req.user
+      });
+    });
+  app.route('/new')
+    .get(function(req, res) {
+      res.render('new.ejs', {
+        user:req.user
+      });
+    });
+  app.route('/login')
+    .get(function(req, res) {
+      res.render('login.ejs', {
         user:req.user
       });
     });

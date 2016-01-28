@@ -28,7 +28,7 @@ angular.module('casaNodejsApp')
           scope.menu.push({
             title: 'Login',
             onClick: function(){
-              window.location.href = '/auth/google';
+              window.location.href = '/login';
             }
           });
         }

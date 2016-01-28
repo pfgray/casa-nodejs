@@ -1,17 +1,14 @@
-'use strict';
 
 var webpack = require('webpack'),
     path = require('path');
 
 // PATHS
 var PATHS = {
+  login: __dirname + '/client/login',
+  new: __dirname + '/client/new',
   app: __dirname + '/client/app',
   target: __dirname + '/dist'
 };
-
-var babelSettings = {
-
-}
 
 module.exports = {
     resolve: {
@@ -23,11 +20,13 @@ module.exports = {
     devtool: "#inline-source-map",
 
     entry: {
-        app: [PATHS.app + '/app.js']
+        main: [PATHS.app + '/app.js'],
+        new: [PATHS.new + '/main.js'],
+        login: [PATHS.login + '/login.js']
     },
     output: {
         path: PATHS.target,
-        filename: 'main.js',
+        filename: '[name].js',
         publicPath: '/assets/'
     },
     module: {
@@ -35,9 +34,9 @@ module.exports = {
         test: /\.js$/,
         loader: 'ng-annotate!babel?' + JSON.stringify({
           plugins: ['transform-runtime'],
-          presets: ['es2015', 'stage-1']
+          presets: ['react', 'es2015', 'stage-1']
         }),
-        include: PATHS.app
+        include: [PATHS.app, PATHS.new, PATHS.login]
       }, {
         test: /\.less$/,
         loader: 'style!css!less'
@@ -61,6 +60,7 @@ module.exports = {
 
     plugins: [
       new webpack.NoErrorsPlugin(),
-      new webpack.optimize.UglifyJsPlugin()
+      new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en$/)
+      // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ]
 };
