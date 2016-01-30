@@ -14,7 +14,15 @@ body {
 
 .login-container {
   text-align: center;
-  padding-top: ~"calc(50vh - ((39px * 1)/2) - 10px)"
+  padding-top: ~"calc(50vh - ((39px * 1)/2) - 10px)";
+
+  * {
+    font-size: 1.25em;
+  }
+  div:last-child {
+    margin-top: 0.5em;
+  }
+
 }
 
 
@@ -28,5 +36,10 @@ body {
 
   span:nth-child(2){
     margin-left: 1em;
+  }
+
+  &.link-btn {
+    display: inline-block;
+    text-decoration: none;
   }
 }

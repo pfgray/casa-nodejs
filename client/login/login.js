@@ -12,10 +12,13 @@ var Login = React.createClass({
     return (
       <div className="casa-login">
         <div className='login-container'>
-          <button className='btn' onClick={this.loginWithGoogle}>
+          <a className='btn link-btn' href='/auth/google'>
             <i className="fa fa-google"></i>
             <span>sign in with google</span>
-          </button>
+          </a>
+          <div>
+            (more to come).
+          </div>
         </div>
       </div>
     );
