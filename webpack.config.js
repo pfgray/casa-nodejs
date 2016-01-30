@@ -4,6 +4,7 @@ var webpack = require('webpack'),
 
 // PATHS
 var PATHS = {
+  client: __dirname + '/client',
   login: __dirname + '/client/login',
   new: __dirname + '/client/new',
   app: __dirname + '/client/app',
@@ -22,7 +23,7 @@ module.exports = {
     entry: {
         main: [PATHS.app + '/app.js'],
         new: [PATHS.new + '/main.js'],
-        login: [PATHS.login + '/login.js']
+        login: [PATHS.login + '/LoginApp.js']
     },
     output: {
         path: PATHS.target,
@@ -36,7 +37,7 @@ module.exports = {
           plugins: ['transform-runtime'],
           presets: ['react', 'es2015', 'stage-1']
         }),
-        include: [PATHS.app, PATHS.new, PATHS.login]
+        include: PATHS.client
       }, {
         test: /\.less$/,
         loader: 'style!css!less'

@@ -1,10 +1,11 @@
-'use strict';
 
 var webpack = require('webpack'),
     path = require('path');
 
 // PATHS
 var PATHS = {
+  client: __dirname + '/client',
+  login: __dirname + '/client/login',
   app: __dirname + '/client/app',
   target: __dirname + '/dist/assets'
 };
@@ -20,12 +21,14 @@ module.exports = {
     devtool: "#source-map",
 
     entry: {
-        app: [PATHS.app + '/app.js']
+        main: [PATHS.app + '/app.js'],
+        new: [PATHS.new + '/main.js'],
+        login: [PATHS.login + '/LoginApp.js']
     },
     output: {
         path: PATHS.target,
-        filename: 'main.js',
-        sourceMapFilename: "./bundle.js.map",
+        filename: '[name].js',
+        sourceMapFilename: "./[name].js.map",
         publicPath: '/assets/'
     },
     module: {
@@ -41,7 +44,7 @@ module.exports = {
           plugins: ['transform-runtime'],
           presets: ['es2015', 'stage-1']
         }),
-        include: PATHS.app
+        include: PATHS.client
       }, {
         test: /\.less$/,
         loader: 'style!css!less'
@@ -54,9 +57,6 @@ module.exports = {
       }, {
         test: /(\.(eot.*|woff.*|ttf.*|svg.*)$|.(gif)$)/,
         loader: "file"
-      }, {
-        test: /\.html$/,
-        loader: "ngtemplate?relativeTo=" + __dirname + "!html"
       }, {
         test: /\.jade$/,
         loader: "jade"
