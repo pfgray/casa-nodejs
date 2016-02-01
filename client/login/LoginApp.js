@@ -17,7 +17,7 @@ import './login.less';
 class LoginApp extends React.Component {
  render() {
    return (
-     <div className="casa-login">
+     <div className="main">
       <Header />
       <Login />
      </div>

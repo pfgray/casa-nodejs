@@ -48,7 +48,7 @@ module.exports = function(app) {
         user:req.user
       });
     });
-  app.route('/new')
+  app.route('/new*')
     .get(function(req, res) {
       res.render('new.ejs', {
         user:req.user

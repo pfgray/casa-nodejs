@@ -22,7 +22,7 @@ module.exports = {
 
     entry: {
         main: [PATHS.app + '/app.js'],
-        new: [PATHS.new + '/main.js'],
+        new: [PATHS.new + '/RootCasaApp.js'],
         login: [PATHS.login + '/LoginApp.js']
     },
     output: {

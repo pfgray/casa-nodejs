@@ -24,6 +24,7 @@
     "express": "^4.10.8",
     "express-session": "^1.0.4",
     "font-awesome": ">=4.1.0",
+    "history": "^1.17.0",
     "http-proxy": "^1.13.0",
     "jade": "~1.7.0",
     "jquery": "~1.11.0",
@@ -40,6 +41,7 @@
     "q": "^1.4.1",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
+    "react-router": "^1.0.3",
     "request": "^2.51.0",
     "serve-favicon": "~2.0.1"
   },
