@@ -45,11 +45,8 @@ module.exports = {
         test: /\.css$/,
         loader: 'style!css'
       }, {
-        test: /\.(png|jpg)$/,
-        loader: 'url?limit=8192'
-      }, {
-        test: /(\.(eot.*|woff.*|ttf.*|svg.*)$|.(gif)$)/,
-        loader: "file"
+        test: /(\.(eot.*|woff2?.*|ttf.*|svg.*)$|.(gif|png|jpg)$)/,
+        loader: "url?limit=8192"
       }, {
         test: /\.html$/,
         loader: "ngtemplate?relativeTo=" + __dirname + "!html"
