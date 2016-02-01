@@ -9,9 +9,11 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { syncHistory, routeReducer } from 'react-router-redux';
 
+import casaReducer from './store/casaReducer';
 import CasaApp from './CasaApp';
 import AppsContainer from './apps/AppsContainer';
-import casaReducer from './store/casaReducer';
+import Peers from './peers/Peers';
+import Stores from './storefronts/StoreFronts';
 
 
 const browserHistory = useBasename(createBrowserHistory)({
@@ -35,6 +37,8 @@ class RootCasaApp extends React.Component {
         <Router history={browserHistory}>
           <Route path="/" component={CasaApp}>
             <IndexRoute component={AppsContainer}/>
+            <Route path="/peers" component={Peers} />
+            <Route path="/stores" component={Stores} />
           </Route>
         </Router>
       </Provider>

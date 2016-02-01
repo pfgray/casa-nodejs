@@ -10,7 +10,15 @@
     <script type="text/javascript">
       window.user = <%- JSON.stringify(user) || 'undefined' %>;
     </script>
-
+    <style>
+      /* These styles are here for the few milliseconds while the javascript is
+       * still loading. without it, there will appear to be a 'flash' of white.
+      */
+      body {
+        margin: 0;
+        background-color: #43B9A6;
+      }
+    </style>
   </head>
   <body>
     <!--[if lt IE 8]>

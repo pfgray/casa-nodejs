@@ -13,6 +13,7 @@
     "babel-runtime": "^6.3.19",
     "body-parser": "~1.5.0",
     "bootstrap": "~3.1.1",
+    "classnames": "^2.2.3",
     "composable-middleware": "^0.3.0",
     "compression": "~1.0.1",
     "connect-livereload": "^0.5.4",
