@@ -1,0 +1,85 @@
+@import './colors.less';
+
+@desktop:   ~"only screen and (min-width: 960px) and (max-width: 1199px)";
+@screen-med:    ~"only screen and (min-width: 720px) and (max-width: 959px)";
+
+
+@height-header: 55px;
+@width-sidebar: 100px;
+@width-small-sidebar: 80%;
+@sidebar-ts-duration: 0.4s;
+@sidebar-ts-timing-function: cubic-bezier(0, 0, 0, 1);//ease-out;*/
+@color-background-content: #EEE;
+@height-search-bar: 3em;
+
+.container {
+  min-height: ~"calc(100% - "@height-header~")";
+  perspective: 1500px;
+  perspective-origin: 0% 50%;
+  /*overflow-x: hidden;*/
+  position: relative;
+
+  > * {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .sidebar {
+    position: absolute;
+    top: 0;
+    bottom:0;
+    left: 0;
+    width: @width-sidebar;
+    color: #FFF;
+    -webkit-transition: transform @sidebar-ts-duration @sidebar-ts-timing-function;
+    transition: transform @sidebar-ts-duration @sidebar-ts-timing-function;
+    z-index: 10;
+    overflow: hidden;
+
+    @media @screen-med {
+      width: @width-small-sidebar;
+      -webkit-transform: translate3d(-100%, 0, 0);
+      transform: translate3d(-100%, 0, 0);
+      box-shadow: none;
+      transition-property: transform;
+      -webkit-transition-property: transform;
+    }
+  }
+
+  .content {
+    margin-left: @width-sidebar;
+
+    background-color: @color-background-content;
+    width: ~"calc(100% - "@width-sidebar~")";
+    transform: translate3d(0, 0, 0);
+    transform-style: preserve-3d;
+    -webkit-transition: all @sidebar-ts-duration @sidebar-ts-timing-function;
+    transition: all @sidebar-ts-duration @sidebar-ts-timing-function;
+    z-index: 5;
+    height: ~"calc(100vh - "@height-header~")";
+
+    @media @screen-med {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+
+  &.open {
+    .sidebar {
+      visibility: visible;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+    .content {
+      -webkit-transform: translate3d(@width-sidebar, 0, 0);
+      transform: translate3d(@width-sidebar, 0, 0);
+      margin-left: 0;
+
+      @media @screen-med {
+        opacity: 0.5;
+        -webkit-transform: translate3d(@width-small-sidebar, 0, 0);
+        transform: translate3d(@width-small-sidebar, 0, 0);
+      }
+    }
+  }
+}
