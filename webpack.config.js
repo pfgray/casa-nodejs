@@ -16,6 +16,9 @@ module.exports = {
       extensions: ['', '.js'],
       alias: {}
     },
+    node: {
+      fs: "empty"
+    },
 
     debug: true,
     devtool: "#inline-source-map",

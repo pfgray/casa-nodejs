@@ -15,6 +15,9 @@ module.exports = {
       extensions: ['', '.js'],
       alias: {}
     },
+    node: {
+      fs: "empty"
+    },
 
     cache: false,
     debug: true,
