@@ -11,7 +11,7 @@ import './main.less';
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 
-const fadeDelay = 1000;
+const fadeDelay = 250;
 
 export default class CasaApp extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ export default class CasaApp extends React.Component {
       <div className='main'>
         <Header />
         <div className='container'>
-          <div className='sidebar'><Sidebar /></div>
+          <div className='sidebar'><Sidebar duration={fadeDelay} /></div>
           <div className='content'>
             <div className={classnames('content-inner', 'fadein', {'visible': this.state.visible})}>
               {this.props.children}

@@ -1,42 +1,57 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, IndexLink } from 'react-router';
+import classNames from 'classnames';
 
 import './sidebar.less';
 
-const duration = 1000; //milliseconds
+const links = [{
+  path: '',
+  label: 'Apps',
+  comp: IndexLink,
+  icon: 'fa-th'
+},{
+  path: '/peers',
+  label: 'Peers',
+  comp: Link,
+  icon: 'fa-users'
+},{
+  path: '/stores',
+  label: 'Storefronts',
+  comp: Link,
+  icon: 'fa-gift'
+}];
 
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {count:0};
+    console.log('hmm:', links.length, props);
+    this.fadeInterval = props.duration / links.length;
+    this.state = {count: 0};
   }
   componentDidMount() {
-    setInterval(() => {
-      console.log("okay");
-      this.setState({count: this.state.count+1});
-    }, 200);
+    let increment = () => {
+      if(this.state.count < links.length){
+        console.log('incrementing', this.fadeInterval);
+        this.setState({count: this.state.count + 1});
+        setTimeout(increment, this.fadeInterval);
+      }
+    };
+    setTimeout(increment);
   }
   render() {
+    let liClasses = (i) => classNames({
+      'visible': this.state.count > i
+    });
     return (
       <ul>
-        <li className={this.state.count > 0 ? 'visible' : ''}>
-          <Link to='/new' activeClassName='active'>
-            <i className="fa fa-th"></i>
-            <span className="label">Apps</span>
-          </Link>
-        </li>
-        <li className={this.state.count > 1 ? 'visible' : ''}>
-          <Link to='/peers' activeClassName='active'>
-            <i className="fa fa-users"></i>
-            <span className="label">Peers</span>
-          </Link>
-        </li>
-        <li className={this.state.count > 2 ? 'visible' : ''}>
-          <Link to='stores' activeClassName='active'>
-            <i className="fa fa-gift"></i>
-            <span className="label">Storefronts</span>
-          </Link>
-        </li>
+        {links.map((link, i) =>
+          <li key={link.path} className={liClasses(i)}>
+            <link.comp to={link.path} activeClassName='active'>
+              <i className={'fa ' + link.icon}></i>
+              <span className='label'>{link.label}</span>
+            </link.comp>
+          </li>
+        )}
       </ul>
     );
   }
