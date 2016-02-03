@@ -1,8 +1,16 @@
+@import './reset.less';
 @import './fonts/fonts.css';
 @import './colors.less';
 
+@font-main: 'Montserrat', sans-serif;
+
 body {
   margin: 0;
+  background-color: @color-body-background;
+}
+
+div {
+  box-sizing: border-box;
 }
 
 .fadein {
@@ -15,12 +23,11 @@ body {
 }
 
 .logo {
-  font-family: 'Montserrat', sans-serif;
+  font-family: @font-main;
 }
 
 .main {
   font-family: sans-serif;
-  background-color: @color-primary;
   height: 100vh;
   color: #fff;
 }
