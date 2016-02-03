@@ -3,16 +3,14 @@
  */
 import React from 'react';
 
-export default class Apps extends React.Component {
-  render() {
-    return (
-      <div className="app-list">
-        <ul style={{margin: '0'}}>
-          <li>{"App 1"}</li>
-          <li>{"App 2"}</li>
-          <li>{"App 3"}</li>
-        </ul>
-      </div>
-    );
-  }
-}
+export default ({apps}) => {
+  return (
+    <div className="app-list">
+      <ul style={{margin: '0'}}>
+        {apps.slice(0, 5).map((app, i) =>
+          <li key={i}>{app.original.use.title}</li>
+        )}
+      </ul>
+    </div>
+  );
+};
