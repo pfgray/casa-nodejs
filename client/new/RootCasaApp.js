@@ -20,9 +20,10 @@ import Stores from './storefronts/StoreFronts';
 const browserHistory = useBasename(createBrowserHistory)({
   basename: '/new'
 });
-const reducer = combineReducers(Object.assign({}, casaReducer, {
+const reducer = combineReducers({
+  casa: casaReducer,
   routing: routeReducer
-}));
+});
 const reduxRouterMiddleware = syncHistory(browserHistory);
 const finalCreateStore = compose(
     applyMiddleware(thunk),

@@ -1,6 +1,13 @@
+import { combineReducers } from 'redux';
 
+import dashboard from '../dashboard/dashboardReducer';
 
-export default function update(state, action) {
-  console.log(action);
+var apps = (state = {}, action) => {
+  console.log('got action: ', action);
   return state;
-}
+};
+
+export default combineReducers({
+  apps,
+  dashboard
+});
