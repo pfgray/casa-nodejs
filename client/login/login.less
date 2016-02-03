@@ -1,15 +1,21 @@
 @import '../styles/colors.less';
+@import '../styles/layout.less';
 @import '../../node_modules/font-awesome/less/font-awesome.less';
 
 .login-container {
-  text-align: center;
-  padding-top: ~"calc(50vh - ((73px * 1)/2) - 65px)";
+  height: ~"calc(100% - "@height-header~")";
+  width: 100%;
+  background-color: @color-primary;
 
-  * {
-    font-size: 1.25em;
-  }
-  div:last-child {
-    margin-top: 0.5em;
-  }
+  .login-box {
+    text-align: center;
+    padding-top: ~"calc(50vh - ((73px * 1)/2) - 65px)";
 
+    * {
+      font-size: 1.25em;
+    }
+    div:last-child {
+      margin-top: 0.5em;
+    }
+  }
 }

@@ -1,7 +1,45 @@
+@import '../styles/colors.less';
+
+@transition-timing-view: ease-out;
+@transition-duration-view: 0.5s;
+
 .sidebar {
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    padding-top: 1em;
+
+    li {
+      transform: translate3d(-100%, 0, 0);
+      transition: all @transition-duration-view @transition-timing-view;
+
+      &.visible {
+        transform: translate3d(0, 0, 0);
+      }
+
+      a {
+        width: 100%;
+        text-decoration: none;
+        color: #fff;
+        text-align: center;
+        display: block;
+        padding: 1em 0;
+
+        &.active {
+          background-color: #eee;
+          color: @color-primary;
+        }
+
+        * {
+          display: block;
+        }
+
+        .fa {
+          font-size: 2em;
+        }
+      }
+    }
+
   }
 }

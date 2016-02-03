@@ -9,17 +9,21 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { syncHistory, routeReducer } from 'react-router-redux';
 
+import casaReducer from './store/casaReducer';
 import CasaApp from './CasaApp';
 import AppsContainer from './apps/AppsContainer';
-import casaReducer from './store/casaReducer';
+import Dashboard from './dashboard/Dashboard';
+import Peers from './peers/Peers';
+import Stores from './storefronts/StoreFronts';
 
 
 const browserHistory = useBasename(createBrowserHistory)({
   basename: '/new'
 });
-const reducer = combineReducers(Object.assign({}, casaReducer, {
+const reducer = combineReducers({
+  casa: casaReducer,
   routing: routeReducer
-}));
+});
 const reduxRouterMiddleware = syncHistory(browserHistory);
 const finalCreateStore = compose(
     applyMiddleware(thunk),
@@ -34,7 +38,9 @@ class RootCasaApp extends React.Component {
       <Provider store={store}>
         <Router history={browserHistory}>
           <Route path="/" component={CasaApp}>
-            <IndexRoute component={AppsContainer}/>
+            <IndexRoute component={Dashboard}/>
+            <Route path="/peers" component={Peers} />
+            <Route path="/stores" component={Stores} />
           </Route>
         </Router>
       </Provider>

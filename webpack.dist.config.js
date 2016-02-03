@@ -15,6 +15,9 @@ module.exports = {
       extensions: ['', '.js'],
       alias: {}
     },
+    node: {
+      fs: "empty"
+    },
 
     cache: false,
     debug: true,
@@ -57,6 +60,9 @@ module.exports = {
       }, {
         test: /\.jade$/,
         loader: "jade"
+      }, {
+        test: /\.json$/,
+        loader: "json"
       }]
     },
 

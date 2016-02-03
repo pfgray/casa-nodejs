@@ -16,6 +16,9 @@ module.exports = {
       extensions: ['', '.js'],
       alias: {}
     },
+    node: {
+      fs: "empty"
+    },
 
     debug: true,
     devtool: "#inline-source-map",
@@ -53,6 +56,9 @@ module.exports = {
       }, {
         test: /\.jade$/,
         loader: "jade"
+      }, {
+        test: /\.json$/,
+        loader: "json"
       }]
     },
 

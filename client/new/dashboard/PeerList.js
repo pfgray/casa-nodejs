@@ -3,12 +3,14 @@
  */
 import React from 'react';
 
-export default ({apps}) => {
+import moment from 'moment';
+
+export default ({peers}) => {
   return (
     <div className="app-list">
       <ul style={{margin: '0'}}>
-        {apps.slice(0, 5).map((app, i) =>
-          <li key={i}>{app.original.use.title}</li>
+        {peers.slice(0, 5).map((peer, i) =>
+          <li key={i}>{peer.name}, {moment(peer.last_updated).fromNow()}</li>
         )}
       </ul>
     </div>

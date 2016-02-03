@@ -1,19 +1,53 @@
+@import './reset.less';
 @import './fonts/fonts.css';
 @import './colors.less';
 
+@font-main: 'Montserrat', sans-serif;
+
 body {
   margin: 0;
+  background-color: @color-body-background;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.fadein {
+  opacity:0;
+  transition: opacity 1s ease-out;
+
+  &.visible {
+    opacity: 1;
+  }
 }
 
 .logo {
-  font-family: 'Montserrat', sans-serif;
+  font-family: @font-main;
 }
 
 .main {
   font-family: sans-serif;
-  background-color: @color-primary;
   height: 100vh;
   color: #fff;
+}
+
+.content {
+  padding: 4%; 
+}
+
+.panel {
+  .title {
+    font-family: @font-main;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  border: 1px solid #E1E6E9;
+  border-radius: 2px;
+  background-color: white;
+  padding: 1em;
+  color: black;
 }
 
 .btn {
