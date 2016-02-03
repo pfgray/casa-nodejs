@@ -5,21 +5,23 @@
   .row {
     margin-top: 2em;
 
+    &:first-child{
+      margin-top: 0;
+    }
+
+    a {
+        display: inline-block;
+    }
     .dash-box {
-      .title {
-        font-family: @font-main;
-        text-transform: uppercase;
-        font-weight: bold;
+      &:nth-child(2){
+        margin-left: 4%;
       }
 
-      margin-left: 4%;
-      border: 1px solid #E1E6E9;
-      border-radius: 2px;
-      background-color: white;
+
       display:  inline-block;
       width: 44%;
-      padding: 1em;
-      color: black;
+      height: 15em;
+      vertical-align: top;
     }
   }
 }

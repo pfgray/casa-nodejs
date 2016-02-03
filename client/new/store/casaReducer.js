@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux';
 
 import dashboard from '../dashboard/dashboardReducer';
+import peers from '../peers/peersReducer';
 
 var apps = (state = {}, action) => {
-  console.log('got action: ', action);
   return state;
 };
 
 export default combineReducers({
   apps,
-  dashboard
+  dashboard,
+  peers
 });
