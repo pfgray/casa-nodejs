@@ -2,12 +2,16 @@ import React from 'react';
 
 import './header.less';
 
-export default class Header extends React.Component {
-  render() {
-    return (
-      <div className='header'>
-        <div className='logo'>CASA</div>
-      </div>
-    );
-  }
-}
+let Header = ({user}) => {
+  var profile = user ? (
+    <div className='user-profile'>{user.name}</div>
+  ) : null;
+  return (
+    <div className='header'>
+      <div className='logo'>CASA</div>
+      {profile}
+    </div>
+  );
+};
+
+export default Header;
