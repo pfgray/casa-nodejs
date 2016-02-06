@@ -22,9 +22,16 @@ export function receivePeers(peers: Peer[]): PeerAction {
   }
 }
 
-export function fetchPeers(): (d: any) => PeerAction {
+export function fetchPeers(): (d: any) => void {
   //parentheses are required for typescript here to wrap the returning object.
-  return dispatch => ({
-    type: PeerActions.FETCH_PEERS
-  })
+  return dispatch => {
+      request.get('/api/peers')
+        .end((err, res) => {
+          dispatch({
+            type: PeerActions.RECEIVE_PEERS,
+            peers: res.body
+          });
+        });
+      dispatch({type: PeerActions.FETCH_PEERS});
+    };
 }

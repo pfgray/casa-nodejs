@@ -50,7 +50,6 @@
     "redux-thunk": "^1.0.3",
     "serve-favicon": "~2.0.1",
     "superagent": "^1.7.2",
-    "typescript": "^1.7.5",
     "url-loader": "^0.5.7"
   },
   "devDependencies": {
@@ -71,7 +70,7 @@
     "open": "~0.0.4",
     "should": "~3.3.1",
     "style-loader": "^0.13.0",
-    "ts-loader": "^0.8.0",
+    "typescript": "^1.8.0",
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1"
   },
