@@ -1,6 +1,10 @@
 {
   "ambientDependencies": {
+    "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#ad1c4f411a9ad949c0c73de4d190be1b2bf08a6f",
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#aee0039a2d6686ec78352125010ebb38a7a7d743",
+    "react": "github:DefinitelyTyped/DefinitelyTyped/react/react.d.ts#83b88a031cc8f2006fd361bf0a0b548c3bcc8259",
+    "react-redux": "github:DefinitelyTyped/DefinitelyTyped/react-redux/react-redux.d.ts#a513c4df6eb8505da8eef432891c8b69b73535d9",
+    "redux": "github:DefinitelyTyped/DefinitelyTyped/redux/redux.d.ts#a820bbdead70913f0c750802b367ed54cb99b442",
     "superagent": "github:DefinitelyTyped/DefinitelyTyped/superagent/superagent.d.ts#b30dbc4dd32b3237cd78e9139c3fc270caaacacb"
   }
 }

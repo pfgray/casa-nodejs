@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "sourceMap": false
+    "sourceMap": false,
+    "jsx":"react"
   },
   "compileOnSave": false,
   "buildOnSave": false,
@@ -9,6 +10,10 @@
     "node_modules"
   ],
   "files":[
-    "./typings/browser.d.ts"
+    "./typings/browser.d.ts",
+    "./client/new/peers/Peers.tsx",
+    "./client/new/peers/PeersContainer.tsx",
+    "./client/new/peers/PeerActions.ts",
+    "./client/new/peers/peersReducer.ts"
   ]
 }

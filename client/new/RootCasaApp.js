@@ -13,7 +13,7 @@ import casaReducer from './store/casaReducer';
 import CasaApp from './CasaApp';
 import AppsContainer from './apps/AppsContainer';
 import Dashboard from './dashboard/Dashboard';
-import Peers from './peers/Peers';
+import Peers from './peers/PeersContainer';
 import Stores from './storefronts/StoreFronts';
 
 

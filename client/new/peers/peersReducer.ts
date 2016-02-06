@@ -6,7 +6,7 @@ interface PeerState {
 }
 
 const initialState: PeerState = {
-  loading: false,
+  loading: true,
   peers: []
 };
 
