@@ -8,16 +8,6 @@ import * as _ from 'lodash';
 import { fetchPeers } from './PeerActions.ts';
 import Peers from './Peers.tsx';
 
-const mapStateToProps = (state) => {
-  return state.casa.peers;
-};
-
-const mapDispatchToProps = (dispatch) =>  {
-  return {
-    dispatch: dispatch
-  };
-};
-
 class PeersContainer extends React.Component<any, any> {
   constructor(props){
     super(props);
@@ -30,4 +20,9 @@ class PeersContainer extends React.Component<any, any> {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PeersContainer);
+export default connect(
+  state => state.casa.peers,
+  dispatch => ({
+    dispatch: dispatch
+  })
+)(PeersContainer);
