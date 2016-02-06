@@ -13,7 +13,7 @@ var PATHS = {
 
 module.exports = {
     resolve: {
-      extensions: ['', '.js'],
+      extensions: ['', '.js', '.ts'],
       alias: {}
     },
     node: {
@@ -59,6 +59,9 @@ module.exports = {
       }, {
         test: /\.json$/,
         loader: "json"
+      },{
+        test: /\.tsx?$/,
+        loader: 'ts-loader'
       }]
     },
 
