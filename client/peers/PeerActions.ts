@@ -12,7 +12,8 @@ export interface PeerAction {
 export enum PeerActions {
   RECEIVE_PEERS,
   FETCH_PEERS,
-  CREATE_PEER
+  CREATE_PEER,
+  EDIT_PEER
 }
 
 export function receivePeers(peers: Peer[]): PeerAction {
@@ -44,5 +45,18 @@ export function createPeer(peer: Peer): (d: any) => void {
         dispatch(routeActions.push('/peers'));
       });
       dispatch({type: PeerActions.CREATE_PEER});
+    };
+}
+
+export function updatePeer(id: string, peer: Peer): (d: any) => void {
+  //parentheses are required for typescript here to wrap the returning object.
+  return dispatch => {
+      peerService.updatePeer(id, peer)
+      .then(peer => {
+        console.log('updated peer...');
+        //todo: redirect back to peer list.
+        dispatch(routeActions.push('/peers'));
+      });
+      dispatch({type: PeerActions.EDIT_PEER});
     };
 }

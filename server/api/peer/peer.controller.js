@@ -11,7 +11,30 @@ exports.index = function(req, res) {
     .then(function(peers){
       res.json(peers);
     }, function(err){
-      console.log('error getting apps: ', err);
+      console.log('error getting peers: ', err);
+      res.json({
+          status:'error',
+          message:err
+      }, 500);
+    });
+};
+
+exports.fetch = function(req, res) {
+    console.log("Getting peer with id: ", req.params.peer);
+
+    model.getPeer(req.casa.db, req.params.peer)
+    .then(function(peer){
+      console.log('Found peer:', peer);
+      if(req.user._id !== peer.userId){
+        res.json({
+            status:'error',
+            message:"You can't look at other's peers"
+        }, 403);
+      } else {
+        res.json(peer);
+      }
+    }, function(err){
+      console.log('error getting peer: ', err);
       res.json({
           status:'error',
           message:err

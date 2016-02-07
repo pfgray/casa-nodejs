@@ -11,6 +11,7 @@ var router = express.Router();
 
 router.get('/', injectDb, authGuard, controller.index);
 router.post('/', injectDb, authGuard, controller.create);
+router.get('/:peer', injectDb, authGuard, controller.fetch);
 router.delete('/:peer', injectDb, authGuard, controller.delete);
 router.post('/:peer/updates', injectDb, authGuard, operations.createUpdateOperation);
 

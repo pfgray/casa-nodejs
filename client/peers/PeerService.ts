@@ -3,30 +3,36 @@ import * as Q from 'q';
 
 import Peer from './Peer.ts';
 
+
+function requestToPromise<T>(req: request.SuperAgentRequest): Q.Promise<T> {
+  var deferred = Q.defer<T>();
+  req.end((err, res) => {
+      if(err){
+        deferred.reject(err);
+      } else {
+        deferred.resolve(res.body);
+      }
+    });
+  return deferred.promise;
+}
+
 export default class PeerService {
   getPeers() {
-    var deferred = Q.defer<Peer[]>();
-    request.get('/api/peers')
-      .end((err, res) => {
-        if(err){
-          deferred.reject(err);
-        } else {
-          deferred.resolve(res.body);
-        }
-      });
-    return deferred.promise;
+    return requestToPromise(request.get('/api/peers'));
+  }
+  getPeer(id: string) {
+    return requestToPromise(request.get(`/api/peers/${id}`));
+  }
+  updatePeer(id: string, peer: Peer){
+    return requestToPromise(
+      request
+      .post(`/api/peers/${id}`)
+      .send(peer));
   }
   createPeer(peer: Peer) {
-    var deferred = Q.defer();
-    request.post('/api/peers')
-      .send(peer)
-      .end((err, res) => {
-        if(err){
-          deferred.reject(err);
-        } else {
-          deferred.resolve(res.body);
-        }
-      });
-    return deferred.promise;
+    return requestToPromise(
+      request
+      .post('/api/peers')
+      .send(peer));
   }
 }

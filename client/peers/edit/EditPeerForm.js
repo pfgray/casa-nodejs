@@ -2,7 +2,6 @@ import React from 'react';
 
 export default (props) => {
   const {fields: {name, payloadUrl}, handleSubmit, submitting, createPeer} = props;
-  console.log("got handleSubmit: ", handleSubmit);
   return (
     <div className='content'>
       <div className='panel peer-edit'>

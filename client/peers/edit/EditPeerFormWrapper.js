@@ -3,36 +3,48 @@
  */
 import React from 'react';
 import { reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { createPeer } from '../PeerActions';
 
+import { createPeer, updatePeer } from '../PeerActions';
+import { initializeEditPeer } from './editPeerReducer';
 import EditPeerForm from './EditPeerForm';
+import PeerService from '../PeerService';
+
+const peerService = new PeerService();
+
 
 export const fields = ['name', 'payloadUrl'];
-
-const submit = (values, dispatch) => {
-  console.log('now submitting...', values);
-  dispatch(createPeer(values));
-};
 
 class EditPeerFormWrapper extends React.Component {
   constructor(props){
     super(props);
   }
+  componentDidMount(){
+    //if we're editing, initialize the peer
+    if(this.props.params.peer){
+      peerService.getPeer(this.props.params.peer).then(peer =>
+        this.props.dispatch(initializeEditPeer(peer))
+      );
+    }
+  }
+  submit(values, dispatch){
+    console.log('now submitting...', values);
+    if(this.props.params.peer){
+      dispatch(updatePeer(this.props.params.peer, values));
+    } else {
+      dispatch(createPeer(values));
+    }
+  }
   render() {
-    return <EditPeerForm {...this.props} createPeer={submit}/>;
+    return <EditPeerForm {...this.props} createPeer={this.submit.bind(this)}/>;
   }
 }
 
-const formComponent = reduxForm({
-  form: 'editPeer',
-  fields
-})(EditPeerFormWrapper);
-
-//we also need access to dispatch, & the current pathname
-export default connect(
-  state => ({
-    pathname: state.routing.location.pathname
+export default reduxForm({
+    form: 'editPeer',
+    fields
+  },
+  state => ({ // mapStateToProps
+    initialValues: state.formData.editPeer.peer
   }),
-  (dispatch) => ({dispatch})
-)(formComponent);
+  dispatch => ({dispatch})
+)(EditPeerFormWrapper);
