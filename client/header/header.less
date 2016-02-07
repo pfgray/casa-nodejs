@@ -4,6 +4,17 @@
   padding: 0.5em 1em;
   background-color: @color-header;
 
+  * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .pathname {
+    margin-left: 1em;
+    font-weight: bold;
+    color: @color-primary;
+  }
+
   .logo {
     font-size: 2em;
   }
@@ -13,6 +24,7 @@
 
     a {
       color: #fff;
+      padding: 0.75em; //todo: this is inexact...
     }
   }
 }
