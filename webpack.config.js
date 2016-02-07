@@ -4,10 +4,7 @@ var webpack = require('webpack'),
 
 // PATHS
 var PATHS = {
-  client: __dirname + '/client',
-  login: __dirname + '/client/login',
-  new: __dirname + '/client/new',
-  app: __dirname + '/client/app',
+  app: __dirname + '/client',
   target: __dirname + '/dist'
 };
 
@@ -24,9 +21,7 @@ module.exports = {
     devtool: "#inline-source-map",
 
     entry: {
-        main: [PATHS.app + '/app.js'],
-        new: [PATHS.new + '/RootCasaApp.js'],
-        login: [PATHS.login + '/LoginApp.js']
+        main: [PATHS.app + '/RootCasaApp.js']
     },
     output: {
         path: PATHS.target,
@@ -36,11 +31,12 @@ module.exports = {
     module: {
       loaders: [{
         test: /\.js$/,
-        loader: 'ng-annotate!babel?' + JSON.stringify({
+        loader: 'babel?' + JSON.stringify({
           plugins: ['transform-runtime'],
           presets: ['react', 'es2015', 'stage-1']
         }),
-        include: PATHS.client
+        include: PATHS.client,
+        exclude: /node_modules/,
       }, {
         test: /\.less$/,
         loader: 'style!css!less'
@@ -50,9 +46,6 @@ module.exports = {
       }, {
         test: /(\.(eot.*|woff2?.*|ttf.*|svg.*)$|.(gif|png|jpg)$)/,
         loader: "url?limit=8192"
-      }, {
-        test: /\.html$/,
-        loader: "ngtemplate?relativeTo=" + __dirname + "!html"
       }, {
         test: /\.jade$/,
         loader: "jade"

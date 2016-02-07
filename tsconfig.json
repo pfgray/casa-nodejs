@@ -11,9 +11,9 @@
   ],
   "files":[
     "./typings/browser.d.ts",
-    "./client/new/peers/Peers.tsx",
-    "./client/new/peers/PeersContainer.tsx",
-    "./client/new/peers/PeerActions.ts",
-    "./client/new/peers/peersReducer.ts"
+    "./client/peers/Peers.tsx",
+    "./client/peers/PeersContainer.tsx",
+    "./client/peers/PeerActions.ts",
+    "./client/peers/peersReducer.ts"
   ]
 }

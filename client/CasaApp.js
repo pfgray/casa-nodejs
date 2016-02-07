@@ -2,13 +2,13 @@
  * Entry file for the CASA app.
  */
 import React from 'react';
-import classnames from 'classnames';
+//import classnames from 'classnames';
 
-import '../styles/flat.less';
-import '../styles/layout.less';
-import './main.less';
+import './styles/flat.less';
+import './styles/layout.less';
+import './styles/main.less';
 
-import Header from '../header/Header';
+import Header from './header/Header';
 //import Sidebar from '../sidebar/Sidebar';
 
 const fadeDelay = 250;
