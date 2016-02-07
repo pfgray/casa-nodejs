@@ -8,7 +8,7 @@ import './styles/flat.less';
 import './styles/layout.less';
 import './styles/main.less';
 
-import Header from './header/Header';
+import HeaderContainer from './header/HeaderContainer';
 //import Sidebar from '../sidebar/Sidebar';
 
 const fadeDelay = 250;
@@ -24,10 +24,8 @@ export default class CasaApp extends React.Component {
   render() {
     return (
       <div className='main'>
-        <Header />
-        <div className='content'>
-          {this.props.children}
-        </div>
+        <HeaderContainer />
+        {this.props.children}
       </div>
     );
   }

@@ -33,7 +33,7 @@ class Dashboard extends React.Component {
   render () {
     console.log('rendering with: ', this.props.apps);
     return this.props.apps ? (
-      <div className='dash'>
+      <div className='dash content'>
         <div className='row'>
           <Dashbox title='Apps'><AppList apps={this.props.apps}/></Dashbox>
           <Dashbox title='Peers' link='/peers'>
