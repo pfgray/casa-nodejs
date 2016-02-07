@@ -7,6 +7,7 @@
     "react": "github:DefinitelyTyped/DefinitelyTyped/react/react.d.ts#83b88a031cc8f2006fd361bf0a0b548c3bcc8259",
     "react-redux": "github:DefinitelyTyped/DefinitelyTyped/react-redux/react-redux.d.ts#a513c4df6eb8505da8eef432891c8b69b73535d9",
     "react-router": "github:DefinitelyTyped/DefinitelyTyped/react-router/react-router.d.ts#07feae11780495b90145451d48d4a50923762ef1",
+    "react-router-redux": "github:DefinitelyTyped/DefinitelyTyped/react-router-redux/react-router-redux.d.ts#e6236157ce37fe1c8f2e3babd0bee364d8788c8b",
     "redux": "github:DefinitelyTyped/DefinitelyTyped/redux/redux.d.ts#a820bbdead70913f0c750802b367ed54cb99b442",
     "superagent": "github:DefinitelyTyped/DefinitelyTyped/superagent/superagent.d.ts#b30dbc4dd32b3237cd78e9139c3fc270caaacacb"
   }

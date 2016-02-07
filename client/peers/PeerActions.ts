@@ -1,5 +1,6 @@
 import PeerService from './PeerService.ts';
 import Peer from './Peer.ts';
+import { routeActions } from 'react-router-redux';
 
 const peerService = new PeerService();
 
@@ -40,6 +41,7 @@ export function createPeer(peer: Peer): (d: any) => void {
       .then(peer => {
         console.log('created peer...');
         //todo: redirect back to peer list.
+        dispatch(routeActions.push('/peers'));
       });
       dispatch({type: PeerActions.CREATE_PEER});
     };
