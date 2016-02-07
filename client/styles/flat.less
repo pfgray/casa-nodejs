@@ -33,7 +33,7 @@ div {
 }
 
 .content {
-  padding: 4%; 
+  padding: 4%;
 }
 
 .panel {
@@ -43,7 +43,7 @@ div {
     font-weight: 700;
   }
 
-  border: 1px solid #E1E6E9;
+  border: 1px solid @color-panel-border;
   border-radius: 2px;
   background-color: white;
   padding: 1em;
@@ -51,11 +51,11 @@ div {
 }
 
 .btn {
-  border: 2px solid white;
   border-radius: 4px;
   padding: 1em;
-  background-color: rgba(0,0,0,0);
   color: white;
+  display: inline-block;
+  background-color: @color-primary;
 
   span:nth-child(2){
     margin-left: 1em;
@@ -64,5 +64,9 @@ div {
   &.link-btn {
     display: inline-block;
     text-decoration: none;
+  }
+  &.clear-btn {
+    background-color: rgba(0,0,0,0);
+    border: 2px solid white;
   }
 }

@@ -10,6 +10,11 @@ export default (props) => {
     <span>Loading...</span>
   ) : (
     <div className='content peer-list'>
+      <div className='peer-options'>
+        <Link className='btn link-btn' to='/peers/new'>
+          <i className='fa fa-plus' />New Peer
+        </Link>
+      </div>
       {props.peers.map(peer =>
         <div key={peer._id} className='panel peer'>
           <h3 className='title'>{peer.name}</h3>
