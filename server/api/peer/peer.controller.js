@@ -28,9 +28,9 @@ exports.create = function(req, res) {
             error:'Cannot be blank'
         });
     }
-    if(!req.body.payload_url || req.body.payload_url.trim() === ''){
+    if(!req.body.payloadUrl || req.body.payloadUrl.trim() === ''){
         errors.push({
-            field:'payload_url',
+            field:'payloadUrl',
             error:'Cannot be blank'
         });
     }
@@ -41,7 +41,7 @@ exports.create = function(req, res) {
     }
     var peer = {
         name:req.body.name,
-        payload_url:req.body.payload_url,
+        payloadUrl:req.body.payloadUrl,
         userId: req.user._id,
         last_updated:null
     };

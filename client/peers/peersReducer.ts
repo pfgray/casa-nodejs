@@ -1,4 +1,5 @@
-import { Peer, PeerActions, PeerAction } from './PeerActions.ts';
+import { PeerActions, PeerAction } from './PeerActions.ts';
+import Peer from './Peer.ts';
 
 interface PeerState {
   loading: boolean

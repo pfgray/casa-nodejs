@@ -1,3 +1,4 @@
+/// <reference path="main/ambient/Q/Q.d.ts" />
 /// <reference path="main/ambient/history/history.d.ts" />
 /// <reference path="main/ambient/lodash/lodash.d.ts" />
 /// <reference path="main/ambient/node/node.d.ts" />

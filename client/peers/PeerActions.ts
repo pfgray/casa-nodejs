@@ -1,9 +1,7 @@
-import * as request from 'superagent';
+import PeerService from './PeerService.ts';
+import Peer from './Peer.ts';
 
-export interface Peer {
-  name: string
-  payloadUrl: string
-}
+const peerService = new PeerService();
 
 export interface PeerAction {
   type: PeerActions
@@ -12,7 +10,8 @@ export interface PeerAction {
 
 export enum PeerActions {
   RECEIVE_PEERS,
-  FETCH_PEERS
+  FETCH_PEERS,
+  CREATE_PEER
 }
 
 export function receivePeers(peers: Peer[]): PeerAction {
@@ -25,13 +24,23 @@ export function receivePeers(peers: Peer[]): PeerAction {
 export function fetchPeers(): (d: any) => void {
   //parentheses are required for typescript here to wrap the returning object.
   return dispatch => {
-      request.get('/api/peers')
-        .end((err, res) => {
-          dispatch({
-            type: PeerActions.RECEIVE_PEERS,
-            peers: res.body
-          });
-        });
+      peerService.getPeers()
+      .then(peers => dispatch({
+        type: PeerActions.RECEIVE_PEERS,
+        peers: peers
+      }));
       dispatch({type: PeerActions.FETCH_PEERS});
+    };
+}
+
+export function createPeer(peer: Peer): (d: any) => void {
+  //parentheses are required for typescript here to wrap the returning object.
+  return dispatch => {
+      peerService.createPeer(peer)
+      .then(peer => {
+        console.log('created peer...');
+        //todo: redirect back to peer list.
+      });
+      dispatch({type: PeerActions.CREATE_PEER});
     };
 }

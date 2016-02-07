@@ -10,7 +10,7 @@ var mongo = require('../../database');
 exports.createUpdateOperation = function(req, res) {
   //get the peer they're talking about
   model.getPeer(req.casa.db, req.params.peer).then(function(peer){
-    //now, go get all the apps from the payload_url!
+    //now, go get all the apps from the payloadUrl!
     exports.updatePeer(req.casa.db, peer, function(err, result){
       console.log('Updated peer...');
       if(err){
@@ -93,7 +93,7 @@ var adjInFilter = function(apps){
 
 exports.updatePeer = function(db, peer, callback){
     console.log('updating peer...', peer._id);
-    request(peer.payload_url, function (error, response, body) {
+    request(peer.payloadUrl, function (error, response, body) {
         if (!error && response.statusCode === 200) {
             console.log('got successful response...');
             var apps = adjInTranslate(JSON.parse(body));

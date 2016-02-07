@@ -17,7 +17,7 @@ class HeaderContainer extends React.Component<any, any> {
 export default connect(
   state => ({
     currentUser: state.currentUser,
-    pathname: state.pathname
+    pathname: state.routing.location.pathname
   }),
   dispatch => ({
     dispatch: dispatch

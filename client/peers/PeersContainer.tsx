@@ -21,7 +21,7 @@ class PeersContainer extends React.Component<any, any> {
 }
 
 export default connect(
-  state => state.casa.peers,
+  state => state.peers,
   dispatch => ({
     dispatch: dispatch
   })

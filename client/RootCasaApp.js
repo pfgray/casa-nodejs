@@ -6,23 +6,20 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import { syncHistory, routeReducer } from 'react-router-redux';
+import { syncHistory } from 'react-router-redux';
 
 
-import casaReducer from './store/casaReducer';
+import reducer from './store/casaReducer';
 import CasaApp from './CasaApp';
 //import AppsContainer from './apps/AppsContainer';
 import Login from './login/Login';
 import Welcome from './welcome/Welcome';
 import Dashboard from './dashboard/Dashboard';
 import Peers from './peers/PeersContainer';
+import EditPeer from './peers/edit/EditPeerFormWrapper';
 import Stores from './storefronts/StoreFronts';
 
 var browserHistory = createBrowserHistory();
-const reducer = combineReducers({
-  casa: casaReducer,
-  routing: routeReducer
-});
 const reduxRouterMiddleware = syncHistory(browserHistory);
 const finalCreateStore = compose(
     applyMiddleware(thunk),
@@ -39,7 +36,11 @@ class RootCasaApp extends React.Component {
           <Route path="/" component={CasaApp}>
             <IndexRoute component={Welcome}/>
             <Route path="/dashboard" component={Dashboard}/>
-            <Route path="/peers" component={Peers} />
+            <Route path="/peers" >
+              <IndexRoute component={Peers} />
+              <Route path="edit/:peer" component={EditPeer}/>
+              <Route path="new" component={EditPeer}/>
+            </Route>
             <Route path="/stores" component={Stores} />
             <Route path="/login" component={Login} />
           </Route>

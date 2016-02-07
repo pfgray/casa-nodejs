@@ -14,7 +14,7 @@ import AppList from './AppList';
 import PeerList from './PeerList';
 
 const mapStateToProps = (state) => {
-  return state.casa.dashboard;
+  return state.dashboard;
 };
 
 const mapDispatchToProps = (dispatch) =>  {

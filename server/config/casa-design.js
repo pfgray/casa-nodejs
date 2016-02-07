@@ -57,7 +57,7 @@ module.exports = {
                 "_id": doc._id,
                 "_rev": doc._rev,
                 "name": doc.name,
-                "payload_url": doc.payload_url,
+                "payloadUrl": doc.payloadUrl,
                 "type": doc.type,
                 "last_updated": doc.last_updated,
                 "apps": doc.apps,
@@ -73,7 +73,7 @@ module.exports = {
               emit(doc.userId, {
                 "_id": doc._id,
                 "name": doc.name,
-                "payload_url": doc.payload_url,
+                "payloadUrl": doc.payloadUrl,
                 "type": doc.type,
                 "last_updated": doc.last_updated,
                 "app_count": appCount
