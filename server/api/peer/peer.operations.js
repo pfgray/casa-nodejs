@@ -101,7 +101,7 @@ exports.updatePeer = function(db, peer, callback){
             apps = adjInFilter(apps);
             //let's add the apps to the peer object!
             peer.apps = apps;
-            peer.last_updated = new Date();
+            peer.lastUpdated = new Date();
             console.log('Now updating peer...');
             model.updatePeer(db, peer).then(function(res){
                 peer._rev = res._rev;

@@ -59,9 +59,9 @@ module.exports = {
                 "name": doc.name,
                 "payloadUrl": doc.payloadUrl,
                 "type": doc.type,
-                "last_updated": doc.last_updated,
+                "lastUpdated": doc.lastUpdated,
                 "apps": doc.apps,
-                "app_count": appCount
+                "appCount": appCount
               })
             }
           }
@@ -75,7 +75,7 @@ module.exports = {
                 "name": doc.name,
                 "payloadUrl": doc.payloadUrl,
                 "type": doc.type,
-                "last_updated": doc.last_updated,
+                "lastUpdated": doc.lastUpdated,
                 "app_count": appCount
               });
             }

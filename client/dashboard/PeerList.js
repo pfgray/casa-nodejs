@@ -10,7 +10,7 @@ export default ({peers}) => {
     <div className="app-list">
       <ul style={{margin: '0'}}>
         {peers.slice(0, 5).map((peer, i) =>
-          <li key={i}>{peer.name}, {moment(peer.last_updated).fromNow()}</li>
+          <li key={i}>{peer.name}, {moment(peer.lastUpdated).fromNow()}</li>
         )}
       </ul>
     </div>

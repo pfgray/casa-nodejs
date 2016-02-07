@@ -43,7 +43,7 @@ exports.create = function(req, res) {
         name:req.body.name,
         payloadUrl:req.body.payloadUrl,
         userId: req.user._id,
-        last_updated:null
+        lastUpdated:null
     };
     model.createPeer(req.casa.db, peer)
     .then(function(newPeer){
