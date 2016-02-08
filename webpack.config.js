@@ -54,7 +54,12 @@ module.exports = {
         loader: "json"
       },{
         test: /\.tsx?$/,
-        loader: 'ts-loader'
+        loader: 'babel?' + JSON.stringify({
+          plugins: ['transform-runtime'],
+          presets: ['react', 'es2015', 'stage-1']
+        }) + '!ts-loader',
+        include: PATHS.client,
+        exclude: /node_modules/,
       }]
     },
 

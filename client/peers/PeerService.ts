@@ -35,4 +35,10 @@ export default class PeerService {
       .post('/api/peers')
       .send(peer));
   }
+  syncPeer(id: string) {
+    console.log('yep, were syncinc:', id)
+    return requestToPromise(
+      request
+      .post(`/api/peers/${id}/sync`));
+  }
 }

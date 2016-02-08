@@ -7,13 +7,16 @@ const peerService = new PeerService();
 export interface PeerAction {
   type: PeerActions
   peers?: Peer[]
+  id?: string
 }
 
 export enum PeerActions {
   RECEIVE_PEERS,
   FETCH_PEERS,
   CREATE_PEER,
-  EDIT_PEER
+  EDIT_PEER,
+  SYNC_PEER,
+  END_SYNC_PEER
 }
 
 export function receivePeers(peers: Peer[]): PeerAction {
@@ -30,7 +33,8 @@ export function fetchPeers(): (d: any) => void {
       .then(peers => dispatch({
         type: PeerActions.RECEIVE_PEERS,
         peers: peers
-      }));
+      }))
+      .catch(console.error);
       dispatch({type: PeerActions.FETCH_PEERS});
     };
 }
@@ -43,7 +47,8 @@ export function createPeer(peer: Peer): (d: any) => void {
         console.log('created peer...');
         //todo: redirect back to peer list.
         dispatch(routeActions.push('/peers'));
-      });
+      })
+      .catch(console.error);
       dispatch({type: PeerActions.CREATE_PEER});
     };
 }
@@ -58,5 +63,19 @@ export function updatePeer(id: string, peer: Peer): (d: any) => void {
         dispatch(routeActions.push('/peers'));
       });
       dispatch({type: PeerActions.EDIT_PEER});
+    };
+}
+
+export function syncPeer(id: string): (d: any) => void {
+  console.log('syncing peer:', id);
+  return dispatch => {
+      peerService.syncPeer(id)
+      .then(peer => {
+        console.log('synced peer...');
+        //todo: redirect back to peer list.
+        dispatch({type: PeerActions.END_SYNC_PEER, id});
+      })
+      .catch(console.error);
+      dispatch({type: PeerActions.SYNC_PEER, id});
     };
 }
