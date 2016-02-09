@@ -8,11 +8,18 @@ import moment from 'moment';
 export default ({peers}) => {
   return (
     <div className="app-list">
-      <ul style={{margin: '0'}}>
+      <table className='info-table'>
+        <tr>
+          <th>Name</th>
+          <th>Last Updated</th>
+        </tr>
         {peers.slice(0, 5).map((peer, i) =>
-          <li key={i}>{peer.name}, {moment(peer.lastUpdated).fromNow()}</li>
+          <tr key={i}>
+            <td className='col-70'>{peer.name}</td>
+            <td className='col-30'>{peer.lastUpdated ? moment(peer.lastUpdated).fromNow() : 'never'}</td>
+          </tr>
         )}
-      </ul>
+      </table>
     </div>
   );
 };
