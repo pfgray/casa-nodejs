@@ -3,15 +3,14 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 
 import Dashbox from './Dashbox';
 import { fetchDashboard } from './DashboardActions';
 
 import './dashboard.less';
 
-import AppList from './AppList';
-import PeerList from './PeerList';
+import AppList from './AppList.tsx';
+import PeerList from './PeerList.tsx';
 
 const mapStateToProps = (state) => {
   return state.dashboard;
@@ -36,7 +35,7 @@ class Dashboard extends React.Component {
       <div className='dash content'>
         <div className='row'>
           <Dashbox title='Apps'><AppList apps={this.props.apps}/></Dashbox>
-          <Dashbox title='Peers' link='/peers'>
+          <Dashbox title='Repositories' link='/repos'>
             <PeerList peers={this.props.peers}/>
           </Dashbox>
         </div>

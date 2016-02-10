@@ -1,12 +1,13 @@
 /*
  * A complete list of a user's (scope's) apps.
  */
-import React from 'react';
-
-import moment from 'moment';
+import * as React from 'react';
+import * as moment from 'moment';
 
 export default ({peers}) => {
-  return (
+  return peers.length < 1 ? (
+    <div>You don't have any repositories yet.</div>
+  ) : (
     <div className="app-list">
       <table className='info-table'>
         <tr>

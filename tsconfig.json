@@ -18,6 +18,8 @@
     "./client/peers/Peer.ts",
     "./client/peers/PeerService.ts",
     "./client/peers/peersReducer.ts",
+    "./client/dashboard/PeerList.tsx",
+    "./client/dashboard/AppList.tsx",
     "./client/header/HeaderContainer.ts"
   ]
 }

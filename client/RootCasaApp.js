@@ -36,7 +36,7 @@ class RootCasaApp extends React.Component {
           <Route path="/" component={CasaApp}>
             <IndexRoute component={Welcome}/>
             <Route path="/dashboard" component={Dashboard}/>
-            <Route path="/peers" >
+            <Route path="/repos" >
               <IndexRoute component={Peers} />
               <Route path="edit/:peer" component={EditPeer}/>
               <Route path="new" component={EditPeer}/>

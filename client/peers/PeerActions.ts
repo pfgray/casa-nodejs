@@ -46,7 +46,7 @@ export function createPeer(peer: Peer): (d: any) => void {
       .then(peer => {
         console.log('created peer...');
         //todo: redirect back to peer list.
-        dispatch(routeActions.push('/peers'));
+        dispatch(routeActions.push('/repos'));
       })
       .catch(console.error);
       dispatch({type: PeerActions.CREATE_PEER});
@@ -60,7 +60,7 @@ export function updatePeer(id: string, peer: Peer): (d: any) => void {
       .then(peer => {
         console.log('updated peer...');
         //todo: redirect back to peer list.
-        dispatch(routeActions.push('/peers'));
+        dispatch(routeActions.push('/repos'));
       });
       dispatch({type: PeerActions.EDIT_PEER});
     };
