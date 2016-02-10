@@ -15,6 +15,12 @@ const Info = (props) => {
   );
 };
 
+const NewPeerButton = () => (
+  <Link className='btn link-btn' to='/peers/new'>
+    <i className='fa fa-plus' />New Repository
+  </Link>
+);
+
 const SyncButton = (props) => (
   <i onClick={() => props.sync(props.peer._id)}
      className={"fa fa-refresh" + (props.peer.syncing ? ' fa-spin' : '')}></i>
@@ -32,17 +38,31 @@ const Peer = (props) => {
   );
 }
 
+const PeerList = (props) => {
+  return props.peers.length < 1 ? (
+    <div className='panel jumbotron'>
+      <i className="fa fa-database"></i>
+      <h1>You don't seem to have any repositories.</h1>
+      <NewPeerButton />
+    </div>
+  ) : (
+    <div>
+      {props.peers.map(peer => <Peer key={peer._id} peer={peer} sync={props.syncPeer}/>)}
+    </div>
+  );
+}
+
 export default (props) => {
   return props.loading ? (
     <span>Loading...</span>
   ) : (
     <div className='content peer-list'>
       <div className='peer-options'>
-        <Link className='btn link-btn' to='/peers/new'>
-          <i className='fa fa-plus' />New Peer
-        </Link>
+        {props.peers.length > 0 ? (
+          <NewPeerButton />
+        ) : (<span></span>)}
       </div>
-      {props.peers.map(peer => <Peer key={peer._id} peer={peer} sync={props.syncPeer}/>)}
+      <PeerList peers={props.peers} />
     </div>
   );
 }
