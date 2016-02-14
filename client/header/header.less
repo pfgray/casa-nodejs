@@ -1,11 +1,13 @@
 @import '../styles/colors.less';
+@import '../styles/layout.less';
 
 .header {
   padding: 0.5em 1em;
   background-color: @color-header;
   color: #fff;
+  height: @height-header;
 
-  * {
+  * > {
     display: inline-block;
     vertical-align: middle;
   }
@@ -16,6 +18,10 @@
     color: @color-primary;
   }
 
+  div {
+    height: 100%;
+  }
+
   .logo {
     font-size: 2em;
   }
@@ -24,8 +30,18 @@
     float: right;
 
     a {
+      text-decoration: none;
       color: #fff;
       padding: 0.75em; //todo: this is inexact...
     }
+  }
+
+  .profile-picture {
+    height: 100%;
+    border-radius: 100%;
+  }
+
+  .user-profile{
+    margin-right: 0.5em;
   }
 }

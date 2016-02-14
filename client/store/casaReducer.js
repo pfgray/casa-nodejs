@@ -3,8 +3,9 @@ import { combineReducers } from 'redux';
 import dashboard from '../dashboard/dashboardReducer';
 import peers from '../peers/peersReducer';
 import { reducer as formReducer } from 'redux-form';
-import { syncHistory, routeReducer } from 'react-router-redux';
+import { routeReducer } from 'react-router-redux';
 import editPeerReducer from '../peers/edit/editPeerReducer';
+import currentUserReducer from './currentUserReducer';
 
 var apps = (state = {}, action) => {
   console.log('reading action: ', action);
@@ -12,6 +13,7 @@ var apps = (state = {}, action) => {
 };
 
 export default combineReducers({
+  currentUser: currentUserReducer,
   apps,
   dashboard,
   peers,

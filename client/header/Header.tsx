@@ -3,20 +3,29 @@ import { Link } from 'react-router';
 
 import './header.less';
 
-let Pathname = ({pathname}) => (
+const Pathname = ({pathname}) => (
   <span className="pathname">{pathname}</span>
 );
 
-let UserProfile = ({currentUser}) => (
-  <div className='user-profile'>{currentUser}</div>
-);
+const UserProfile = ({currentUser}) => {
+  const {user} = currentUser;
+  const pic = user && user.picture ? <img className='profile-picture' src={user.picture} /> : '';
+  return (
+    <div className='user-profile'>
+      {/*currentUser.user.name*/}
+      {pic}
+    </div>
+  )
+};
 
-let LoginButton = () => (
+const LoginButton = () => (
   <Link to='/login'>Login</Link>
 );
 
 export default ({currentUser, pathname}) => {
-  var profile = currentUser ? UserProfile({currentUser}) : LoginButton();
+  const login = pathname.indexOf('login') > -1 ? '' : <LoginButton />;
+  const profile = currentUser.user ? UserProfile({currentUser}) : login;
+  //if it's the login path don't render
   return (
     <div className='header'>
       <div className='logo'>CASA</div>
