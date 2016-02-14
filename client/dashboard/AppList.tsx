@@ -8,11 +8,22 @@ export default ({apps}) => {
     <div>You don't have any apps yet. Add some repositories to get some.</div>
   ) : (
     <div className="app-list">
-      <ul style={{margin: '0'}}>
-        {apps.slice(0, 5).map((app, i) =>
-          <li key={i}>{app.original.use.title}</li>
-        )}
-      </ul>
+      <table className='info-table'>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {apps.slice(0, 5).map((app, i) =>
+            <tr key={i}>
+              <td className='col-70'>{app.attributes.use.title}</td>
+              <td></td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };

@@ -98,7 +98,22 @@ table.info-table{
   td.col-100{ width: 100%; }
 
   tr {
-    border-bottom: 1px dotted @color-primary;
+    padding: 0.5em;
+  }
+  th, td {
+    padding: 0.25em;
+    &:last-child {
+      text-align: right;
+    }
+  }
+
+  thead {
+    tr {
+      border-bottom: 1px solid @color-primary;
+    }
+    th {
+      color: #999;
+    }
   }
 
 }
@@ -115,4 +130,9 @@ table.info-table{
     font-size: 1.5em;
     margin-bottom: 0.5em;
   }
+}
+
+.fa-spin-4x {
+  -webkit-animation: fa-spin 0.5s infinite linear;
+  animation: fa-spin 0.5s infinite linear;
 }

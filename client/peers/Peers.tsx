@@ -62,7 +62,7 @@ export default (props) => {
           <NewPeerButton />
         ) : (<span></span>)}
       </div>
-      <PeerList peers={props.peers} />
+      <PeerList {...props} />
     </div>
   );
 }
