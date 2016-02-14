@@ -17,7 +17,7 @@ import Welcome from './welcome/Welcome';
 import Dashboard from './dashboard/Dashboard';
 import Peers from './peers/PeersContainer';
 import EditPeer from './peers/edit/EditPeerFormWrapper';
-import Stores from './storefronts/StoreFronts';
+import Stores from './storefronts/Storefronts.tsx';
 
 var browserHistory = createBrowserHistory();
 const reduxRouterMiddleware = syncHistory(browserHistory);
