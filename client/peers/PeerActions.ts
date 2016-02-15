@@ -1,41 +1,46 @@
+import { routeActions } from 'react-router-redux';
 import PeerService from './PeerService.ts';
 import Peer from './Peer.ts';
-import { routeActions } from 'react-router-redux';
+import { typeName, isType, Action } from '../redux/redux-extras.ts';
 
 const peerService = new PeerService();
 
-export interface PeerAction {
-  type: PeerActions
-  peers?: Peer[]
-  id?: string
-}
-
-export enum PeerActions {
-  RECEIVE_PEERS,
-  FETCH_PEERS,
-  CREATE_PEER,
-  EDIT_PEER,
-  SYNC_PEER,
-  END_SYNC_PEER
-}
-
-export function receivePeers(peers: Peer[]): PeerAction {
-  return {
-    type: PeerActions.RECEIVE_PEERS,
-    peers: peers
+@typeName("FetchPeersAction")
+export class FetchPeersAction extends Action {}
+@typeName("ReceivePeersAction")
+export class ReceivePeersAction extends Action {
+  constructor(public peers: Peer[]){
+    super();
   }
+}
+@typeName("CreatePeerAction")
+export class CreatePeerAction extends Action {}
+@typeName("EditPeerAction")
+export class EditPeerAction extends Action {}
+@typeName("SyncPeerAction")
+export class SyncPeerAction extends Action {
+  constructor(public id: string){
+    super();
+  }
+}
+@typeName("EndSyncPeerAction")
+export class EndSyncPeerAction extends Action {
+  constructor(public id: string){
+    super();
+  }
+}
+
+export function receivePeers(peers: Peer[]): Action {
+  return new ReceivePeersAction(peers);
 }
 
 export function fetchPeers(): (d: any) => void {
   //parentheses are required for typescript here to wrap the returning object.
   return dispatch => {
       peerService.getPeers()
-      .then(peers => dispatch({
-        type: PeerActions.RECEIVE_PEERS,
-        peers: peers
-      }))
+      .then(peers => dispatch(new ReceivePeersAction(peers)))
       .catch(console.error);
-      dispatch({type: PeerActions.FETCH_PEERS});
+      dispatch(new FetchPeersAction());
     };
 }
 
@@ -44,12 +49,11 @@ export function createPeer(peer: Peer): (d: any) => void {
   return dispatch => {
       peerService.createPeer(peer)
       .then(peer => {
-        console.log('created peer...');
         //todo: redirect back to peer list.
         dispatch(routeActions.push('/repos'));
       })
       .catch(console.error);
-      dispatch({type: PeerActions.CREATE_PEER});
+      dispatch(new CreatePeerAction());
     };
 }
 
@@ -62,7 +66,7 @@ export function updatePeer(id: string, peer: Peer): (d: any) => void {
         //todo: redirect back to peer list.
         dispatch(routeActions.push('/repos'));
       });
-      dispatch({type: PeerActions.EDIT_PEER});
+      dispatch(new EditPeerAction());
     };
 }
 
@@ -70,12 +74,8 @@ export function syncPeer(id: string): (d: any) => void {
   console.log('syncing peer:', id);
   return dispatch => {
       peerService.syncPeer(id)
-      .then(peer => {
-        console.log('synced peer...');
-        //todo: redirect back to peer list.
-        dispatch({type: PeerActions.END_SYNC_PEER, id});
-      })
+      .then(peer => dispatch(new EndSyncPeerAction(id)))
       .catch(console.error);
-      dispatch({type: PeerActions.SYNC_PEER, id});
+      dispatch(new EndSyncPeerAction(id));
     };
 }

@@ -3,7 +3,8 @@
     "module": "commonjs",
     "target": "es6",
     "sourceMap": false,
-    "jsx":"react"
+    "jsx":"react",
+    "experimentalDecorators": true
   },
   "compileOnSave": false,
   "buildOnSave": false,
@@ -12,6 +13,7 @@
   ],
   "files":[
     "./typings/browser.d.ts",
+    "./client/redux/redux-extras.ts",
     "./client/peers/Peers.tsx",
     "./client/peers/PeersContainer.tsx",
     "./client/peers/PeerActions.ts",
