@@ -16,6 +16,7 @@ module.exports = function(app) {
   app.use('/api/peers', require('./api/peer'));
   app.use('/api/out/payloads', require('./api/payload'));
   app.use('/api/dashboard', require('./api/dashboard'));
+  app.use('/api/storefronts', require('./api/storefronts'));
   app.use('/api', require('./api/user'));
 
   // Redirect the user to Google for authentication.  When complete, Google

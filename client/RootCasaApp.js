@@ -17,7 +17,7 @@ import Welcome from './welcome/Welcome';
 import Dashboard from './dashboard/Dashboard';
 import Peers from './peers/PeersContainer';
 import EditPeer from './peers/edit/EditPeerFormWrapper';
-import Stores from './storefronts/Storefronts.tsx';
+//import Stores from './storefronts/Storefronts.tsx';
 
 var browserHistory = createBrowserHistory();
 const reduxRouterMiddleware = syncHistory(browserHistory);
@@ -41,7 +41,7 @@ class RootCasaApp extends React.Component {
               <Route path="edit/:peer" component={EditPeer}/>
               <Route path="new" component={EditPeer}/>
             </Route>
-            <Route path="/stores" component={Stores} />
+            <Route path="/stores" component={() => <span />} />
             <Route path="/login" component={Login} />
           </Route>
         </Router>
