@@ -22,7 +22,7 @@ exports.index = function(req, res) {
 exports.fetch = function(req, res) {
     console.log("Getting storefronts with id: ", req.params.storefront);
 
-    model.getPeer(req.casa.db, req.params.storefront)
+    model.getStorefront(req.casa.db, req.params.storefront)
     .then(function(storefront){
       console.log('Found storefront:', storefront);
       if(req.user._id !== storefront.userId){
@@ -49,7 +49,7 @@ exports.create = function(req, res) {
         name:req.body.name,
         userId: req.user._id
     };
-    model.createPeer(req.casa.db, storefront)
+    model.createStorefront(req.casa.db, storefront)
     .then(function(newPeer){
         //TODO: get the storefront by id from the db
         storefront._id  = newPeer._id;
