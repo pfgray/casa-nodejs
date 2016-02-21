@@ -20,6 +20,7 @@
     "./client/peers/peersReducer.ts",
     "./client/dashboard/PeerList.tsx",
     "./client/dashboard/AppList.tsx",
+    "client/dashboard/StorefrontList.tsx",
     "./client/header/HeaderContainer.ts",
     "./client/store/currentUserReducer.ts"
   ]

@@ -11,6 +11,7 @@ import './dashboard.less';
 
 import AppList from './AppList.tsx';
 import PeerList from './PeerList.tsx';
+import StorefrontList from './StorefrontList.tsx';
 
 const mapStateToProps = (state) => {
   return state.dashboard;
@@ -40,7 +41,7 @@ class Dashboard extends React.Component {
           </Dashbox>
         </div>
         <div className='row'>
-          <Dashbox  title='Stores'>Box #3</Dashbox>
+          <Dashbox  title='Stores'><StorefrontList storefronts={this.props.storefronts}/></Dashbox>
         </div>
       </div>
     ) : <span>loading...</span>;
