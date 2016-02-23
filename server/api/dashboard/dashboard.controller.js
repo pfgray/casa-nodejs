@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var appsModel = require('../application/application.model');
 var peersModel = require('../peer/peer.model');
+var storefrontModel = require('../storefronts/storefront.model.js');
 
 // Get the dashboard
 exports.index = function(req, res) {
@@ -14,9 +15,12 @@ exports.index = function(req, res) {
     }
     appsModel.getApplicationsForUser(req.casa.db, req.user._id).then(function(apps){
       peersModel.getPeersByUser(req.casa.db, req.user._id).then(function(peers){
-        res.json({
-          apps:apps,
-          peers: peers
+        storefrontModel.getStorefrontsByUser(req.casa.db, req.user._id).then(function(storefronts){
+          res.json({
+            apps:apps,
+            peers: peers,
+            storefronts: storefronts
+          });
         });
       }, function(err){ throw err; });
     })
