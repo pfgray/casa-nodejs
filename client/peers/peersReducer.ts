@@ -1,4 +1,12 @@
-import { PeerActions, PeerAction } from './PeerActions.ts';
+import { typeName, isType, Action } from '../redux/redux-extras.ts';
+import {
+  FetchPeersAction,
+  ReceivePeersAction,
+  CreatePeerAction,
+  EditPeerAction,
+  SyncPeerAction,
+  EndSyncPeerAction
+} from './PeerActions.ts';
 import Peer from './Peer.ts';
 
 interface PeerState {
@@ -11,32 +19,31 @@ const initialState: PeerState = {
   peers: []
 };
 
-export default function(state: PeerState = initialState, action: PeerAction): PeerState {
-  switch(action.type){
-    case PeerActions.RECEIVE_PEERS:
-      return {
-        loading: false,
-        peers: action.peers
-      };
-    case PeerActions.FETCH_PEERS:
-      return {
-        loading: true,
-        peers: state.peers
-      };
-    case PeerActions.SYNC_PEER:
-      return Object.assign({}, state, {
-        peers: mergeToPeerWithId(action.id, state.peers, {
-          syncing: true
-        })
-      });
-    case PeerActions.END_SYNC_PEER:
-      return Object.assign({}, state, {
-        peers: mergeToPeerWithId(action.id, state.peers, {
-          syncing: false
-        })
-      });
-    default:
-      return state;
+export default function(state: PeerState = initialState, action: Action): PeerState {
+  if(isType(action, ReceivePeersAction)){
+    return {
+      loading: false,
+      peers: action.peers
+    };
+  } else if (isType(action, FetchPeersAction)){
+    return {
+      loading: true,
+      peers: state.peers
+    };
+  } else if (isType(action, SyncPeerAction)){
+    return Object.assign({}, state, {
+      peers: mergeToPeerWithId(action.id, state.peers, {
+        syncing: true
+      })
+    });
+  } else if(isType(action, EndSyncPeerAction)){
+    return Object.assign({}, state, {
+      peers: mergeToPeerWithId(action.id, state.peers, {
+        syncing: false
+      })
+    });
+  } else {
+    return state;
   }
 }
 

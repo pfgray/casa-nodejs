@@ -18,7 +18,7 @@ function requestToPromise<T>(req: request.SuperAgentRequest): Q.Promise<T> {
 
 export default class PeerService {
   getPeers() {
-    return requestToPromise(request.get('/api/peers'));
+    return requestToPromise<Peer[]>(request.get('/api/peers'));
   }
   getPeer(id: string) {
     return requestToPromise(request.get(`/api/peers/${id}`));
