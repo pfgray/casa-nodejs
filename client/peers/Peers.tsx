@@ -57,12 +57,12 @@ export default (props) => {
     <span>Loading...</span>
   ) : (
     <div className='content peer-list'>
+      <PeerList {...props} />
       <div className='peer-options'>
         {props.peers.length > 0 ? (
           <NewPeerButton />
         ) : (<span></span>)}
       </div>
-      <PeerList {...props} />
     </div>
   );
 }

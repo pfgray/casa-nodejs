@@ -12,15 +12,22 @@
   ],
   "files":[
     "./typings/browser.d.ts",
+    "./client/common/requestHelpers.ts",
     "./client/peers/Peers.tsx",
     "./client/peers/PeersContainer.tsx",
     "./client/peers/PeerActions.ts",
     "./client/peers/Peer.ts",
     "./client/peers/PeerService.ts",
     "./client/peers/peersReducer.ts",
+    "./client/storefronts/Storefront.ts",
+    "./client/storefronts/Storefronts.tsx",
+    "./client/storefronts/StorefrontsContainer.tsx",
+    "./client/storefronts/storefrontReducer.ts",
+    "./client/storefronts/StorefrontActions.ts",
+    "./client/storefronts/StorefrontService.ts",
     "./client/dashboard/PeerList.tsx",
     "./client/dashboard/AppList.tsx",
-    "client/dashboard/StorefrontList.tsx",
+    "./client/dashboard/StorefrontList.tsx",
     "./client/header/HeaderContainer.ts",
     "./client/store/currentUserReducer.ts"
   ]

@@ -41,7 +41,9 @@ class Dashboard extends React.Component {
           </Dashbox>
         </div>
         <div className='row'>
-          <Dashbox  title='Stores'><StorefrontList storefronts={this.props.storefronts}/></Dashbox>
+          <Dashbox title='Stores' link='/storefronts'>
+            <StorefrontList storefronts={this.props.storefronts}/>
+          </Dashbox>
         </div>
       </div>
     ) : <span>loading...</span>;
