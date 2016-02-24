@@ -6,6 +6,7 @@
 
 var errors = require('./components/errors');
 var passport = require('passport');
+var environment = require('./config/environment');
 
 module.exports = function(app) {
 
@@ -47,7 +48,8 @@ module.exports = function(app) {
     .get(function(req, res) {
       console.log('showing the index file:');
       res.render('index.ejs', {
-        user:req.user
+        user: req.user,
+        domain: environment.domain
       });
     });
 };

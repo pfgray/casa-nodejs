@@ -4,6 +4,7 @@
 // ==================================
 module.exports = {
   // CouchDB connection options
+  domain: 'http://localhost:9000',
   couch: {
     host: process.env.COUCH_HOST || 'http://localhost',
     port: process.env.COUCH_PORT || 5984,

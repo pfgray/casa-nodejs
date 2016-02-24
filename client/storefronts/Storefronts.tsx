@@ -14,12 +14,15 @@ const Storefront = (props) => {
   return (
     <div key={storefront._id} className='panel entity'>
       <h3 className='title'>{storefront.name}</h3>
+      <div>
+        <span>Lti url: </span>
+        <span>{storefront._id}</span>
+      </div>
     </div>
   );
 }
 
 const StorefrontList = (props) => {
-  console.log('got:', props);
   return props.storefronts.length < 1 ? (
     <div className='panel jumbotron'>
       <i className="fa fa-database"></i>
@@ -34,7 +37,6 @@ const StorefrontList = (props) => {
 }
 
 export default (props) => {
-  console.log('got:', props);
   return props.loading ? (
     <span>Loading...</span>
   ) : (
