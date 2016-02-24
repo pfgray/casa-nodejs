@@ -56,9 +56,9 @@ export default (props) => {
   return props.loading ? (
     <span>Loading...</span>
   ) : (
-    <div className='content peer-list'>
+    <div className='content entity-list'>
       <PeerList {...props} />
-      <div className='peer-options'>
+      <div className='entity-options'>
         {props.peers.length > 0 ? (
           <NewPeerButton />
         ) : (<span></span>)}
