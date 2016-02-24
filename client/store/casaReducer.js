@@ -22,6 +22,7 @@ export default combineReducers({
   storefronts,
   form: formReducer,
   routing: routeReducer,
+  env: () => ({ domain: window.domain }),
   formData: combineReducers({
     editPeer: editPeerReducer,
     editStorefront: editStorefrontReducer

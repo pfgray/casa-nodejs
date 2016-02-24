@@ -21,6 +21,9 @@ class StorefrontsContainer extends React.Component<any, any> {
 }
 
 export default connect(
-  state => state.storefronts,
+  state => ({
+    storefronts: state.storefronts,
+    env: state.env
+  }),
   dispatch => ({ dispatch })
 )(StorefrontsContainer);

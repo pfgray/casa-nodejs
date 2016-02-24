@@ -4,19 +4,19 @@ import * as moment from 'moment';
 import { Link } from 'react-router';
 
 const NewStorefrontButton = () => (
-  <Link className='btn link-btn' to='/storefronts /new'>
+  <Link className='btn link-btn' to='/storefronts/new'>
     <i className='fa fa-plus' />New Storefront
   </Link>
 );
 
 const Storefront = (props) => {
-  const { storefront, sync } = props;
+  const { storefront, sync, domain } = props;
   return (
     <div key={storefront._id} className='panel entity'>
       <h3 className='title'>{storefront.name}</h3>
       <div>
         <span>Lti url: </span>
-        <span>{storefront._id}</span>
+        <span>{domain + "/stores/" + storefront._id + "/lti"}</span>
       </div>
     </div>
   );
@@ -31,19 +31,22 @@ const StorefrontList = (props) => {
     </div>
   ) : (
     <div>
-      {props.storefronts.map(storefront => <Storefront key={storefront._id} storefront={storefront} />)}
+      {props.storefronts.map(storefront =>
+        <Storefront key={storefront._id} storefront={storefront} domain={props.domain} />)}
     </div>
   );
 }
 
 export default (props) => {
+  const storefronts = props.storefronts.storefronts;
+  const env = props.env;
   return props.loading ? (
     <span>Loading...</span>
   ) : (
     <div className='content entity-list'>
-      <StorefrontList {...props} />
+      <StorefrontList storefronts={storefronts} domain={env.domain} />
       <div className='entity-options'>
-        {props.storefronts.length > 0 ? (
+        {storefronts.length > 0 ? (
           <NewStorefrontButton />
         ) : (<span></span>)}
       </div>
