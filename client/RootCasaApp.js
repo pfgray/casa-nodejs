@@ -19,6 +19,7 @@ import Peers from './peers/PeersContainer';
 import EditPeer from './peers/edit/EditPeerFormWrapper';
 import Storefronts from './storefronts/StorefrontsContainer';
 import EditStorefront from './storefronts/edit/EditStorefrontFormWrapper.js';
+import LtiStorefront from './lti/LtiStorefront';
 
 var browserHistory = createBrowserHistory();
 const reduxRouterMiddleware = syncHistory(browserHistory);
@@ -49,6 +50,8 @@ class RootCasaApp extends React.Component {
             </Route>
             <Route path="/stores" component={() => <span />} />
             <Route path="/login" component={Login} />
+          </Route>
+          <Route path="/store/:store" component={LtiStorefront}>
           </Route>
         </Router>
       </Provider>

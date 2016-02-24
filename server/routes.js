@@ -35,7 +35,7 @@ module.exports = function(app) {
           res.redirect('/dashboard');
   });
 
-  app.post('/stores/:storefront/lti')
+  app.use('/stores/', require('./storefronts'));
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components)/*')
