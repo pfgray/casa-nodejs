@@ -19,7 +19,6 @@ var appModel = {
       });
     },
     getApplicationsForStorefront: function(db, storefrontId){
-      console.log('getting storefront...', db);
       return storefrontModel.getStorefront(db, storefrontId)
       .then(function(storefront){
         console.log('getting apps... for storefront');
