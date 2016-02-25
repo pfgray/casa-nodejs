@@ -71,7 +71,7 @@ exports.delete = function(req, res) {
     res.status(500).json(err);
   }
   console.log("deleting storefront with id: ", req.params.storefront);
-  model.getPeer(req.casa.db, req.params.storefront).then(function(storefront) {
+  model.getStorefront(req.casa.db, req.params.storefront).then(function(storefront) {
     console.log("got storefront:", storefront);
     if(req.user._id === storefront.userId){
       model.deletePeer(req.casa.db, storefront._id)
