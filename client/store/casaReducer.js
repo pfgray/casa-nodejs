@@ -24,7 +24,7 @@ export default combineReducers({
   appStore,
   routing: routeReducer,
   env: () => ({ domain: window.domain }),
-  lti: () => (window.casa.lti),
+  lti: () => (window.casa.lti ? window.casa.lti : {}),
   form: formReducer,
   formData: combineReducers({
     editPeer: editPeerReducer,
