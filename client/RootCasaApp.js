@@ -8,6 +8,9 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { syncHistory } from 'react-router-redux';
 
+//styles
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 import reducer from './store/casaReducer';
 import CasaApp from './CasaApp';

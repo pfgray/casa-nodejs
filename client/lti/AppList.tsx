@@ -1,6 +1,7 @@
 
 import * as React from 'react';
 import App from './App.tsx';
+import { Input } from 'react-bootstrap';
 
 function containsStr(str1, str2){
   return str1 && str2 &&
@@ -30,9 +31,9 @@ export default (props) => {
   var apps = props.apps.map(function (app) {
     return (
       <div className='app-list'>
-      <App app={app} />
-
-           </div>);
+        <App app={app} />
+      </div>
+    );
   }.bind(this));
   //onClick={resolveHandler(app).clickHandler}
   //highlights={searches}/>
@@ -46,7 +47,7 @@ export default (props) => {
   return (
     <div>
       <div className='search-box'>
-        <input
+        <Input
           type='text'
           placeholder='Find' />
       </div>

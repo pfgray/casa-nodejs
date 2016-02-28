@@ -4,6 +4,7 @@
 /// <reference path="browser/ambient/moment-node/moment-node.d.ts" />
 /// <reference path="browser/ambient/moment/moment.d.ts" />
 /// <reference path="browser/ambient/node/node.d.ts" />
+/// <reference path="browser/ambient/react-bootstrap/react-bootstrap.d.ts" />
 /// <reference path="browser/ambient/react-redux/react-redux.d.ts" />
 /// <reference path="browser/ambient/react-router-redux/react-router-redux.d.ts" />
 /// <reference path="browser/ambient/react-router/react-router.d.ts" />

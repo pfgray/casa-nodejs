@@ -10,14 +10,9 @@ import editStorefrontReducer from '../storefronts/edit/editStorefrontReducer';
 import currentUserReducer from './currentUserReducer';
 import appStore from '../lti/appStore/appStoreReducer';
 
-var apps = (state = {}, action) => {
-  console.log('reading action: ', action);
-  return state;
-};
 
 export default combineReducers({
   currentUser: currentUserReducer,
-  apps,
   dashboard,
   peers,
   storefronts,
