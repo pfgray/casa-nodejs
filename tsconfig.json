@@ -15,6 +15,7 @@
     "./typings/browser.d.ts",
     "./client/common/requestHelpers.ts",
     "./client/common/redux-extras.ts",
+    "./client/ui/ColorService.ts",
     "./client/peers/Peers.tsx",
     "./client/peers/PeersContainer.tsx",
     "./client/peers/PeerActions.ts",
@@ -36,6 +37,8 @@
     "./client/lti/appStore/AppStoreService.ts",
     "./client/lti/appStore/App.ts",
     "./client/lti/appStore/AppStoreActions.ts",
+    "./client/lti/AppList.tsx",
+    "./client/lti/App.tsx",
     "./client/lti/LtiStorefront.tsx",
     "./client/lti/LtiStorefrontContainer.tsx"
   ]
