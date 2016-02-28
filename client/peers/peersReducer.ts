@@ -1,4 +1,4 @@
-import { typeName, isType, Action } from '../redux/redux-extras.ts';
+import { typeName, isType, Action } from '../common/redux-extras.ts';
 import {
   FetchPeersAction,
   ReceivePeersAction,

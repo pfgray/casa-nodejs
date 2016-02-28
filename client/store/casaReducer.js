@@ -8,6 +8,7 @@ import { routeReducer } from 'react-router-redux';
 import editPeerReducer from '../peers/edit/editPeerReducer';
 import editStorefrontReducer from '../storefronts/edit/editStorefrontReducer';
 import currentUserReducer from './currentUserReducer';
+import appStore from '../lti/appStore/appStoreReducer';
 
 var apps = (state = {}, action) => {
   console.log('reading action: ', action);
@@ -20,9 +21,11 @@ export default combineReducers({
   dashboard,
   peers,
   storefronts,
-  form: formReducer,
+  appStore,
   routing: routeReducer,
   env: () => ({ domain: window.domain }),
+  lti: () => (window.casa.lti),
+  form: formReducer,
   formData: combineReducers({
     editPeer: editPeerReducer,
     editStorefront: editStorefrontReducer

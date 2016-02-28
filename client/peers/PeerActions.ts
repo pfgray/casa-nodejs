@@ -1,7 +1,7 @@
 import { routeActions } from 'react-router-redux';
 import PeerService from './PeerService.ts';
 import Peer from './Peer.ts';
-import { typeName, isType, Action } from '../redux/redux-extras.ts';
+import { typeName, isType, Action } from '../common/redux-extras.ts';
 
 const peerService = new PeerService();
 

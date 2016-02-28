@@ -6,7 +6,7 @@ var lti = require('ims-lti');
 
 // Get list of things
 exports.lti = function(req, res) {
-  console.log("Got LTI launch...", req.body);
+  //console.log("Got LTI launch...", req.body);
 
   //does there exist an appInstance (in this storefront), which has
   //an already created content item for this resource_link_id?
@@ -46,7 +46,7 @@ exports.lti = function(req, res) {
       store: req.params.storefront,
       resource_link_id: req.body.resource_link_id
     };
-    res.redirect(303, "/store/" + req.params.storefront);
+    res.redirect(303, "/store");
   }, function(err){
     console.log('error validating lti launch: ', err);
     console.log(err.stack);
@@ -64,4 +64,9 @@ exports.lti = function(req, res) {
     }, 500);
   });
 
+};
+
+exports.appStore = function(req, res) {
+  console.log('whaaaaat');
+  res.json([]);
 };
