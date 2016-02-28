@@ -67,6 +67,24 @@ exports.lti = function(req, res) {
 };
 
 exports.appStore = function(req, res) {
-  console.log('whaaaaat');
-  res.json([]);
+  if(req.session.lti.store !== req.params.storefront){
+    console.log('they werent equal...');
+    res.status(403).json({
+      error: "You must lti launch into this store to access it"
+    });
+  } else {
+    //find all apps in this storefront...
+    appModel.getApplicationsForStorefront(req.casa.db, req.params.storefront)
+    .then(function(apps){
+      res.json(apps);
+    })
+    .catch(function(err){
+      console.log('error validating lti launch: ', err);
+      console.log(err.stack);
+      res.json({
+          status:'error',
+          message:err
+      }, 500);
+    });
+  }
 };
