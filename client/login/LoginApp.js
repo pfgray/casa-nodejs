@@ -11,9 +11,6 @@ import ReactDOM from 'react-dom';
 import Header from '../header/Header';
 import Login from './Login';
 
-import '../styles/flat.less';
-import './login.less';
-
 class LoginApp extends React.Component {
  render() {
    return (
