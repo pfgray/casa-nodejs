@@ -28,13 +28,7 @@ export default (props) => {
 
 
 
-  var apps = props.apps.map(function (app) {
-    return (
-      <div className='app-list'>
-        <App app={app} />
-      </div>
-    );
-  }.bind(this));
+  var apps = props.apps.map(app => <App app={app}/>);
   //onClick={resolveHandler(app).clickHandler}
   //highlights={searches}/>
 
@@ -51,7 +45,7 @@ export default (props) => {
           type='text'
           placeholder='Find' />
       </div>
-      <div className='box'>
+      <div className='app-store-list'>
         {appList}
       </div>
     </div>
