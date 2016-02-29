@@ -14,7 +14,8 @@
   "files":[
     "./typings/browser.d.ts",
     "./client/common/requestHelpers.ts",
-    "./client/redux/redux-extras.ts",
+    "./client/common/redux-extras.ts",
+    "./client/ui/ColorService.ts",
     "./client/peers/Peers.tsx",
     "./client/peers/PeersContainer.tsx",
     "./client/peers/PeerActions.ts",
@@ -31,6 +32,14 @@
     "./client/dashboard/AppList.tsx",
     "./client/dashboard/StorefrontList.tsx",
     "./client/header/HeaderContainer.ts",
-    "./client/store/currentUserReducer.ts"
+    "./client/store/currentUserReducer.ts",
+    "./client/lti/appStore/appStoreReducer.ts",
+    "./client/lti/appStore/AppStoreService.ts",
+    "./client/lti/appStore/App.ts",
+    "./client/lti/appStore/AppStoreActions.ts",
+    "./client/lti/AppList.tsx",
+    "./client/lti/App.tsx",
+    "./client/lti/LtiStorefront.tsx",
+    "./client/lti/LtiStorefrontContainer.tsx"
   ]
 }

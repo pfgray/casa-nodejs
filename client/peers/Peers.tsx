@@ -3,8 +3,6 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import { Link } from 'react-router';
 
-import './peers.less';
-
 const Info = (props) => {
   return (
     <div className='info'>

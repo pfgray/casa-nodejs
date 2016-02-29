@@ -4,8 +4,6 @@
 import React from 'react';
 //import classnames from 'classnames';
 
-import './styles/flat.less';
-import './styles/layout.less';
 import './styles/main.less';
 
 import HeaderContainer from './header/HeaderContainer';

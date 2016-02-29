@@ -1,8 +1,6 @@
 
 import React from 'react';
 
-import './login.less';
-
 export default React.createClass({
   render: function() {
     return (

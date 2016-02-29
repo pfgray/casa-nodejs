@@ -2,19 +2,13 @@
 
 var _ = require('lodash');
 var Q = require('q');
-var casa_model = require('../../database');
 var model = require('../../database');
 
-module.exports = {
-    getApplications:function(callback){
-        var db = casa_model.getDatabase();
-        db.view('casa/applications', {group: true, reduce: true}, function (err, res) {
-            callback(err, _.transform(res, function(result, entity){
-                return result.push(entity.value);
-            }));
-        });
-    },
-    getApplicationsForUser:function(db, userId){
+var storefrontModel = require('../storefronts/storefront.model');
+
+var appModel = {
+    getApplicationsForUser: function(db, userId){
+      console.log('getting apps for user...');
       return Q.ninvoke(db.collection('peers').find({
         userId: userId
       }), 'toArray')
@@ -24,16 +18,13 @@ module.exports = {
         }).flatten().value();
       });
     },
-    getApplication:function(originatorId, appId, callback){
-        var db = casa_model.getDatabase();
-        db.view('casa/applications', {
-            key:{originator_id: originatorId, id: appId},
-            group:true,
-            reduce:true
-        }, function (err, res) {
-            callback(err, _.transform(res, function(result, entity){
-                return result.push(entity.value);
-            })[0]);
-        });
+    getApplicationsForStorefront: function(db, storefrontId){
+      return storefrontModel.getStorefront(db, storefrontId)
+      .then(function(storefront){
+        console.log('getting apps... for storefront');
+        return appModel.getApplicationsForUser(db, storefront.userId)
+      }.bind(this));
     }
 }
+
+module.exports = appModel;

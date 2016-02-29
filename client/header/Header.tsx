@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 
-import './header.less';
-
 const Pathname = ({pathname}) => (
   <span className="pathname">{pathname}</span>
 );

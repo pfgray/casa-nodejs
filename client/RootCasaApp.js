@@ -8,6 +8,9 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { syncHistory } from 'react-router-redux';
 
+//styles
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 import reducer from './store/casaReducer';
 import CasaApp from './CasaApp';
@@ -19,6 +22,7 @@ import Peers from './peers/PeersContainer';
 import EditPeer from './peers/edit/EditPeerFormWrapper';
 import Storefronts from './storefronts/StorefrontsContainer';
 import EditStorefront from './storefronts/edit/EditStorefrontFormWrapper.js';
+import LtiStorefront from './lti/LtiStorefrontContainer';
 
 var browserHistory = createBrowserHistory();
 const reduxRouterMiddleware = syncHistory(browserHistory);
@@ -49,6 +53,8 @@ class RootCasaApp extends React.Component {
             </Route>
             <Route path="/stores" component={() => <span />} />
             <Route path="/login" component={Login} />
+          </Route>
+          <Route path="/store" component={LtiStorefront}>
           </Route>
         </Router>
       </Provider>

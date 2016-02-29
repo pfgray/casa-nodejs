@@ -35,10 +35,11 @@ module.exports = function(app) {
           res.redirect('/dashboard');
   });
 
+  app.use('/stores/', require('./storefronts'));
+
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components)/*')
     .get(errors[404]);
-
 
   app.set('view engine', 'ejs');
 
@@ -49,7 +50,8 @@ module.exports = function(app) {
       console.log('showing the index file:');
       res.render('index.ejs', {
         user: req.user,
-        domain: environment.domain
+        domain: environment.domain,
+        lti: req.session.lti
       });
     });
 };

@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 import Dashbox from './Dashbox';
 import { fetchDashboard } from './DashboardActions';
 
-import './dashboard.less';
-
 import AppList from './AppList.tsx';
 import PeerList from './PeerList.tsx';
 import StorefrontList from './StorefrontList.tsx';

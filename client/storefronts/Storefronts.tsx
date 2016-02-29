@@ -17,6 +17,14 @@ const Storefront = (props) => {
       <div>
         <span>Lti url: </span>
         <span>{domain + "/stores/" + storefront._id + "/lti"}</span>
+        <div>
+          {storefront.keypairs.map(keypair =>
+            <div>
+              <div>key: {keypair.key}</div>
+              <div>secret: {keypair.secret}</div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
