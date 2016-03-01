@@ -1,9 +1,7 @@
-
 import React from 'react';
-import { render } from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { syncHistory } from 'react-router-redux';
@@ -33,33 +31,27 @@ const finalCreateStore = compose(
 )(createStore);
 const store = finalCreateStore(reducer);
 
-class RootCasaApp extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router history={browserHistory}>
-          <Route path="/" component={CasaApp}>
-            <IndexRoute component={Welcome}/>
-            <Route path="/dashboard" component={Dashboard}/>
-            <Route path="/repos" >
-              <IndexRoute component={Peers} />
-              <Route path="edit/:peer" component={EditPeer}/>
-              <Route path="new" component={EditPeer}/>
-            </Route>
-            <Route path="/storefronts" >
-              <IndexRoute component={Storefronts} />
-              <Route path="edit/:storefront" component={EditStorefront}/>
-              <Route path="new" component={EditStorefront}/>
-            </Route>
-            <Route path="/stores" component={() => <span />} />
-            <Route path="/login" component={Login} />
-          </Route>
-          <Route path="/store" component={LtiStorefront}>
-          </Route>
-        </Router>
-      </Provider>
-    );
-  }
-}
-
-render(<RootCasaApp />, document.getElementById('content'));
+export default () => (
+  <Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={CasaApp}>
+        <IndexRoute component={Welcome}/>
+        <Route path="/dashboard" component={Dashboard}/>
+        <Route path="/repos" >
+          <IndexRoute component={Peers} />
+          <Route path="edit/:peer" component={EditPeer}/>
+          <Route path="new" component={EditPeer}/>
+        </Route>
+        <Route path="/storefronts" >
+          <IndexRoute component={Storefronts} />
+          <Route path="edit/:storefront" component={EditStorefront}/>
+          <Route path="new" component={EditStorefront}/>
+        </Route>
+        <Route path="/stores" component={() => <span />} />
+        <Route path="/login" component={Login} />
+      </Route>
+      <Route path="/store" component={LtiStorefront}>
+      </Route>
+    </Router>
+  </Provider>
+);

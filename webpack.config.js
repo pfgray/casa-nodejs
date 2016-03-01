@@ -21,7 +21,11 @@ module.exports = {
     devtool: "#inline-source-map",
 
     entry: {
-        main: [PATHS.app + '/RootCasaApp.js']
+      main: [
+        'webpack-dev-server/client?http://localhost:9001/',
+        'webpack/hot/only-dev-server',
+        PATHS.app + '/main.js'
+      ]
     },
     output: {
         path: PATHS.target,
@@ -31,7 +35,7 @@ module.exports = {
     module: {
       loaders: [{
         test: /\.js$/,
-        loader: 'babel?' + JSON.stringify({
+        loader: 'react-hot!babel?' + JSON.stringify({
           plugins: ['transform-runtime'],
           presets: ['react', 'es2015', 'stage-1']
         }),
@@ -54,7 +58,7 @@ module.exports = {
         loader: "json"
       },{
         test: /\.tsx?$/,
-        loader: 'babel?' + JSON.stringify({
+        loader: 'react-hot!babel?' + JSON.stringify({
           plugins: ['transform-runtime'],
           presets: ['react', 'es2015', 'stage-1']
         }) + '!ts-loader',
@@ -65,7 +69,8 @@ module.exports = {
 
     plugins: [
       new webpack.NoErrorsPlugin(),
-      new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en$/)
+      new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en$/),
+      new webpack.HotModuleReplacementPlugin()
       // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ]
 };
