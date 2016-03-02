@@ -70,6 +70,11 @@ div {
   &.clear-btn {
     background-color: rgba(0,0,0,0);
     border: 2px solid white;
+    transition: background-color 0.25s;
+    &:focus,&:hover {
+      color: white;
+      background-color: rgba(1,1,1,0.15);
+    }
   }
 }
 
