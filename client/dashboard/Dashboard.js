@@ -3,10 +3,10 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 import Dashbox from './Dashbox';
 import { fetchDashboard } from './DashboardActions';
-
 import AppList from './AppList.tsx';
 import PeerList from './PeerList.tsx';
 import StorefrontList from './StorefrontList.tsx';
@@ -31,19 +31,27 @@ class Dashboard extends React.Component {
   render () {
     console.log('rendering with: ', this.props.apps);
     return this.props.apps ? (
-      <div className='dash content'>
-        <div className='row'>
-          <Dashbox title='Apps'><AppList apps={this.props.apps}/></Dashbox>
-          <Dashbox title='Repositories' link='/repos'>
-            <PeerList peers={this.props.peers}/>
-          </Dashbox>
-        </div>
-        <div className='row'>
-          <Dashbox title='Stores' link='/storefronts'>
-            <StorefrontList storefronts={this.props.storefronts}/>
-          </Dashbox>
-        </div>
-      </div>
+      <Grid className='dash'>
+        <Row>
+          <Col lg={6} md={12}>
+            <Dashbox title='Apps'>
+              <AppList apps={this.props.apps}/>
+            </Dashbox>
+          </Col>
+          <Col lg={6} md={12}>
+            <Dashbox title='Repositories' link='/repos'>
+              <PeerList peers={this.props.peers}/>
+            </Dashbox>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={12}>
+            <Dashbox title='Stores' link='/storefronts'>
+              <StorefrontList storefronts={this.props.storefronts}/>
+            </Dashbox>
+          </Col>
+        </Row>
+      </Grid>
     ) : <span>loading...</span>;
   }
 }
