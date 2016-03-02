@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 const Info = (props) => {
   return (
     <div className='info'>
-      <span className='label'>{props.label}</span>
+      <span className='identifier'>{props.label}</span>
       <span className='median'>:</span>
       <span className='text'>{props.children}</span>
     </div>

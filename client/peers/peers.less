@@ -1,41 +1,45 @@
+.peer {
+  margin-top: 1em;
 
-.peer-list {
-
-  .peer {
-    margin-top: 1em;
-
-    .title {
-      font-size:1.15em;
-      margin-bottom: 0.5em;
-    }
-
-    .fa-refresh {
-      cursor: pointer;
-      margin-left: 0.25em;
-    }
-
-    .info{
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      color: #999;
-      width: 50%;
-      min-width: 300px;
-    }
-    .median {
-      margin-right: 0.5em;
-    }
+  .title {
+    font-size:1.15em;
+    margin-bottom: 0.5em;
   }
 
-  .peer-options {
-      text-align: right;
-      margin-bottom: 1em;
+  .fa-refresh {
+    cursor: pointer;
+    margin-left: 0.25em;
   }
 
-  .jumbotron {
+  .info{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #999;
     width: 50%;
-    margin: 0 auto;
+    min-width: 300px;
+
+    > * {
+      display: inline-block;
+    }
+
+    .text {
+      color: #444
+    }
   }
+  .median {
+    margin-right: 0.5em;
+  }
+}
+
+.peer-options {
+    text-align: right;
+    margin-bottom: 1em;
+}
+
+.jumbotron {
+  width: 50%;
+  margin: 0 auto;
 }
 
 .peer-edit {
