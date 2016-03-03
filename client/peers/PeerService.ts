@@ -41,4 +41,9 @@ export default class PeerService {
       request
       .post(`/api/peers/${id}/sync`));
   }
+  deletePeer(id: string) {
+    return requestToPromise(
+      request
+      .delete(`/api/peers/${id}`));
+  }
 }

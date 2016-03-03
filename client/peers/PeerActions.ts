@@ -29,6 +29,30 @@ export class EndSyncPeerAction extends Action {
     super();
   }
 }
+@typeName("ConfirmDeletePeerAction")
+export class ConfirmDeletePeerAction extends Action {
+  constructor(public peerId: string){
+    super();
+  }
+}
+@typeName("CancelConfirmDeletePeerAction")
+export class CancelConfirmDeletePeerAction extends Action {
+  constructor(){
+    super();
+  }
+}
+@typeName("DeletePeerAction")
+export class DeletePeerAction extends Action {
+  constructor(public peerId: string){
+    super();
+  }
+}
+@typeName("EndDeletePeerAction")
+export class EndDeletePeerAction extends Action {
+  constructor(public peerId: string){
+    super();
+  }
+}
 
 export function receivePeers(peers: Peer[]): Action {
   return new ReceivePeersAction(peers);
@@ -78,4 +102,22 @@ export function syncPeer(id: string): (d: any) => void {
       .catch(console.error);
       dispatch(new EndSyncPeerAction(id));
     };
+}
+
+export function confirmDeletePeer(peerId: string): Action {
+  return new ConfirmDeletePeerAction(peerId);
+}
+
+export function cancelConfirmDeletePeer(): Action {
+  return new CancelConfirmDeletePeerAction();
+}
+
+export function deletePeer(peerId: string) {
+  return dispatch => {
+    peerService.deletePeer(peerId)
+    .then(() => {
+      dispatch(new EndDeletePeerAction(peerId))
+    });
+    dispatch(new DeletePeerAction(peerId));
+  }
 }

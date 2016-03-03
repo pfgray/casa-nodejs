@@ -20,6 +20,13 @@ div {
   color: @color-primary;
 }
 
+.modal {
+  overflow-y: auto;
+}
+.modal-body {
+  overflow-x: auto;
+}
+
 .fadein {
   opacity:0;
   transition: opacity 1s ease-out;
@@ -51,6 +58,11 @@ div {
     text-transform: uppercase;
     font-weight: 700;
     margin-bottom: 0.5em;
+
+    .fa-trash {
+      float: right;
+      cursor: pointer;
+    }
   }
 
   border: 1px solid @color-panel-border;
