@@ -16,6 +16,10 @@ div {
   box-sizing: border-box;
 }
 
+.accent {
+  color: @color-primary;
+}
+
 .fadein {
   opacity:0;
   transition: opacity 1s ease-out;
@@ -116,6 +120,12 @@ table.info-table {
     }
     &:only-child {
       text-align: left;
+    }
+    &.right {
+      text-align: right;
+    }
+    &.center {
+      text-align: center;
     }
   }
 

@@ -13,14 +13,16 @@ export default ({peers}) => {
         <thead>
           <tr>
             <th>Name</th>
+            <th className='center'>Apps</th>
             <th>Last Updated</th>
           </tr>
         </thead>
         <tbody>
           {peers.slice(0, 5).map((peer, i) =>
             <tr key={i}>
-              <td className='col-70'>{peer.name}</td>
-              <td className='col-30'>{peer.lastUpdated ? moment(peer.lastUpdated).fromNow() : 'never'}</td>
+              <td className='col-60'>{peer.name}</td>
+              <td className='col-20 accent center'>{peer.apps ? peer.apps.length : ''}</td>
+              <td className='col-20'>{peer.lastUpdated ? moment(peer.lastUpdated).fromNow() : 'never'}</td>
             </tr>
           )}
         </tbody>
