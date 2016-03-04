@@ -2,7 +2,7 @@
   color: white;
   background-color: fade(black, 30%);
   background-image: linear-gradient(45deg, rgba(0, 216, 255, .5), rgba(0, 255, 127,.5));
-  min-height: ~"calc(100% - "@height-header~")";
+  min-height: ~"calc(100vh - "@height-header~")";
   text-align: center;
   padding-top: 5em;
 
@@ -17,5 +17,46 @@
   a {
     font-size: 1.25em;
     margin-bottom: 3em;
+  }
+}
+
+.route-main-enter {
+  &.welcome-page * {
+    opacity: 0;
+  }
+}
+.route-main-enter.route-main-enter-active {
+  &.welcome-page * {
+    opacity: 1;
+    transition: opacity 5000ms ease-out;
+  }
+}
+
+.route-main-leave {
+  //h1 div a
+  //animation-delay
+  &.welcome-page {
+    opacity: 1;
+
+  }
+}
+.route-main-leave.route-main-leave-active {
+  &.welcome-page {
+    * {
+      opacity: 0;
+      transition: opacity 500ms ease-out 100ms;
+    }
+    h1 {
+      transform: translate(-50px, 0);
+      transition: opacity 500ms ease-out 100ms, transform 500ms ease-out 200ms;
+    }
+    div {
+      transform: translate(-100px, 0);
+      transition: opacity 500ms ease-out 100ms, transform 500ms ease-out 100ms;
+    }
+    a {
+      transform: translate(-200px, 0);
+      transition: opacity 500ms ease-out 100ms, transform 500ms ease-out;
+    }
   }
 }
