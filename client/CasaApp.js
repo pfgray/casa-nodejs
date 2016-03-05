@@ -17,8 +17,8 @@ export default class CasaApp extends React.Component {
         <ReactCSSTransitionReplace
           component="div"
           transitionName="route-main"
-          transitionEnterTimeout={700}
-          transitionLeaveTimeout={700}>
+          transitionEnterTimeout={1500}
+          transitionLeaveTimeout={1000}>
           {React.cloneElement(this.props.children, {
               key: this.props.location.pathname
             })}

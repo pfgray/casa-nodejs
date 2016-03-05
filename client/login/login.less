@@ -26,13 +26,21 @@
 
 .route-main-enter {
   &.login-container {
+    /*background-color: red !important;
+    background-image: none !important;*/
+    opacity: 0;
+  }
+  &.login-container * {
     opacity: 0;
   }
 }
 .route-main-enter.route-main-enter-active {
   &.login-container {
     opacity: 1;
-    transition: opacity 500ms ease-out 700ms;
+  }
+  &.login-container * {
+    opacity: 1;
+    transition: opacity 500ms ease-out 1000ms;
   }
 }
 /*
