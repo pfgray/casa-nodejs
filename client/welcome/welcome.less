@@ -23,31 +23,29 @@
 }
 
 .route-main-enter {
-  &.welcome-page * {
+  &.welcome-page {
     opacity: 0;
   }
 }
 .route-main-enter.route-main-enter-active {
-  &.welcome-page * {
+  &.welcome-page {
     opacity: 1;
-    transition: opacity 5000ms ease-out;
+    transition: opacity @duration-route-transition ease-out @duration-route-transition;
   }
 }
 
 .route-main-leave {
   //h1 div a
   //animation-delay
-  &.welcome-page * {
+  &.welcome-page {
     opacity: 1;
   }
 }
 .route-main-leave.route-main-leave-active {
   &.welcome-page {
     background: rgba(0,0,0,0);
-    * {
-      opacity: 0;
-      transition: opacity @duration-route-transition linear;
-    }
+    opacity: 0;
+    transition: opacity @duration-route-transition linear;
     h1 {
       transform: translate(-50px, 0);
       transition: opacity 300ms ease-out 100ms, transform 500ms ease-out 200ms;

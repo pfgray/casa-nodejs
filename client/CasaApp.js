@@ -7,7 +7,7 @@ import HeaderContainer from './header/HeaderContainer';
 import ReactCSSTransitionReplace from 'react-css-transition-replace';
 import classNames from 'classnames';
 
-const routeTransitionDuration = 1000;
+const routeTransitionDuration = 500;
 const gradientRoutes = ['/', '/login'];
 
 export default class CasaApp extends React.Component {

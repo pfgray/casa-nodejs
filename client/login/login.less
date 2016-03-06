@@ -25,37 +25,22 @@
   &.login-container {
     opacity: 0;
   }
-  &.login-container * {
-    opacity: 0;
-  }
 }
 .route-main-enter.route-main-enter-active {
   &.login-container {
     opacity: 1;
-  }
-  &.login-container * {
-    opacity: 1;
-    transition: opacity @duration-route-transition ease-out (@duration-route-transition);
+    transition: opacity @duration-route-transition ease-out @duration-route-transition;
   }
 }
-/*
+
 .route-main-leave {
-  //h1 div a
-  //animation-delay
   &.login-container {
     opacity: 1;
-    transition: opacity 500ms ease-out;
-/*
-    a {
-      transform: translate(-100%, 0);
-      transition: transform 500ms ease-out;
-    }
-
   }
 }
 .route-main-leave.route-main-leave-active {
   &.login-container {
     opacity: 0;
+    transition: opacity @duration-route-transition ease-out;
   }
 }
-*/
