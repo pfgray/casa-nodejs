@@ -2,6 +2,7 @@
 var storefrontModel = require('../api/storefronts/storefront.model');
 
 var appModel = require('../api/application/application.model');
+var launchModel = require('./launches/launches.model');
 var lti = require('ims-lti');
 
 // Get list of things
@@ -40,13 +41,17 @@ exports.lti = function(req, res) {
         throw new Error("Signature mismatch");
       } else {
         console.log("successfully validated lti launch");
+        //store information about this launch:
+        launchModel.createStorefrontLaunch(req.casa.db, req.params.storefront, req.body)
+        .then(function(){
+          req.session.lti = {
+            store: req.params.storefront,
+            resource_link_id: req.body.resource_link_id
+          };
+          res.redirect(303, "/store");
+        });
       }
     });
-    req.session.lti = {
-      store: req.params.storefront,
-      resource_link_id: req.body.resource_link_id
-    };
-    res.redirect(303, "/store");
   }, function(err){
     console.log('error validating lti launch: ', err);
     console.log(err.stack);
