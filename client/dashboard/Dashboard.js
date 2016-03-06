@@ -24,12 +24,24 @@ const mapDispatchToProps = (dispatch) =>  {
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      transitioningOut: true,
+      transitioningTo: null
+    };
   }
   componentDidMount(){
     this.props.dispatch(fetchDashboard());
   }
+  transitionOut(link, cb){
+    //set transitioning,
+    // wait for a bit, then call callback
+    this.setState({
+      transitioningOut: true,
+      transitioningTo: link
+    });
+    setTimeout(cb, 500);
+  }
   render () {
-    console.log('rendering with: ', this.props.apps);
     return this.props.apps ? (
       <Grid className='dash'>
         <Row>
