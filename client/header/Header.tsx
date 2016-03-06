@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { Link } from 'react-router';
 
+/**
+ * Paths which contain login info elsewhere, which shouldn't render topright login button
+ */
+const loginPaths = ['/', '/login']
+
 const Pathname = ({pathname}) => (
   <span className="pathname">{pathname}</span>
 );
@@ -21,7 +26,8 @@ const LoginButton = () => (
 );
 
 export default ({currentUser, pathname}) => {
-  const login = pathname.indexOf('login') > -1 ? '' : <LoginButton />;
+  console.log('path is:', pathname);
+  const login = loginPaths.indexOf(pathname) > -1 ? '' : <LoginButton />;
   const profile = currentUser.user ? UserProfile({currentUser}) : login;
   //if it's the login path don't render
   return (
