@@ -16,5 +16,18 @@ module.exports = {
       .then(function(result){
         return result.ops[0];
       });
+  },
+  getTotalLaunchesForStorefront: function(db, storefrontId){
+    var map = function() {
+      emit(this.storefrontId, 1);
+    };
+    var reduce = function(storefrontId, launches){
+      return launches.count;
+    };
+    return Q.ninvoke(db.collection(collection), 'insert',
+       map,
+       reduce,
+       { out: "map_reduce_example" }
+    );
   }
 }
