@@ -4,15 +4,13 @@ var webpack = require('webpack'),
 
 // PATHS
 var PATHS = {
-  client: __dirname + '/client',
-  login: __dirname + '/client/login',
-  app: __dirname + '/client/app',
-  target: __dirname + '/dist/assets'
+  app: __dirname + '/client',
+  target: __dirname + '/dist'
 };
 
 module.exports = {
     resolve: {
-      extensions: ['', '.js'],
+      extensions: ['', '.js', '.ts', '.tsx'],
       alias: {}
     },
     node: {
@@ -20,13 +18,11 @@ module.exports = {
     },
 
     cache: false,
-    debug: true,
+    debug: false,
     devtool: "#source-map",
 
     entry: {
-        main: [PATHS.app + '/app.js'],
-        new: [PATHS.new + '/main.js'],
-        login: [PATHS.login + '/LoginApp.js']
+        main: [PATHS.app + '/main.js']
     },
     output: {
         path: PATHS.target,
@@ -43,11 +39,11 @@ module.exports = {
 
       loaders: [{
         test: /\.js$/,
-        loader: 'ng-annotate!babel?' + JSON.stringify({
+        loader: 'babel?' + JSON.stringify({
           plugins: ['transform-runtime'],
-          presets: ['es2015', 'stage-1']
+          presets: ['react', 'es2015', 'stage-1']
         }),
-        include: PATHS.client
+        include: PATHS.app
       }, {
         test: /\.less$/,
         loader: 'style!css!less'
@@ -57,19 +53,34 @@ module.exports = {
       }, {
         test: /(\.(eot.*|woff2?.*|ttf.*|svg.*)$|.(gif|png|jpg)$)/,
         loader: "url?limit=8192"
-      }, {
-        test: /\.jade$/,
-        loader: "jade"
-      }, {
-        test: /\.json$/,
-        loader: "json"
+      },{
+        test: /\.tsx?$/,
+        loader: 'babel?' + JSON.stringify({
+          plugins: ['transform-runtime'],
+          presets: ['react', 'es2015', 'stage-1']
+        }) + '!ts-loader',
+        include: PATHS.app,
+        exclude: /node_modules/,
       }]
     },
 
     plugins: [
       new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          drop_console: true
+        }
+      }),
       new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.optimize.AggressiveMergingPlugin()
+      new webpack.optimize.AggressiveMergingPlugin(),
+      new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en$/),
+      new webpack.NoErrorsPlugin({
+        bail: true
+      }),
+      new webpack.DefinePlugin({
+        'process.env': {
+          'NODE_ENV': '"production"'
+        }
+      })
     ]
 };

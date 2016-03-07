@@ -1,8 +1,8 @@
-FROM dockerfile/nodejs
+FROM node:argon
 
-ADD ./ /app
+COPY ./ /app
 WORKDIR /app
-RUN npm install
+RUN npm run build
 
 EXPOSE 9000
 

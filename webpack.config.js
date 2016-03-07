@@ -39,7 +39,7 @@ module.exports = {
           plugins: ['transform-runtime'],
           presets: ['react', 'es2015', 'stage-1']
         }),
-        include: PATHS.client,
+        include: PATHS.app,
         exclude: /node_modules/,
       }, {
         test: /\.less$/,
@@ -50,19 +50,13 @@ module.exports = {
       }, {
         test: /(\.(eot.*|woff2?.*|ttf.*|svg.*)$|.(gif|png|jpg)$)/,
         loader: "url?limit=8192"
-      }, {
-        test: /\.jade$/,
-        loader: "jade"
-      }, {
-        test: /\.json$/,
-        loader: "json"
       },{
         test: /\.tsx?$/,
         loader: 'react-hot!babel?' + JSON.stringify({
           plugins: ['transform-runtime'],
           presets: ['react', 'es2015', 'stage-1']
         }) + '!ts-loader',
-        include: PATHS.client,
+        include: PATHS.app,
         exclude: /node_modules/,
       }]
     },
@@ -71,6 +65,5 @@ module.exports = {
       new webpack.NoErrorsPlugin(),
       new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en$/),
       new webpack.HotModuleReplacementPlugin()
-      // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
     ]
 };
