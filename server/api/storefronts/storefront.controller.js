@@ -13,8 +13,8 @@ exports.index = function(req, res) {
     }, function(err){
       console.log('error getting storefronts: ', err);
       res.json({
-          status:'error',
-          message:err
+        status:'error',
+        message:err
       }, 500);
     });
 };

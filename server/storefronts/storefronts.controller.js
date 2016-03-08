@@ -93,3 +93,11 @@ exports.appStore = function(req, res) {
     });
   }
 };
+
+exports.totalLaunches = function(req, res) {
+  launchModel.getTotalLaunchesForStorefront(req.casa.db, req.params.storefront)
+  .then(function(result){
+    console.log('the result is:', result);
+    res.json(result);
+  })
+};

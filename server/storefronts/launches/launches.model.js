@@ -18,16 +18,13 @@ module.exports = {
       });
   },
   getTotalLaunchesForStorefront: function(db, storefrontId){
-    var map = function() {
-      emit(this.storefrontId, 1);
-    };
-    var reduce = function(storefrontId, launches){
-      return launches.count;
-    };
-    return Q.ninvoke(db.collection(collection), 'insert',
-       map,
-       reduce,
-       { out: "map_reduce_example" }
-    );
+    console.log('retrieving stuff:', storefrontId);
+    return Q.ninvoke(db.collection(collection).aggregate([
+      { $match: { "storefrontId": storefrontId } },
+      { $group: { "_id": "$storefrontId", "count": { $sum: 1 } } }
+    ]), 'toArray').then(function(res){
+      console.log('got:', arguments);
+      return res;
+    });
   }
 }
