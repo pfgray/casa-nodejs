@@ -19,12 +19,15 @@ module.exports = {
   },
   getTotalLaunchesForStorefront: function(db, storefrontId){
     console.log('retrieving stuff:', storefrontId);
-    return Q.ninvoke(db.collection(collection).aggregate([
-      { $match: { "storefrontId": storefrontId } },
-      { $group: { "_id": "$storefrontId", "count": { $sum: 1 } } }
-    ]), 'toArray').then(function(res){
+    return Q.ninvoke(db.collection(collection), 'count', {
+      "storefrontId": storefrontId
+    }).then(function(res){
       console.log('got:', arguments);
       return res;
     });
+    // return Q.ninvoke(db.collection(collection).aggregate([
+    //   { $match: { "storefrontId": storefrontId } },
+    //   { $group: { "_id": "$storefrontId", "count": { $sum: 1 } } }
+    // ]), 'toArray')
   }
 }
