@@ -95,9 +95,12 @@ exports.appStore = function(req, res) {
 };
 
 exports.totalLaunches = function(req, res) {
-  launchModel.getTotalLaunchesForStorefront(req.casa.db, req.params.storefront)
+  launchModel.getTotalLaunchesForStorefronts(req.casa.db, [req.params.storefront])
   .then(function(result){
     console.log('the result is:', result);
     res.json(result);
+  }).catch(function(err){
+    console.log('error:', err);
+    res.json(err);
   })
 };

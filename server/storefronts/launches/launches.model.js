@@ -17,14 +17,23 @@ module.exports = {
         return result.ops[0];
       });
   },
-  getTotalLaunchesForStorefront: function(db, storefrontId){
-    console.log('retrieving stuff:', storefrontId);
-    return Q.ninvoke(db.collection(collection), 'count', {
-      "storefrontId": storefrontId
-    }).then(function(res){
+  getTotalLaunchesForStorefronts: function(db, storefrontIds){
+    console.log('retrieving stuff:', storefrontIds);
+    return Q.ninvoke(db.collection(collection), 'aggregate', [
+      { "$match": { "storefrontId": { "$in": storefrontIds } } },
+      { "$group": { "_id": "$storefrontId", "count": { "$sum": 1 }}}
+    ]).then(function(res){
       console.log('got:', arguments);
       return res;
     });
+
+    // return Q.ninvoke(db.collection(collection), 'count', {
+    //   "storefrontId": storefrontId
+    // }).then(function(res){
+    //   console.log('got:', arguments);
+    //   return res;
+    // });
+
     // return Q.ninvoke(db.collection(collection).aggregate([
     //   { $match: { "storefrontId": storefrontId } },
     //   { $group: { "_id": "$storefrontId", "count": { $sum: 1 } } }
