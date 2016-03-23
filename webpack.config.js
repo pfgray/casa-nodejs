@@ -43,10 +43,10 @@ module.exports = {
         exclude: /node_modules/,
       }, {
         test: /\.less$/,
-        loader: 'style!css!less'
+        loader: 'style?sourceMap!css?sourceMap!less?sourceMap'
       }, {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: 'style?sourceMap!css?sourceMap'
       }, {
         test: /(\.(eot.*|woff2?.*|ttf.*|svg.*)$|.(gif|png|jpg)$)/,
         loader: "url?limit=8192"
