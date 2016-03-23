@@ -2,6 +2,8 @@
 var webpack = require('webpack'),
     path = require('path');
 
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 // PATHS
 var PATHS = {
   app: __dirname + '/client',
@@ -43,10 +45,14 @@ module.exports = {
         exclude: /node_modules/,
       }, {
         test: /\.less$/,
-        loader: 'style?sourceMap!css?sourceMap!less?sourceMap'
+        loader: ExtractTextPlugin.extract(
+          'css?sourceMap!less?sourceMap'
+        )
       }, {
         test: /\.css$/,
-        loader: 'style?sourceMap!css?sourceMap'
+        loader: ExtractTextPlugin.extract(
+          'css?sourceMap'
+        )
       }, {
         test: /(\.(eot.*|woff2?.*|ttf.*|svg.*)$|.(gif|png|jpg)$)/,
         loader: "url?limit=8192"
@@ -64,6 +70,7 @@ module.exports = {
     plugins: [
       new webpack.NoErrorsPlugin(),
       new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en$/),
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new ExtractTextPlugin("styles.css")
     ]
 };
