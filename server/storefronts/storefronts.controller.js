@@ -38,7 +38,7 @@ exports.lti = function(req, res) {
     var provider = new lti.Provider(info.keypair.key, info.keypair.secret, lti.MemoryStore, lti.HMAC_SHA1);
     provider.valid_request(req, function(err, isValid){
       if(!isValid){
-        throw new Error("Signature mismatch");
+        throw err;
       } else {
         console.log("successfully validated lti launch");
         //store information about this launch:
