@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Q = require('q');
 var model = require('../../database');
 var collection = 'storefrontLaunches';
+var ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
   createStorefrontLaunch:function(db, storefrontId, launchParameters){
@@ -18,25 +19,15 @@ module.exports = {
       });
   },
   getTotalLaunchesForStorefronts: function(db, storefrontIds){
-    console.log('retrieving stuff:', storefrontIds);
+    var ids = storefrontIds.map(function(id){
+      return id.toString();
+    });
     return Q.ninvoke(db.collection(collection), 'aggregate', [
-      { "$match": { "storefrontId": { "$in": storefrontIds } } },
+      { "$match": { "storefrontId": { "$in": ids } } },
       { "$group": { "_id": "$storefrontId", "count": { "$sum": 1 }}}
     ]).then(function(res){
       console.log('got:', arguments);
       return res;
     });
-
-    // return Q.ninvoke(db.collection(collection), 'count', {
-    //   "storefrontId": storefrontId
-    // }).then(function(res){
-    //   console.log('got:', arguments);
-    //   return res;
-    // });
-
-    // return Q.ninvoke(db.collection(collection).aggregate([
-    //   { $match: { "storefrontId": storefrontId } },
-    //   { $group: { "_id": "$storefrontId", "count": { $sum: 1 } } }
-    // ]), 'toArray')
   }
 }
