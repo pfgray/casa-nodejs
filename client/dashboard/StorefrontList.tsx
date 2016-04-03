@@ -13,12 +13,14 @@ export default ({storefronts}) => {
         <thead>
           <tr>
             <th>Name</th>
+            <th>Visits</th>
           </tr>
         </thead>
         <tbody>
           {storefronts.slice(0, 5).map((store, i) =>
             <tr key={i}>
               <td className='col-70'>{store.name}</td>
+              <td className='col-30'>{store.launchCount}</td>
             </tr>
           )}
         </tbody>
