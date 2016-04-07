@@ -1,4 +1,8 @@
 
+var fs = require('fs');
+var ejs = require('ejs');
+
+var environment = require('../config/environment');
 var storefrontModel = require('../api/storefronts/storefront.model');
 
 var appModel = require('../api/application/application.model');
@@ -93,6 +97,21 @@ exports.appStore = function(req, res) {
     });
   }
 };
+
+var ltiXmlConfigTemplate = fs.readFileSync('./server/storefronts/storefrontLtiConfig.xml', 'utf8');
+
+exports.appStoreConfig = function(req, res) {
+  console.log('getting config for: ', req.params.storefront);
+  storefrontModel.getStorefront(req.casa.db, req.params.storefront)
+  .then(function(storefront){
+    //console.log('rendering config for storefront: ', storefront);
+    res.set('Content-Type', 'application/xml');
+    res.send(ejs.render(ltiXmlConfigTemplate, {
+      name: storefront.name,
+      launchUrl: environment.domain + '/stores/' + storefront._id + '/lti'
+    }));
+  });
+}
 
 exports.totalLaunches = function(req, res) {
   launchModel.getTotalLaunchesForStorefronts(req.casa.db, [req.params.storefront])

@@ -7,6 +7,7 @@ var injectDb = require('../database/injectDb');
 var router = express.Router();
 
 router.post('/:storefront/lti', injectDb, controller.lti);
+router.get('/:storefront/config', injectDb, controller.appStoreConfig);
 router.get('/:storefront/launches', injectDb, controller.totalLaunches);
 
 module.exports = router;
