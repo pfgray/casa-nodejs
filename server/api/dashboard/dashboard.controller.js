@@ -22,12 +22,13 @@ exports.index = function(req, res) {
           var ids = storefronts.map(function(s) { return s._id });
           launchesModel.getTotalLaunchesForStorefronts(db, ids).then(function(launchCounts){
             storefronts.map(function(store){
-              store.launchCount = _.find(launchCounts, function(launch) {
+              var foundStore = _.find(launchCounts, function(launch) {
                 return launch._id === store._id.toString();
-              }).count;
+              });
+              store.launchCount = foundStore ? foundStore.count : 0;
             });
             res.json({
-              apps:apps,
+              apps: apps,
               peers: peers,
               storefronts: storefronts
             });
