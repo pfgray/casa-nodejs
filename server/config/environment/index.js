@@ -32,12 +32,23 @@ var all = {
   // List of user roles
   userRoles: ['guest', 'user', 'admin'],
 
+  getDomainUrl: function(){
+    return this.host.protocol + '://' + this.host.domain + ':' + this.host.port;
+  }
+
 };
 
-console.log(all)
+console.log(all);
+
+var envConfig = require('./' + process.env.NODE_ENV + '.js') || {};
+
+//better way to do this?
+envConfig.host = {
+  protocol: process.env.HOST_PROTOCOL || envConfig.protocol,
+  domain: process.env.HOST_DOMAIN || envConfig.domain,
+  port: process.env.HOST_PORT || envConfig.port
+}
 
 // Export the config object based on the NODE_ENV
 // ==============================================
-module.exports = _.merge(
-  all,
-  require('./' + process.env.NODE_ENV + '.js') || {});
+module.exports = _.merge(all, envConfig);

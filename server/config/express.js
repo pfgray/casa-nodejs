@@ -25,12 +25,6 @@ module.exports = function(app) {
 
   app.use(cors());
 
-  var cfg = {
-    protocol: process.env.HOST_PROTOCOL || 'http',
-    domain: process.env.HOST_DOMAIN || 'localhost',
-    port: process.env.HOST_PORT || 9000
-  };
-
   app.set('views', config.root + '/server/views');
   app.set('view engine', 'jade');
   app.use(compression());
@@ -61,7 +55,7 @@ module.exports = function(app) {
   }
 
   //Setup passport:
-  console.log('got: ', JSON.stringify(cfg));
-  passport_config.init(app, cfg);
+  console.log('got: ', JSON.stringify(config.getDomainUrl()));
+  passport_config.init(app, config);
 
 };

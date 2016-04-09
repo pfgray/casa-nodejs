@@ -12,12 +12,11 @@ module.exports.init = function(app, config){
     }));
     app.use(passport.initialize());
     app.use(passport.session());
-    var url = config.protocol + '://' + config.domain + ':' + config.port;
-    console.log('got url, first: ', url);
+    console.log('got url, first: ', config.getDomainUrl());
     passport.use(new GoogleStrategy({
             clientID: process.env.CASA_GOOGLE_CLIENT_ID,
             clientSecret: process.env.CASA_GOOGLE_CLIENT_SECRET,
-            callbackURL: url + "/auth/google/callback"
+            callbackURL: config.getDomainUrl() + "/auth/google/callback"
         }, function(accessToken, refreshToken, profile, done) {
             console.log('got: ', accessToken, refreshToken, profile);
             var googleUser = profile._json;

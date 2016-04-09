@@ -50,7 +50,7 @@ module.exports = function(app) {
       console.log('showing the index file:');
       res.render('index.ejs', {
         user: req.user,
-        domain: environment.domain,
+        domain: environment.getDomainUrl(),
         lti: req.session.lti
       });
     });
