@@ -44,10 +44,10 @@ var envConfig = require('./' + process.env.NODE_ENV + '.js') || {};
 
 //better way to do this?
 envConfig.host = {
-  protocol: process.env.HOST_PROTOCOL || envConfig.protocol,
-  domain: process.env.HOST_DOMAIN || envConfig.domain,
-  port: process.env.HOST_PORT || envConfig.port
-}
+  protocol: process.env.HOST_PROTOCOL || envConfig.host.protocol,
+  domain: process.env.HOST_DOMAIN || envConfig.host.domain,
+  port: process.env.HOST_PORT || envConfig.host.port
+};
 
 // Export the config object based on the NODE_ENV
 // ==============================================
