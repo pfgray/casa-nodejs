@@ -91,7 +91,7 @@ exports.delete = function(req, res) {
   }
   console.log("deleting peer with id: ", req.params.peer);
   model.getPeer(req.casa.db, req.params.peer).then(function(peer) {
-    console.log("got peer:", peer);
+    console.log("got peer:", peer._id);
     if(req.user._id === peer.userId){
       model.deletePeer(req.casa.db, peer._id)
       .then(function(result){
