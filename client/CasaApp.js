@@ -6,7 +6,7 @@ import './styles/main.less';
 import HeaderContainer from './header/HeaderContainer';
 import classNames from 'classnames';
 
-const gradientRoutes = ['/', '/login', '/login/password'];
+const gradientRoutes = ['/', '/login', '/login/email', '/signup', '/signup/email'];
 
 export default class CasaApp extends React.Component {
   constructor(props) {

@@ -8,15 +8,15 @@ export default React.createClass({
       <div className='login-container'>
         <div className='login-box'>
           <div>
-            <Link className='btn link-btn clear-btn' to='/login/email'>
+            <Link className='btn link-btn clear-btn' to='/signup/email'>
               <i className="fa fa-envelope-o"></i>
-              <span>log in with email</span>
+              <span>sign up with email</span>
             </Link>
           </div>
           <div>
             <a className='btn link-btn clear-btn' href='/auth/google'>
               <i className="fa fa-google"></i>
-              <span>log in with google</span>
+              <span>sign up with google</span>
             </a>
           </div>
           <div>

@@ -10,8 +10,8 @@ export default class Welcome extends React.Component {
         <div className='subtitle'>
           Create a community of applications!
         </div>
-        <Link className='btn link-btn clear-btn' to='/login'>
-          Login / Signup
+        <Link className='btn link-btn clear-btn' to='/signup'>
+          Signup
         </Link>
       </div>
     );

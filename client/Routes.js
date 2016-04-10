@@ -11,7 +11,9 @@ import reducer from './store/casaReducer';
 import CasaApp from './CasaApp';
 //import AppsContainer from './apps/AppsContainer';
 import Login from './login/Login';
-import Password from './login/Password';
+import LoginEmail from './login/LoginEmail';
+import Signup from './login/Signup';
+import SignupEmail from './login/SignupEmail';
 import Welcome from './welcome/Welcome';
 import Dashboard from './dashboard/Dashboard';
 import Peers from './peers/PeersContainer';
@@ -48,7 +50,11 @@ export default () => (
         <Route path="/stores" component={() => <span />} />
         <Route path="/login">
           <IndexRoute component={Login} />
-          <Route path="password" component={Password}/>
+          <Route path="email" component={LoginEmail}/>
+        </Route>
+        <Route path="/signup">
+          <IndexRoute component={Signup} />
+          <Route path="email" component={SignupEmail}/>
         </Route>
       </Route>
       <Route path="/store" component={LtiStorefront}>
