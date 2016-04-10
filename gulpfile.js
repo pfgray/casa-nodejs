@@ -8,6 +8,9 @@ var distWebpackConfig = require('./webpack.dist.config.js');
 gulp.task('serve', function(){
   server.run(['server/server.js']);
 
+  var bundle = require('./bundler.js');
+  bundle();
+
   gulp.watch(['server/**/*.js'], function(event){
     server.stop();
     server.run(['server/server.js']);

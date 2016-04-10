@@ -17,7 +17,7 @@ var config = require('./environment');
 var passport = require('passport');
 var passport_config = require('./passport.js');
 var session = require('express-session');
-var cors = cors = require('cors');
+var cors  = require('cors');
 var httpProxy = require('http-proxy');
 
 module.exports = function(app) {
@@ -40,8 +40,6 @@ module.exports = function(app) {
   }
 
   if ('development' === env || 'test' === env) {
-    var bundle = require('./bundler.js');
-    bundle();
     var proxy = httpProxy.createProxyServer();
     app.all('/assets/*', function (req, res) {
       proxy.web(req, res, {
