@@ -10,10 +10,15 @@
   .login-box {
     color: white;
     text-align: center;
-    padding-top: ~"calc(50vh - ((73px * 1)/2) - 65px)";
+    padding-top: ~"calc(50vh - ((73px * 2)/2) - 65px)";
+
+    a {
+      min-width: 256px;
+      margin-bottom: 0.5em;
+    }
 
     * {
-      font-size: 1.25em;
+      font-size: 1.15em;
     }
     div:last-child {
       margin-top: 0.5em;
@@ -42,5 +47,38 @@
   &.login-container {
     opacity: 0;
     transition: opacity @duration-route-transition ease-out;
+  }
+}
+
+.password-form {
+  margin-top: 7em;
+
+  input {
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 2px solid rgba(0, 0, 0, 0.01);
+    border-radius: 4px;
+    color: white;
+    outline: none;
+
+    &:focus {
+      border: 2px solid rgba(0, 0, 0, 0.35);
+    }
+
+    &:placeholder-shown {
+      color: white;
+    }
+    &::-webkit-input-placeholder {
+      color: rgba(255, 255, 255, 0.65);
+      opacity: 1;
+    }
+    &::-moz-placeholder {
+      color: rgba(255, 255, 255, 0.65);
+    }
+    &:-ms-input-placeholder {
+      color: rgba(255, 255, 255, 0.65);
+    }
+    &:-moz-placeholder {
+      color: rgba(255, 255, 255, 0.65);
+    }
   }
 }
