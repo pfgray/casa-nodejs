@@ -40,6 +40,8 @@
     "./client/lti/AppList.tsx",
     "./client/lti/App.tsx",
     "./client/lti/LtiStorefront.tsx",
-    "./client/lti/LtiStorefrontContainer.tsx"
+    "./client/lti/LtiStorefrontContainer.tsx",
+    "./client/login/signup/SignupService.ts",
+    "./client/login/signup/Signup.tsx"
   ]
 }

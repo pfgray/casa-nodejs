@@ -1,8 +1,9 @@
 
-var userModel = require('../../api/user/user.model.js');
+var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var userModel = require('../../api/user/user.model.js');
 
-module.exports = function(passport, config){
+module.exports = function(app, config){
   passport.use(new GoogleStrategy({
       clientID: process.env.CASA_GOOGLE_CLIENT_ID,
       clientSecret: process.env.CASA_GOOGLE_CLIENT_SECRET,
@@ -21,5 +22,20 @@ module.exports = function(passport, config){
       });
     })
   );
+
+  // Redirect the user to Google for authentication.  When complete, Google
+  // will redirect the user back to the application at
+  //     /auth/google/return
+  app.get('/auth/google', passport.authenticate('google', {scope: 'email'}));
+
+  // Google will redirect the user to this URL after authentication.  Finish
+  // the process by verifying the assertion.  If valid, the user will be
+  // logged in.  Otherwise, authentication has failed.
+  app.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function(req, res) {
+      // Successful authentication, redirect home.
+      res.redirect('/dashboard');
+  });
 
 }

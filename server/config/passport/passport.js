@@ -15,7 +15,7 @@ module.exports.init = function(app, config){
     app.use(passport.session());
     console.log('got url, first: ', config.getDomainUrl());
 
-    google(passport, config);
+    google(app, config);
 
     passport.serializeUser(function(user, done) {
         done(null, user);
