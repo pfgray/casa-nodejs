@@ -6,10 +6,11 @@ import SignupService from './SignupService';
 export const fields = [ 'email', 'password', 'confirmPassword' ];
 const signupService = new SignupService();
 
-const onSignup = (values, dispatch) => {
-  console.log('submitting: ', values);
+const onSignup = (values) => {
   return new Promise((resolve, reject) => {
-    signupService.signup(values).then(resolve, reject);
+    setTimeout(_ => {
+      signupService.signup(values).then(resolve, reject);
+    }, 1000);
   });
 };
 
@@ -33,8 +34,10 @@ const SignupEmail = (props) => {
             <input type='password' placeholder='confirm password' {...confirmPassword}/>
           </div>
           <div className="col-sm-4 col-sm-offset-4 submit-container">
-            <button type="submit" className='btn link-btn clear-btn' disabled={submitting}>
-              {submitting ? <i/> : null} Signup
+            <button type="submit"
+              className={'btn link-btn clear-btn' + (submitting ? ' loading' : '')}
+              disabled={submitting}>
+              {submitting ? <i className='fa fa-circle-o-notch fa-spin'/> : null} Signup
             </button>
           </div>
         </div>

@@ -4,6 +4,7 @@ var passport = require('passport');
 var userModel = require('../../api/user/user.model.js');
 
 var google = require('./google.js');
+var email = require('./email.js');
 
 module.exports.init = function(app, config){
     app.use(session({
@@ -16,6 +17,7 @@ module.exports.init = function(app, config){
     console.log('got url, first: ', config.getDomainUrl());
 
     google(app, config);
+    email(app, config);
 
     passport.serializeUser(function(user, done) {
         done(null, user);

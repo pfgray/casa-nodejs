@@ -1,6 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
+var Q = require('q');
 var model = require('../../database');
 var keyGenerator = require('../key/key.generator.js');
 
@@ -37,6 +38,22 @@ module.exports = {
               callback(null, u);
             }
           });
+        });
+    },
+    getUserByEmail: function(db, email){
+      console.log('finding user...');
+      return Q.ninvoke(db.collection(collection), 'findOne', {
+        email: email
+      }).then(function(user){
+        console.log('okay, we found: ', user);
+        return user;
+      });
+    },
+    createUser: function(db, user){
+      return Q.ninvoke(db.collection(collection), 'insert', user)
+        .then(function(result){
+          console.log('got back: ', result);
+          return result.ops[0];
         });
     }
 };
