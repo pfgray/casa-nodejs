@@ -1,8 +1,10 @@
 
 var passport = require('passport');
+var Q = require('q');
 var userModel = require('../../api/user/user.model.js');
 var LocalStrategy = require('passport-local');
 var injectDb = require('../../database/injectDb');
+var bcrypt = require('bcrypt');
 
 module.exports = function(app, config){
   passport.use(new LocalStrategy({
@@ -24,22 +26,24 @@ module.exports = function(app, config){
     //does there already exist a user with this email?
     userModel.getUserByEmail(req.casa.db, req.body.email)
     .then(function(user){
-      console.log('lolololololol')
       if(user === null){
         console.log('making user...');
+
         //create the user
-        userModel.createUser(req.casa.db, req.body)
-        .then(function(umm){
-          console.log('umm..');
-          res.json({umm:true})
-        });
+        return prepUserForDb(req.body)
+          .then(user =>
+            userModel.createUser(req.casa.db, user));
       } else {
-        console.log('wuut')
         res.status(400).json({
           error: "A user with this email already exists."
         })
       }
-    }, res.json).catch(res.json);
+    })
+    .then(user => {
+      console.log('okay, made user: ', user);
+      res.json(user);
+    })
+    .catch(err => res.status(500).json(err));
   });
 
   app.post('/api/login',
@@ -48,4 +52,21 @@ module.exports = function(app, config){
       // Successful authentication, redirect home.
       res.redirect('/dashboard');
   });
+}
+
+function sendUserWelcomeEmail(user){
+  //todo: implement this
+  //user.email;
+}
+
+const saltRounds = 10;
+function prepUserForDb(user) {
+  return Q.ninvoke(bcrypt, 'hash', user.password, saltRounds)
+    .then(function(hash){
+      return {
+        email: user.email,
+        password: hash,
+        pending: false
+      };
+    });
 }
