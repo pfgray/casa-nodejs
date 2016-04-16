@@ -8,7 +8,7 @@ const signupService = new SignupService();
 
 const onSignup = (values) => {
   return new Promise((resolve, reject) => {
-    setTimeout(_ => {
+    setTimeout(() => {
       signupService.signup(values).then(resolve, reject);
     }, 1000);
   });
