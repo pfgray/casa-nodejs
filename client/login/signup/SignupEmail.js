@@ -14,24 +14,42 @@ const onSignup = (values) => {
   });
 };
 
+const validate = user => {
+  const errors = {};
+  if (!user.email) {
+    errors.email = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(user.email)) {
+    errors.email = 'Invalid email address';
+  }
+  if (!user.password) {
+    errors.password = 'Required';
+  } else if (!user.confirmPassword) {
+    errors.confirmPassword = 'Required';
+  } else if (user.password !== user.confirmPassword) {
+    errors.confirmPassword = 'Must be a number';
+  }
+  return errors;
+};
+
 const SignupEmail = (props) => {
   const {
     fields: { email, password, confirmPassword},
     handleSubmit,
     submitting
   } = props;
+  console.log('rendering: ', fields);
   return (
     <div className='login-container container'>
       <form className='password-form' onSubmit={handleSubmit(onSignup)}>
         <div className="row">
           <div className="col-sm-4 col-sm-offset-4">
-            <input type='text' placeholder='email' {...email}/>
+            <input type='text' placeholder='email' {...email} className={email.touched && email.error ? 'error' : ''}/>
           </div>
           <div className="col-sm-4 col-sm-offset-4">
-            <input type='password' placeholder='password' {...password}/>
+            <input type='password' placeholder='password' {...password} className={password.touched && password.error ? 'error' : ''}/>
           </div>
           <div className="col-sm-4 col-sm-offset-4">
-            <input type='password' placeholder='confirm password' {...confirmPassword}/>
+            <input type='password' placeholder='confirm password' {...confirmPassword} className={confirmPassword.error ? 'error' : ''}/>
           </div>
           <div className="col-sm-4 col-sm-offset-4 submit-container">
             <button type="submit"
@@ -48,5 +66,6 @@ const SignupEmail = (props) => {
 
 export default reduxForm({
   form: 'emailSignup',
-  fields
+  fields,
+  validate
 })(SignupEmail);
