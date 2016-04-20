@@ -5,6 +5,7 @@ var userModel = require('../../api/user/user.model.js');
 var LocalStrategy = require('passport-local');
 var injectDb = require('../../database/injectDb');
 var bcrypt = require('bcrypt');
+var invitations = require('../../components/invitations');
 
 module.exports = function(app, config){
   passport.use(new LocalStrategy({
@@ -39,6 +40,7 @@ module.exports = function(app, config){
         })
       }
     })
+    .then(user => invitations.sendInviteEmailToUser(user))
     .then(user => {
       console.log('okay, made user: ', user);
       res.json(user);
@@ -52,11 +54,6 @@ module.exports = function(app, config){
       // Successful authentication, redirect home.
       res.redirect('/dashboard');
   });
-}
-
-function sendUserWelcomeEmail(user){
-  //todo: implement this
-  //user.email;
 }
 
 const saltRounds = 10;
