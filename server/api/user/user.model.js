@@ -8,17 +8,6 @@ var keyGenerator = require('../key/key.generator.js');
 var collection = 'users';
 
 module.exports = {
-    getUser:function(username, callback){
-        model.getDatabase()
-        .then(function(db){
-          //users
-          db.collection(collection).findOne({
-            username:username
-          }, function(err, user){
-            callback(null, user);
-          });
-        });
-    },
     findOrCreate:function(identifier, user, callback){
         console.log('Finding a user for identifier: ', identifier);
         model.getDatabase()

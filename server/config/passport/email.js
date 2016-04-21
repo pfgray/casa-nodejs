@@ -11,13 +11,24 @@ module.exports = function(app, config){
   passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
+    passReqToCallback: true,
     session: true
   },
-  function(email, password, done) {
-      console.log('Creating local user... ', email, password);
-      done(null, {
-        email: email,
-        password: password
+  function(req, email, password, done) {
+      console.log('Checking local user... ', email, password);
+      userModel.getUserByEmail(req.casa.db, email).then(user => {
+        if(!user) {
+          done({err: 'MissingUser'});
+        } else {
+          verifyPassword(password, user.password)
+            .then(success => {
+              if(success){
+                done(null, user);
+              } else {
+                done(null, false);
+              }
+            });
+        }
       });
     }
   ));
@@ -49,16 +60,16 @@ module.exports = function(app, config){
   });
 
   app.post('/api/login',
-    passport.authenticate('google', { failureRedirect: '/login' }),
+    injectDb,
+    passport.authenticate('local', { failureRedirect: '/login' }),
     function(req, res) {
       // Successful authentication, redirect home.
       res.redirect('/dashboard');
   });
 }
 
-const saltRounds = 10;
 function prepUserForDb(user) {
-  return Q.ninvoke(bcrypt, 'hash', user.password, saltRounds)
+  return hashPass(user.password)
     .then(function(hash){
       return {
         email: user.email,
@@ -66,4 +77,16 @@ function prepUserForDb(user) {
         pending: false
       };
     });
+}
+
+function verifyPassword(password, hashedPassword){
+  return hashPass(password)
+    .then(hash => {
+      return hash === hashedPassword
+    });
+}
+
+const saltRounds = 10;
+function hashPass(pass){
+  return Q.ninvoke(bcrypt, 'hash', pass, saltRounds);
 }
