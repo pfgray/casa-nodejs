@@ -9,9 +9,10 @@ var launchesModel = require('../../storefronts/launches/launches.model.js');
 // Get the dashboard
 exports.index = function(req, res) {
     if(!req.user){
-      res.json({
+      res.status(403).json({
         error: "Missing Authentication"
-      }, 403);
+      }
+    );
       return;
     }
     var db = req.casa.db;
@@ -27,7 +28,7 @@ exports.index = function(req, res) {
               });
               store.launchCount = foundStore ? foundStore.count : 0;
             });
-            res.json({
+            res.status(200).json({
               apps: apps,
               peers: peers,
               storefronts: storefronts

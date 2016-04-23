@@ -12,7 +12,6 @@ const initialState: StorefrontState = {
 };
 
 export default function(state: StorefrontState = initialState, action: any): StorefrontState {
-  console.log('received action:', action);
   switch (action.type) {
     case StorefrontActions.RECEIVE_STOREFRONTS:
       return {

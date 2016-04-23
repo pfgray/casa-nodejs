@@ -7,6 +7,7 @@ export const fields = ['email', 'password'];
 const loginService = new LoginService();
 
 const onLogin = ({ email, password }) => {
+  console.log('Submitting: ', email, password);
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       loginService.login(email, password).then(() => {
@@ -33,7 +34,6 @@ const LoginEmail = (props) => {
     handleSubmit,
     submitting
   } = props;
-  console.log('rendering: ', fields);
   return (
     <div className='login-container container'>
       <form className='password-form' onSubmit={handleSubmit(onLogin)}>

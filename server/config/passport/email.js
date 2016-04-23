@@ -20,7 +20,7 @@ module.exports = function(app, config){
         if(!user) {
           done({err: 'MissingUser'});
         } else {
-          verifyPassword(password, user.password)
+          compare(password, user.password)
             .then(success => {
               if(success){
                 done(null, user);
@@ -61,11 +61,13 @@ module.exports = function(app, config){
 
   app.post('/api/login',
     injectDb,
-    passport.authenticate('local', { failureRedirect: '/login' }),
+    passport.authenticate('local'),
     function(req, res) {
       // Successful authentication, redirect home.
-      res.redirect('/dashboard');
-  });
+      res.status(200).json({
+        success:true
+      });
+    });
 }
 
 function prepUserForDb(user) {
@@ -79,11 +81,8 @@ function prepUserForDb(user) {
     });
 }
 
-function verifyPassword(password, hashedPassword){
-  return hashPass(password)
-    .then(hash => {
-      return hash === hashedPassword
-    });
+function compare(password, hashedPassword){
+  return Q.ninvoke(bcrypt, 'compare', password, hashedPassword)
 }
 
 const saltRounds = 10;
