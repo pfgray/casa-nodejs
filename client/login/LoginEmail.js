@@ -12,7 +12,10 @@ const onLogin = ({ email, password }) => {
     setTimeout(() => {
       loginService.login(email, password).then(() => {
         window.location = '/dashboard';
-      }, reject);
+      }, () => {
+        console.log('Bad login..');
+        reject({ password: 'Wrong password', _error: 'login' });
+      });
     }, 1000);
   });
 };
@@ -32,7 +35,8 @@ const LoginEmail = (props) => {
   const {
     fields: { email, password },
     handleSubmit,
-    submitting
+    submitting,
+    error
   } = props;
   return (
     <div className='login-container container'>
@@ -41,10 +45,16 @@ const LoginEmail = (props) => {
           <div className="col-sm-4 col-sm-offset-4">
             <input type='text' placeholder='email'
               {...email} className={email.touched && email.error ? 'error' : ''}/>
+            {(email.error && error === 'missing_user') ?
+              <i className='fa fa-warning' title='No user has this email.'/>
+              : null}
           </div>
           <div className="col-sm-4 col-sm-offset-4">
             <input type='password' placeholder='password'
               {...password} className={password.touched && password.error ? 'error' : ''}/>
+            {(password.error && error === 'login') ?
+              <i className='fa fa-warning' title='Your password was incorrect.'/>
+              : null}
           </div>
           <div className="col-sm-4 col-sm-offset-4 submit-container">
             <button type="submit"

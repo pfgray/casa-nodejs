@@ -18,7 +18,7 @@ module.exports = function(app, config){
       console.log('Checking local user... ', email, password);
       userModel.getUserByEmail(req.casa.db, email).then(user => {
         if(!user) {
-          done({err: 'MissingUser'});
+          done({err: 'MissingUser'}, false);
         } else {
           compare(password, user.password)
             .then(success => {

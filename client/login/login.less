@@ -31,6 +31,24 @@
   .submit-container {
     text-align: center;
   }
+
+  @warning-padding: 5px;
+
+  input {
+    width: ~"calc(100% - (14px + "@warning-padding*2~"))";
+    display: inline-block;
+
+    &:only-child {
+      width: 100%;
+      display: inline-block;
+    }
+  }
+
+  .fa-warning {
+    color: #EEFF64;
+    padding: @warning-padding;
+    vertical-align: middle;
+  }
 }
 
 .route-main-enter {
