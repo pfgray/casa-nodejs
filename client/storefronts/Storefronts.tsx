@@ -3,9 +3,9 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import { Link } from 'react-router';
 
-const NewStorefrontButton = () => (
+export const NewStorefrontButton = () => (
   <Link className='btn link-btn' to='/storefronts/new'>
-    <i className='fa fa-plus' />New Storefront
+    <i className='fa fa-plus' />New Store
   </Link>
 );
 
@@ -34,7 +34,7 @@ const StorefrontList = (props) => {
   return props.storefronts.length < 1 ? (
     <div className='panel jumbotron'>
       <i className="fa fa-database"></i>
-      <h1>You don't seem to have any storefronts.</h1>
+      <h1>You don't seem to have any stores.</h1>
       <NewStorefrontButton />
     </div>
   ) : (
