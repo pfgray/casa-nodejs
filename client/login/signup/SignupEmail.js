@@ -2,14 +2,22 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 import SignupService from './SignupService';
+import LoginService from '../LoginService';
 
-export const fields = [ 'email', 'password', 'confirmPassword' ];
+export const fields = ['email', 'password', 'confirmPassword'];
+const emailFormat = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 const signupService = new SignupService();
+const loginService = new LoginService();
 
 const onSignup = (values) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      signupService.signup(values).then(resolve, reject);
+      signupService.signup(values).then(() => {
+        loginService.login(values.email, values.password)
+        .then(() => {
+          window.location = '/dashboard';
+        });
+      }, reject);
     }, 1000);
   });
 };
@@ -18,7 +26,7 @@ const validate = user => {
   const errors = {};
   if (!user.email) {
     errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(user.email)) {
+  } else if (!emailFormat.test(user.email)) {
     errors.email = 'Invalid email address';
   }
   if (!user.password) {
@@ -33,7 +41,7 @@ const validate = user => {
 
 const SignupEmail = (props) => {
   const {
-    fields: { email, password, confirmPassword},
+    fields: { email, password, confirmPassword },
     handleSubmit,
     submitting
   } = props;
@@ -46,10 +54,12 @@ const SignupEmail = (props) => {
             <input type='text' placeholder='email' {...email} className={email.touched && email.error ? 'error' : ''}/>
           </div>
           <div className="col-sm-4 col-sm-offset-4">
-            <input type='password' placeholder='password' {...password} className={password.touched && password.error ? 'error' : ''}/>
+            <input type='password' placeholder='password' {...password}
+              className={password.touched && password.error ? 'error' : ''}/>
           </div>
           <div className="col-sm-4 col-sm-offset-4">
-            <input type='password' placeholder='confirm password' {...confirmPassword} className={confirmPassword.error ? 'error' : ''}/>
+            <input type='password' placeholder='confirm password'
+              {...confirmPassword} className={confirmPassword.error ? 'error' : ''}/>
           </div>
           <div className="col-sm-4 col-sm-offset-4 submit-container">
             <button type="submit"
