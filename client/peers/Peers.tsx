@@ -14,7 +14,7 @@ const Info = (props) => {
   );
 };
 
-const NewPeerButton = () => (
+export const NewPeerButton = () => (
   <Link className='btn link-btn' to='/repos/new'>
     <i className='fa fa-plus' />New Repository
   </Link>
