@@ -17,7 +17,7 @@ const Storefront = (props) => {
       <div className="storefront-info">
         <ConfigValue label='Lti url'
           value={domain + "/stores/" + storefront._id + "/lti"} />
-        <ConfigValue label='Xml configuration'
+        <ConfigValue label='Xml config'
           value={domain + "/stores/" + storefront._id + "/config.xml"} />
         {_.flatMap(storefront.keypairs, keypair => [
           <ConfigValue label='key' value={keypair.key} />,
@@ -63,6 +63,19 @@ export default (props) => {
 const ConfigValue = ({label, value}) => (
   <div className='config-pair'>
     <span>{label}:</span>
-    <span>{value}</span>
+    <div className='config-value'>
+      <div className='input-group'>
+        <input type='text' className='form-control' value={value} readOnly/>
+        <span className="input-group-btn">
+          <button className="btn btn-default" type="button" onClick={copyText(value)}>
+            <i className='fa fa-clipboard'/>
+          </button>
+        </span>
+      </div>
+    </div>
   </div>
+);
+
+const copyText = text => (
+  () => window.prompt("Copy to clipboard: Ctrl+C, Enter", text)
 );
