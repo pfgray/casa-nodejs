@@ -14,17 +14,15 @@ const Storefront = (props) => {
   return (
     <div key={storefront._id} className='panel entity'>
       <h3 className='title'>{storefront.name}</h3>
-      <div>
-        <span>Lti url: </span>
-        <span>{domain + "/stores/" + storefront._id + "/lti"}</span>
-        <div>
-          {storefront.keypairs.map(keypair =>
-            <div>
-              <div>key: {keypair.key}</div>
-              <div>secret: {keypair.secret}</div>
-            </div>
-          )}
-        </div>
+      <div className="storefront-info">
+        <ConfigValue label='Lti url'
+          value={domain + "/stores/" + storefront._id + "/lti"} />
+        <ConfigValue label='Xml configuration'
+          value={domain + "/stores/" + storefront._id + "/config.xml"} />
+        {_.flatMap(storefront.keypairs, keypair => [
+          <ConfigValue label='key' value={keypair.key} />,
+          <ConfigValue label='secret' value={keypair.secret} />
+        ])}
       </div>
     </div>
   );
@@ -61,3 +59,10 @@ export default (props) => {
     </div>
   );
 }
+
+const ConfigValue = ({label, value}) => (
+  <div className='config-pair'>
+    <span>{label}:</span>
+    <span>{value}</span>
+  </div>
+);
