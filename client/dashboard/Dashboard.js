@@ -15,9 +15,9 @@ const mapStateToProps = (state) => {
   return state.dashboard;
 };
 
-const mapDispatchToProps = (dispatch) =>  {
+const mapDispatchToProps = (dispatch) => {
   return {
-    dispatch: dispatch
+    dispatch
   };
 };
 
@@ -29,11 +29,11 @@ class Dashboard extends React.Component {
       transitioningTo: null
     };
   }
-  componentDidMount(){
+  componentDidMount() {
     this.props.dispatch(fetchDashboard());
   }
-  transitionOut(link, cb){
-    //set transitioning,
+  transitionOut(link, cb) {
+    // set transitioning,
     // wait for a bit, then call callback
     this.setState({
       transitioningOut: true,
@@ -41,7 +41,7 @@ class Dashboard extends React.Component {
     });
     setTimeout(cb, 500);
   }
-  render () {
+  render() {
     return this.props.apps ? (
       <Grid className='dash'>
         <Row>
