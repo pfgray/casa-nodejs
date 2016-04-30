@@ -11,24 +11,23 @@ import PeerService from '../PeerService';
 
 const peerService = new PeerService();
 
-
 export const fields = ['name', 'payloadUrl'];
 
 class EditPeerFormWrapper extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
-  componentDidMount(){
-    //if we're editing, initialize the peer
-    if(this.props.params.peer){
+  componentDidMount() {
+    // if we're editing, initialize the peer
+    if(this.props.params.peer) {
       peerService.getPeer(this.props.params.peer).then(peer =>
         this.props.dispatch(initializeEditPeer(peer))
       );
     }
   }
-  submit(values, dispatch){
+  submit(values, dispatch) {
     console.log('now submitting...', values);
-    if(this.props.params.peer){
+    if(this.props.params.peer) {
       dispatch(updatePeer(this.props.params.peer, values));
     } else {
       dispatch(createPeer(values));
@@ -40,11 +39,11 @@ class EditPeerFormWrapper extends React.Component {
 }
 
 export default reduxForm({
-    form: 'editPeer',
-    fields
-  },
-  state => ({ // mapStateToProps
-    initialValues: state.formData.editPeer.peer
-  }),
-  dispatch => ({dispatch})
+  form: 'editPeer',
+  fields
+},
+state => ({ // mapStateToProps
+  initialValues: state.formData.editPeer.peer
+}),
+dispatch => ({ dispatch })
 )(EditPeerFormWrapper);
