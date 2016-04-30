@@ -20,9 +20,11 @@ export const NewPeerButton = () => (
   </Link>
 );
 
-const SyncButton = (props) => (
-  <i onClick={() => props.sync(props.peer._id)}
-     className={"fa fa-refresh" + (props.peer.syncing ? ' fa-spin' : '')}></i>
+const SyncButton = ({peer, sync}) => (
+  <Button className='btn link-btn slim' onClick={() => sync(peer._id)}>
+    <i className={"fa fa-refresh" + (peer.syncing ? ' fa-spin' : '')}></i>
+    Sync
+  </Button>
 );
 
 const ConfirmDeletePeerModal = (props) => (
@@ -52,13 +54,12 @@ const Peer = (props) => {
     <div key={peer._id} className='panel peer'>
       <h3 className='title'>
         {peer.name}
-        <SyncButton sync={sync} peer={peer}/>
         <DeleteButton deletePeer={deletePeer}
           confirmDeletePeer={confirmDeletePeer} peer={peer} />
       </h3>
+      <SyncButton sync={sync} peer={peer}/>
       <Info label='Payload Url'>{peer.payloadUrl}</Info>
       <Info label='Last Updated'>{peer.lastUpdated !== null ? moment(peer.lastUpdated).fromNow() : 'never'}</Info>
-      {/**/}
     </div>
   );
 }

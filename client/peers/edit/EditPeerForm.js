@@ -1,7 +1,14 @@
 import React from 'react';
 
-export default (props) => {
-  const {fields: {name, payloadUrl}, handleSubmit, submitting, createPeer} = props;
+const EditPeerForm = (props) => {
+  const {
+    fields: {
+      name, payloadUrl
+    },
+    handleSubmit,
+    submitting,
+    createPeer
+  } = props;
   return (
     <div className='content'>
       <div className='panel peer-edit'>
@@ -16,3 +23,5 @@ export default (props) => {
     </div>
   );
 };
+
+export default EditPeerForm;

@@ -98,9 +98,9 @@ export function syncPeer(id: string): (d: any) => void {
   console.log('syncing peer:', id);
   return dispatch => {
       peerService.syncPeer(id)
-      .then(peer => dispatch(new EndSyncPeerAction(id)))
-      .catch(console.error);
-      dispatch(new EndSyncPeerAction(id));
+        .then(peer => dispatch(new EndSyncPeerAction(id)))
+        .catch(console.error);
+      dispatch(new SyncPeerAction(id));
     };
 }
 
