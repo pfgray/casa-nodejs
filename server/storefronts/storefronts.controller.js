@@ -108,7 +108,7 @@ exports.appStoreConfig = function(req, res) {
     res.set('Content-Type', 'application/xml');
     res.send(ejs.render(ltiXmlConfigTemplate, {
       name: storefront.name,
-      launchUrl: environment.domain + '/stores/' + storefront._id + '/lti'
+      launchUrl: environment.getDomainUrl() + '/stores/' + storefront._id + '/lti'
     }));
   });
 }
