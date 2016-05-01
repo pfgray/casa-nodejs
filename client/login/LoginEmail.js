@@ -9,14 +9,12 @@ const loginService = new LoginService();
 const onLogin = ({ email, password }) => {
   console.log('Submitting: ', email, password);
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      loginService.login(email, password).then(() => {
-        window.location = '/dashboard';
-      }, () => {
-        console.log('Bad login..');
-        reject({ password: 'Wrong password', _error: 'login' });
-      });
-    }, 1000);
+    loginService.login(email, password).then(() => {
+      window.location = '/dashboard';
+    }, () => {
+      console.log('Bad login..');
+      reject({ password: 'Wrong password', _error: 'login' });
+    });
   });
 };
 

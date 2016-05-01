@@ -11,14 +11,15 @@ const loginService = new LoginService();
 
 const onSignup = (values) => {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      signupService.signup(values).then(() => {
-        loginService.login(values.email, values.password)
-        .then(() => {
-          window.location = '/dashboard';
-        });
-      }, reject);
-    }, 1000);
+    signupService.signup(values).then(() => {
+      loginService.login(values.email, values.password)
+      .then(() => {
+        window.location = '/dashboard';
+      });
+    }, error => {
+      console.log('got error: ', error);
+      reject({ email: 'A user with this email already exists', _error: 'email' });
+    });
   });
 };
 
@@ -43,7 +44,8 @@ const SignupEmail = (props) => {
   const {
     fields: { email, password, confirmPassword },
     handleSubmit,
-    submitting
+    submitting,
+    error
   } = props;
   console.log('rendering: ', fields);
   return (
@@ -63,11 +65,17 @@ const SignupEmail = (props) => {
           </div>
           <div className="col-sm-4 col-sm-offset-4 submit-container">
             <button type="submit"
-              className={'btn link-btn clear-btn' + (submitting ? ' loading' : '')}
+              className={'btn link-btn clear-btn fill' + (submitting ? ' loading' : '')}
               disabled={submitting}>
               {submitting ? <i className='fa fa-circle-o-notch fa-spin'/> : null} Signup
             </button>
           </div>
+          {(email.error && error === 'email') ?
+            <div className='col-sm-4 col-sm-offset-4 submit-container'>
+              <i className='fa fa-warning' />
+              A user already has this email.
+            </div>
+            : null}
         </div>
       </form>
     </div>

@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
-import FadeIn from '../ui/FadeIn.js';
 
 export default class Welcome extends React.Component {
-  render(){
+  render() {
     return (
       <div className="welcome-page container">
         <div className='row'>
@@ -12,7 +11,7 @@ export default class Welcome extends React.Component {
             Create a community of applications!
           </div>
           <div className='col-sm-4 col-sm-offset-4'>
-            <Link className='btn link-btn clear-btn' to='/signup'>
+            <Link className='btn link-btn clear-btn fill' to='/signup'>
               Signup
             </Link>
           </div>
