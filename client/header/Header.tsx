@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 /**
  * Paths which contain login info elsewhere, which shouldn't render topright login button
  */
-const loginPaths = ['/login', '/login/email']
+const loginPaths = ['/login', '/login/email'];
 
 const Pathname = ({pathname}) => (
   <span className="pathname">{pathname}</span>

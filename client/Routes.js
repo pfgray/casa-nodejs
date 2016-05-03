@@ -6,10 +6,9 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { syncHistory } from 'react-router-redux';
 
-
 import reducer from './store/casaReducer';
 import CasaApp from './CasaApp';
-//import AppsContainer from './apps/AppsContainer';
+// import AppsContainer from './apps/AppsContainer';
 import Login from './login/Login';
 import LoginEmail from './login/LoginEmail';
 import Signup from './login/signup/Signup';
@@ -22,7 +21,7 @@ import Storefronts from './storefronts/StorefrontsContainer';
 import EditStorefront from './storefronts/edit/EditStorefrontFormWrapper.js';
 import LtiStorefront from './lti/LtiStorefrontContainer';
 
-var browserHistory = createBrowserHistory();
+const browserHistory = createBrowserHistory();
 const reduxRouterMiddleware = syncHistory(browserHistory);
 const finalCreateStore = compose(
     applyMiddleware(thunk),
@@ -31,7 +30,7 @@ const finalCreateStore = compose(
 )(createStore);
 const store = finalCreateStore(reducer);
 
-export default () => (
+const Routes = () => (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={CasaApp}>
@@ -56,9 +55,9 @@ export default () => (
           <IndexRoute component={Signup} />
           <Route path="email" component={SignupEmail}/>
         </Route>
-      </Route>
-      <Route path="/store" component={LtiStorefront}>
+        <Route path="/store" component={LtiStorefront} />
       </Route>
     </Router>
   </Provider>
 );
+export default Routes;
