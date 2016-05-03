@@ -50,10 +50,10 @@ module.exports = function(app) {
     app.use(morgan('dev'));
     app.disable('etag');
     app.use(errorHandler()); // Error handler - has to be last
+    app.set('trust proxy', true);
   }
 
   //Setup passport:
-  console.log('got: ', JSON.stringify(config.getDomainUrl()));
   passport_config.init(app, config);
 
 };

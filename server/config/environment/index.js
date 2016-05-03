@@ -33,7 +33,8 @@ var all = {
   userRoles: ['guest', 'user', 'admin'],
 
   getDomainUrl: function(){
-    return this.host.protocol + '://' + this.host.domain + ':' + this.host.port;
+    var port = this.host.port && this.host.port.length > 0 ? ':' + this.host.port: '';
+    return this.host.protocol + '://' + this.host.domain + port;
   }
 
 };
