@@ -123,3 +123,11 @@ exports.totalLaunches = function(req, res) {
     res.json(err);
   })
 };
+
+exports.ltidev = function(req, res) {
+  req.session.lti = {
+    store: req.params.storefront,
+    resource_link_id: req.body.resource_link_id
+  };
+  res.redirect(302, "/store");
+};
