@@ -39,14 +39,18 @@ export default (props) => {
   );
 
   return (
-    <div>
-      <div className='search-box'>
-        <Input
-          type='text'
-          placeholder='Find' />
+    <div className="container">
+      <div className='row'>
+        <div className='col-sm-8 col-sm-offset-2'>
+          <div className='search-box'>
+            <Input type='text' placeholder='Find' />
+          </div>
+        </div>
       </div>
-      <div className='app-store-list'>
-        {appList}
+      <div>
+        <div className='app-store-list'>
+          {appList}
+        </div>
       </div>
     </div>
   );

@@ -12,17 +12,16 @@ export default (props) => {
   var app_id = data.identity.originator_id + data.identity.id;
   var color = colorService.getColorForString(app_id);
   var app_label = data.attributes.use.title.substring(0, 1).toUpperCase();
+  var title = data.attributes.use.title; //highlight(data.attributes.use.title, props.highlights);
+  var desc = data.attributes.use.description;
   var background_style = {
       "background-color":color
   };
 
-  var header = icon ? (
-    <div className='app-header default'>
-        <img className='app-icon' src={icon} />
-    </div>
-  ) : (
+  var header = (
     <div className='app-header' style={background_style}>
-        <span className='app-icon-label'>{app_label}</span>
+      {icon ? <img className='app-icon' src={icon} /> : null}
+      <span className='app-icon-label'>{title}</span>
     </div>
   );
 
@@ -62,18 +61,13 @@ export default (props) => {
   }
   */
 
-
-  var title = data.attributes.use.title; //highlight(data.attributes.use.title, props.highlights);
-  console.log('rendering:', title);
+  console.log('rendering:', data.attributes.use);
 
   return (
     <div className='app'>
       {header}
-      <div className='app-title'>
-          {title}
-      </div>
       <div className='app-body'>
-          {title}{/*}//highlight(data.attributes.use.description, props.highlights)*/}
+          {desc}{/*}//highlight(data.attributes.use.description, props.highlights)*/}
       </div>
     </div>
   );
