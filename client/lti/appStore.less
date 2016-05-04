@@ -27,10 +27,13 @@
 
         .app-header{
             border-bottom: 1px solid @border-color;
-            color:white;
-            font-size:1.15em;
+            color: white;
+            font-size: 1.15em;
             background-color: #DDD;
-            padding: 0.25em;
+            padding: 0.25em 2em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
 
             .app-icon{
                 height:1em;
@@ -48,7 +51,7 @@
         }
         .app-body{
             padding:.5em;
-            height:5em;
+            min-height: 5em;
             overflow-y: hidden;
             overflow-x: hidden;
         }

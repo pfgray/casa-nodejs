@@ -3,6 +3,7 @@ import ColorService from '../ui/ColorService';
 import * as _ from 'lodash';
 
 const colorService = new ColorService();
+const MaxDescLength = 100;
 
 export default (props) => {
   const data = props.app.casaDescriptor;
@@ -13,7 +14,7 @@ export default (props) => {
   var color = colorService.getColorForString(app_id);
   var app_label = data.attributes.use.title.substring(0, 1).toUpperCase();
   var title = data.attributes.use.title; //highlight(data.attributes.use.title, props.highlights);
-  var desc = data.attributes.use.description;
+  var desc: string = data.attributes.use.description;
   var background_style = {
       "background-color":color
   };
@@ -63,11 +64,15 @@ export default (props) => {
 
   console.log('rendering:', data.attributes.use);
 
+  const shortDesc = desc.length > MaxDescLength ?
+    desc.substr(0, MaxDescLength) + '...' :
+    desc;
+
   return (
     <div className='app'>
       {header}
       <div className='app-body'>
-          {desc}{/*}//highlight(data.attributes.use.description, props.highlights)*/}
+          {shortDesc}{/*}//highlight(data.attributes.use.description, props.highlights)*/}
       </div>
     </div>
   );
