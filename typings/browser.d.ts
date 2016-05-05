@@ -9,5 +9,4 @@
 /// <reference path="browser/ambient/react-router-redux/react-router-redux.d.ts" />
 /// <reference path="browser/ambient/react-router/react-router.d.ts" />
 /// <reference path="browser/ambient/react/react.d.ts" />
-/// <reference path="browser/ambient/redux/redux.d.ts" />
 /// <reference path="browser/ambient/superagent/superagent.d.ts" />

@@ -10,7 +10,6 @@ import editStorefrontReducer from '../storefronts/edit/editStorefrontReducer';
 import currentUserReducer from './currentUserReducer';
 import appStore from '../lti/appStore/appStoreReducer';
 
-
 export default combineReducers({
   currentUser: currentUserReducer,
   dashboard,

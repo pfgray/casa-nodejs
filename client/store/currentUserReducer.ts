@@ -1,3 +1,5 @@
+import { createStore } from 'redux';
+
 
 interface UserState {
   user: any
@@ -8,6 +10,13 @@ const initialState: UserState = {
 };
 
 //This only exists for when/if we add auth inside the client (need to set it without refreshing page)
-export default function(state: UserState = initialState, action: any): UserState {
+const currentUserReducer = function(state: UserState = initialState, action: any): UserState {
   return state;
 }
+ 
+export default currentUserReducer;
+//
+// const store = createStore(currentUserReducer);
+// const myState = store.getState();
+//
+// myState.user
