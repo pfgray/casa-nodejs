@@ -6,8 +6,8 @@
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
 
-declare namespace ReactRouterRedux {
-    import R = Redux;
+declare module "react-router-redux" {
+    import { Store, Reducer, Middleware } from 'redux';
     import H = HistoryModule;
 
     const TRANSITION: string;
@@ -34,15 +34,11 @@ declare namespace ReactRouterRedux {
         goForward: GoForwardAction;
         goBack: GoBackAction;
     }
-    interface HistoryMiddleware extends R.Middleware {
-        listenForReplays(store: R.Store, selectLocationState?: Function): void;
+    interface HistoryMiddleware extends Middleware {
+        listenForReplays(store: Store<any>, selectLocationState?: Function): void;
         unsubscribe(): void;
     }
 
-    function routeReducer(state?: any, options?: any): R.Reducer;
+    function routeReducer(state?: any, options?: any): Reducer<any>;
     function syncHistory(history: H.History): HistoryMiddleware;
-}
-
-declare module "react-router-redux" {
-    export = ReactRouterRedux;
 }
