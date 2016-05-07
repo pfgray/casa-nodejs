@@ -5,14 +5,15 @@
 // Definitions by: Qubo <https://github.com/tkqubo>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
+declare module 'react-redux' {
 
-declare module "react-redux" {
   import { Component } from 'react';
   import { Store, Dispatch, ActionCreator } from 'redux';
 
-  export class ElementClass extends Component<any, any> { }
-  export interface ClassDecorator {
-    <T extends (typeof ElementClass)>(component: T): T
+  export class ElementClass<S, R> extends Component<S, R> { }
+
+  export interface ClassDecorator<S, R> {
+    <T extends ElementClass<S, R>>(component: T): T
   }
 
   /**
@@ -22,21 +23,21 @@ declare module "react-redux" {
    * @param mergeProps
    * @param options
      */
-  export function connect(mapStateToProps?: MapStateToProps,
+  export function connect<S, R>(mapStateToProps?: MapStateToProps,
                           mapDispatchToProps?: MapDispatchToPropsFunction|MapDispatchToPropsObject,
                           mergeProps?: MergeProps,
-                          options?: Options): ClassDecorator;
+                          options?: Options): ClassDecorator<S, R>;
 
   interface MapStateToProps {
     (state: any, ownProps?: any): any;
   }
 
   interface MapDispatchToPropsFunction {
-    (dispatch: Dispatch, ownProps?: any): any;
+    (dispatch: Dispatch<any>, ownProps?: any): any;
   }
 
   interface MapDispatchToPropsObject {
-    [name: string]: ActionCreator;
+    [name: string]: ActionCreator<any>;
   }
 
   interface MergeProps {
@@ -54,16 +55,16 @@ declare module "react-redux" {
     pure: boolean;
   }
 
-  export interface Property {
+  export interface Property<S> {
     /**
      * The single Redux store in your application.
      */
-    store?: Store;
+    store?: Store<S>;
     children?: Function;
   }
 
   /**
    * Makes the Redux store available to the connect() calls in the component hierarchy below.
    */
-  export class Provider extends Component<Property, {}> { }
+  export class Provider<S> extends Component<Property<S>, {}> { }
 }
