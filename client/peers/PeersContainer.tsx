@@ -2,6 +2,7 @@
  * A complete list of a user's (scope's) apps.
  */
 import * as React from 'react';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import * as _ from 'lodash';
 
@@ -23,12 +24,16 @@ class PeersContainer extends React.Component<any, any> {
   }
 }
 
+interface AsyncDispatch extends Dispatch<{}> {
+  (d: any): void
+}
+
 export default connect(
   state => state.peers,
   dispatch => ({
     dispatch,
-    syncPeer: id => dispatch(syncPeer(id)),
-    deletePeer: id => dispatch(deletePeer(id)),
+    syncPeer: id => (dispatch as AsyncDispatch)(syncPeer(id)),
+    deletePeer: id => (dispatch as AsyncDispatch)(deletePeer(id)),
     confirmDeletePeer: id => dispatch(confirmDeletePeer(id)),
     cancelConfirmDeletePeer: id => dispatch(cancelConfirmDeletePeer())
   })
