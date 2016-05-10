@@ -15,8 +15,3 @@ const currentUserReducer = function(state: UserState = initialState, action: any
 }
  
 export default currentUserReducer;
-//
-// const store = createStore(currentUserReducer);
-// const myState = store.getState();
-//
-// myState.user

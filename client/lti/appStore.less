@@ -3,6 +3,9 @@
 @import '../styles/colors.less';
 
 @border-color: #e7e7e7;
+@box-shadow: 4px 4px 4px @border-color;
+@hover-box-shadow: 8px 8px 8px darken(@border-color, 10%);
+
 .app-store-list {
     text-align: center;
 
@@ -13,13 +16,19 @@
         cursor: pointer;
         text-align: center;
         border: 1px solid @border-color;
-        box-shadow: 2px 2px 2px @border-color;
+        box-shadow: @box-shadow;
         width:20em;
         display:inline-block;
         vertical-align: middle;
         margin: 1em;
         overflow: hidden;
         text-overflow: ellipsis;
+        transform: box-shadow;
+        transition: 350ms ease-out;
+
+        &:hover, &:focus {
+            box-shadow: @hover-box-shadow;
+        }
 
         .highlight{
           background-color:lighten(@color-primary, 20%);
@@ -73,6 +82,7 @@
   //    width:100%;
   // }
   margin-top: 1em;
+  box-shadow: @box-shadow;
 
   input{
     height: 2.5em;

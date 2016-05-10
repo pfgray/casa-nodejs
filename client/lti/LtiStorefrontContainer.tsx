@@ -14,7 +14,7 @@ class LtiStorefrontContainer extends React.Component<any, any> {
     super(props);
   }
   componentDidMount(){
-    //this.props.dispatch(fetchStorefront(this.props.lti.store));
+    this.props.dispatch(fetchStorefront(this.props.lti.store));
   }
   render() {
     return <LtiStorefront {...this.props} />;
