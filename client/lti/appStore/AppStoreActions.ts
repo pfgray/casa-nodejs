@@ -13,13 +13,19 @@ export class ReceiveAppStoreAction extends Action {
     super();
   }
 }
+@typeName("UpdateSearchTextAction")
+export class UpdateSearchTextAction extends Action {
+  constructor(public searchText: string){
+    super();
+  }
+}
 
 export function fetchStorefront(id: string): (d: any) => void {
   //parentheses are required for typescript here to wrap the returning object.
   return dispatch => {
       appStoreService.getAppStore(id)
-      .then(apps => dispatch(new ReceiveAppStoreAction(apps)))
-      .catch(console.error);
+        .then(apps => dispatch(new ReceiveAppStoreAction(apps)))
+        .catch(console.error);
       dispatch(new FetchAppStoreAction());
     };
 }
