@@ -20,6 +20,7 @@ import EditPeer from './peers/edit/EditPeerFormWrapper';
 import Storefronts from './storefronts/StorefrontsContainer';
 import EditStorefront from './storefronts/edit/EditStorefrontFormWrapper.js';
 import LtiStorefront from './lti/LtiStorefrontContainer';
+import AppCheckout from './lti/appStore/AppCheckout';
 
 const browserHistory = createBrowserHistory();
 const reduxRouterMiddleware = syncHistory(browserHistory);
@@ -56,6 +57,7 @@ const Routes = () => (
           <Route path="email" component={SignupEmail}/>
         </Route>
         <Route path="/store" component={LtiStorefront} />
+        <Route path="/checkout/:originatorId/:appId" component={AppCheckout}/>
       </Route>
     </Router>
   </Provider>

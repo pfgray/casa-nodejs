@@ -2,6 +2,7 @@
 import * as React from 'react';
 import App from './App.tsx';
 import { Input } from 'react-bootstrap';
+import { Link } from 'react-router';
 import { UpdateSearchTextAction } from './appStore/AppStoreActions.ts'; 
 
 function containsStr(str1, str2){
@@ -24,11 +25,13 @@ export default ({ dispatch, loading, apps, searchText }) => {
       });
   });
 
+  var filteredDiv = filtered.map(app =>
+    <Link to={`/checkout/${app.casaDescriptor.identity.originator_id}/${app.casaDescriptor.identity.id}`}>
+      <App app={app} highlights={terms} />
+    </Link>
+  );
 
-
-  var apps = filtered.map(app => <App app={app} highlights={terms}/>);
-
-  var appList = !loading ? apps : (
+  var appList = !loading ? filteredDiv : (
     <div className='loading-container'>
       <i className="fa fa-circle-o-notch fa-spin"></i>
     </div>

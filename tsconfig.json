@@ -24,6 +24,7 @@
     "./client/lti/appStore/AppStoreActions.ts",
     "./client/lti/appStore/appStoreReducer.ts",
     "./client/lti/appStore/AppStoreService.ts",
+    "./client/lti/appStore/AppCheckout.tsx",
     "./client/peers/Peer.ts",
     "./client/peers/PeerActions.ts",
     "./client/peers/PeerService.ts",
